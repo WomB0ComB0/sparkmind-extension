@@ -4,24 +4,67 @@
   "version": "0.0.1",
   "description": "A basic Plasmo extension.",
   "author": "Mike Odnis <mikeodnis3242004@gmail.com>",
+  "license": "EPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WomB0ComB0/sparkmind-extension"
+  },
   "scripts": {
     "dev": "plasmo dev",
-    "build": "plasmo build",
-    "package": "plasmo package"
+    "build": "plasmo build --source-maps --bundle-buddy",
+    "package": "plasmo package",
+    "lint": "eslint . --max-warnings 0",
+    "lint:biome": "bunx biome check --write ./ || true",
+    "lint:knip": "knip",
+    "lint:md": "markdownlint \"**/*.md\" \".github/**/*.md\" --rules sentences-per-line",
+    "lint:packages": "pnpm dedupe --check",
+    "lint:spelling": "cspell \"**\" \".github/**/*\"",
+    "prepare": "husky",
+    "test": "vitest"
   },
   "dependencies": {
+    "@biomejs/biome": "1.8.3",
     "plasmo": "0.88.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tsup": "^8.2.4",
+    "vitest": "^2.0.5",
+    "tailwindcss": "3.4.10"
   },
   "devDependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "4.1.1",
-    "@types/chrome": "0.0.258",
-    "@types/node": "20.11.5",
-    "@types/react": "18.2.48",
-    "@types/react-dom": "18.2.18",
-    "prettier": "3.2.4",
-    "typescript": "5.3.3"
+    "@ianvs/prettier-plugin-sort-imports": "4.3.1",
+    "@types/chrome": "0.0.270",
+    "@types/node": "22.4.2",
+    "@types/react": "18.3.4",
+    "@types/react-dom": "18.3.0",
+    "prettier": "3.3.3",
+    "typescript": "5.5.4",
+    "@release-it/conventional-changelog": "^8.0.1",
+    "@vitest/coverage-v8": "^2.0.5",
+    "@vitest/eslint-plugin": "^1.0.3",
+    "console-fail-test": "^0.5.0",
+    "cspell": "^8.14.2",
+    "husky": "^9.1.5",
+    "jsonc-eslint-parser": "^2.4.0",
+    "knip": "^5.27.2",
+    "lint-staged": "^15.2.9",
+    "markdownlint": "^0.34.0",
+    "markdownlint-cli": "^0.41.0",
+    "postcss": "8.4.41",
+    "prettier-plugin-curly": "^0.2.2",
+    "prettier-plugin-packagejson": "^2.5.1",
+    "prettier-plugin-sh": "^0.14.0",
+    "release-it": "^17.6.0",
+    "sentences-per-line": "^0.2.1",
+    "tsup": "^8.2.4",
+    "typescript-eslint": "^8.2.0",
+    "vitest": "^2.0.5"
+  },
+  "lint-staged": {
+    "*": "prettier --ignore-unknown --write"
+  },
+  "publishConfig": {
+    "provenance": true
   },
   "manifest": {
     "host_permissions": [
