@@ -5,7 +5,7 @@ jobs:
     steps:
       - uses: github/accessibility-alt-text-bot@v1.4.0
 
-name: Accessibility Alt Text Bot
+name: ♿ Accessibility Alt Text Bot
 
 on:
   issue_comment:
