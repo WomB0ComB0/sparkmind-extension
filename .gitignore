@@ -5,6 +5,7 @@
 /node_modules
 /.pnp
 .pnp.js
+.cache
 
 # testing
 /coverage
@@ -31,3 +32,5 @@ dist/
 
 # typescript
 .tsbuildinfo
+
+*storybook.log
