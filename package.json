@@ -23,7 +23,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-"dependencies": {
+  "dependencies": {
     "@biomejs/biome": "1.8.3",
     "@google/generative-ai": "^0.17.1",
     "@nextui-org/link": "^2.0.34",

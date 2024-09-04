@@ -1,5 +1,6 @@
-import ogs from 'open-graph-scraper';
-import { userAgent } from '~constants';
+import ogs from "open-graph-scraper"
+
+import { userAgent } from "~constants"
 
 const studyGuidePrompt = (topic: string, websiteData: string): string => `
 You are a helpful AI assistant creating a 
@@ -29,20 +30,22 @@ applicable, include illustrative examples to
 aid understanding.
 
 ## Begin generating the study guide:
-`;
+`
 
 const fetchDescriptionFromURL = async (url: string) => {
   const options = {
     url,
-    fetchOptions: { headers: { 'user-agent': userAgent } },
-  };
+    fetchOptions: { headers: { "user-agent": userAgent } }
+  }
 
   try {
-    const { result } = await ogs(options);
-    return result.ogDescription || 'No description found';
+    const { result } = await ogs(options)
+    return result.ogDescription || "No description found"
   } catch (error) {
-    throw new Error(`${error instanceof Error ? error.message : 'An unknown error occurred'}`);
+    throw new Error(
+      `${error instanceof Error ? error.message : "An unknown error occurred"}`
+    )
   }
-};
+}
 
-export { studyGuidePrompt, fetchDescriptionFromURL };
+export { studyGuidePrompt, fetchDescriptionFromURL }
