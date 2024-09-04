@@ -1,48 +1,38 @@
-import { Link } from "@nextui-org/link"
-import { useEffect, useState } from "react"
+"use client"
 
+import { useState } from "react"
+import { Toaster } from "sonner"
+import { useIsomorphicLayoutEffect } from "usehooks-ts"
+
+import { ThemeProvider } from "~/components/theme-provider"
+import { Scraper } from "~components"
 import { Button } from "~components/ui/button"
 
 import "~styles/style.css"
 
-function IndexPopup() {
+export default function Popup() {
   const [url, setUrl] = useState<string>("")
-  useEffect(() => {
+
+  useIsomorphicLayoutEffect(() => {
     chrome.tabs
       .query({
         active: true,
         currentWindow: true
       })
-      .then((url) => {
-        console.log(url)
-        console.log(url[0].url)
-        setUrl(url[0].url)
+      .then((tabs) => {
+        if (tabs[0]?.url) {
+          setUrl(tabs[0].url)
+        }
       })
       .catch((error) => console.error(error))
   }, [])
+
   return (
-    <div
-      style={{
-        padding: 16
-      }}>
-      <h2 className="text-2xl font-bold text-red-500">
-        Welcome to your{" "}
-        <Link href="https://www.plasmo.com" target="_blank" rel="noreferrer">
-          Plasmo
-        </Link>{" "}
-        Extension!
-      </h2>
-      <Link
-        href="https://docs.plasmo.com"
-        target="_blank"
-        rel="noreferrer"
-        className="px-4 py-2 mt-4 text-white bg-blue-500 rounded-md">
-        View Docs
-      </Link>
-      <p>{url}</p>
-      <Button>Click me</Button>
-    </div>
+    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+      <div className="w-[450px] p-0 bg-background text-foreground rounded-xl h-[600px]">
+        <Scraper initialUrl={url} />
+      </div>
+      <Toaster position={`top-center`} />
+    </ThemeProvider>
   )
 }
-
-export default IndexPopup

@@ -1,20 +1,16 @@
-import {
-  require_react_dom
-} from "./chunk-YGZ2ZWFG.js";
-import {
-  __commonJS
-} from "./chunk-LK32TJAX.js";
+import { __commonJS } from './chunk-LK32TJAX.js';
+import { require_react_dom } from './chunk-YGZ2ZWFG.js';
 
 // node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/client.js
 var require_client = __commonJS({
-  "node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/client.js"(exports) {
+  'node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/client.js'(exports) {
     var m = require_react_dom();
     if (false) {
       exports.createRoot = m.createRoot;
       exports.hydrateRoot = m.hydrateRoot;
     } else {
       i = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-      exports.createRoot = function(c, o) {
+      exports.createRoot = (c, o) => {
         i.usingClientEntryPoint = true;
         try {
           return m.createRoot(c, o);
@@ -22,7 +18,7 @@ var require_client = __commonJS({
           i.usingClientEntryPoint = false;
         }
       };
-      exports.hydrateRoot = function(c, h, o) {
+      exports.hydrateRoot = (c, h, o) => {
         i.usingClientEntryPoint = true;
         try {
           return m.hydrateRoot(c, h, o);
@@ -32,10 +28,8 @@ var require_client = __commonJS({
       };
     }
     var i;
-  }
+  },
 });
 
-export {
-  require_client
-};
+export { require_client };
 //# sourceMappingURL=chunk-GDNJB6U6.js.map

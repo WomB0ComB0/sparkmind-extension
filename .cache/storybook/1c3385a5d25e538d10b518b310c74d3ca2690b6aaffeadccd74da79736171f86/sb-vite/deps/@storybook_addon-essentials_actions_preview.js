@@ -1,35 +1,33 @@
-import {
-  require_preview_errors
-} from "./chunk-Y6PDBUCS.js";
-import {
-  require_preview_api
-} from "./chunk-JQ2GWK6M.js";
-import {
-  require_global
-} from "./chunk-CYHXIIKI.js";
-import {
-  __toESM
-} from "./chunk-LK32TJAX.js";
+import { require_global } from './chunk-CYHXIIKI.js';
+import { require_preview_api } from './chunk-JQ2GWK6M.js';
+import { __toESM } from './chunk-LK32TJAX.js';
+import { require_preview_errors } from './chunk-Y6PDBUCS.js';
 
 // node_modules/.pnpm/uuid@9.0.1/node_modules/uuid/dist/esm-browser/rng.js
 var getRandomValues;
 var rnds8 = new Uint8Array(16);
 function rng() {
   if (!getRandomValues) {
-    getRandomValues = typeof crypto !== "undefined" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto);
+    getRandomValues =
+      typeof crypto !== 'undefined' &&
+      crypto.getRandomValues &&
+      crypto.getRandomValues.bind(crypto);
     if (!getRandomValues) {
-      throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
+      throw new Error(
+        'crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported',
+      );
     }
   }
   return getRandomValues(rnds8);
 }
 
 // node_modules/.pnpm/uuid@9.0.1/node_modules/uuid/dist/esm-browser/regex.js
-var regex_default = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
+var regex_default =
+  /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
 
 // node_modules/.pnpm/uuid@9.0.1/node_modules/uuid/dist/esm-browser/validate.js
 function validate(uuid) {
-  return typeof uuid === "string" && regex_default.test(uuid);
+  return typeof uuid === 'string' && regex_default.test(uuid);
 }
 var validate_default = validate;
 
@@ -39,31 +37,52 @@ for (let i = 0; i < 256; ++i) {
   byteToHex.push((i + 256).toString(16).slice(1));
 }
 function unsafeStringify(arr, offset = 0) {
-  return byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]];
+  return (
+    byteToHex[arr[offset + 0]] +
+    byteToHex[arr[offset + 1]] +
+    byteToHex[arr[offset + 2]] +
+    byteToHex[arr[offset + 3]] +
+    '-' +
+    byteToHex[arr[offset + 4]] +
+    byteToHex[arr[offset + 5]] +
+    '-' +
+    byteToHex[arr[offset + 6]] +
+    byteToHex[arr[offset + 7]] +
+    '-' +
+    byteToHex[arr[offset + 8]] +
+    byteToHex[arr[offset + 9]] +
+    '-' +
+    byteToHex[arr[offset + 10]] +
+    byteToHex[arr[offset + 11]] +
+    byteToHex[arr[offset + 12]] +
+    byteToHex[arr[offset + 13]] +
+    byteToHex[arr[offset + 14]] +
+    byteToHex[arr[offset + 15]]
+  );
 }
 
 // node_modules/.pnpm/uuid@9.0.1/node_modules/uuid/dist/esm-browser/parse.js
 function parse(uuid) {
   if (!validate_default(uuid)) {
-    throw TypeError("Invalid UUID");
+    throw TypeError('Invalid UUID');
   }
   let v;
   const arr = new Uint8Array(16);
-  arr[0] = (v = parseInt(uuid.slice(0, 8), 16)) >>> 24;
-  arr[1] = v >>> 16 & 255;
-  arr[2] = v >>> 8 & 255;
+  arr[0] = (v = Number.parseInt(uuid.slice(0, 8), 16)) >>> 24;
+  arr[1] = (v >>> 16) & 255;
+  arr[2] = (v >>> 8) & 255;
   arr[3] = v & 255;
-  arr[4] = (v = parseInt(uuid.slice(9, 13), 16)) >>> 8;
+  arr[4] = (v = Number.parseInt(uuid.slice(9, 13), 16)) >>> 8;
   arr[5] = v & 255;
-  arr[6] = (v = parseInt(uuid.slice(14, 18), 16)) >>> 8;
+  arr[6] = (v = Number.parseInt(uuid.slice(14, 18), 16)) >>> 8;
   arr[7] = v & 255;
-  arr[8] = (v = parseInt(uuid.slice(19, 23), 16)) >>> 8;
+  arr[8] = (v = Number.parseInt(uuid.slice(19, 23), 16)) >>> 8;
   arr[9] = v & 255;
-  arr[10] = (v = parseInt(uuid.slice(24, 36), 16)) / 1099511627776 & 255;
-  arr[11] = v / 4294967296 & 255;
-  arr[12] = v >>> 24 & 255;
-  arr[13] = v >>> 16 & 255;
-  arr[14] = v >>> 8 & 255;
+  arr[10] = ((v = Number.parseInt(uuid.slice(24, 36), 16)) / 1099511627776) & 255;
+  arr[11] = (v / 4294967296) & 255;
+  arr[12] = (v >>> 24) & 255;
+  arr[13] = (v >>> 16) & 255;
+  arr[14] = (v >>> 8) & 255;
   arr[15] = v & 255;
   return arr;
 }
@@ -78,26 +97,29 @@ function stringToBytes(str) {
   }
   return bytes;
 }
-var DNS = "6ba7b810-9dad-11d1-80b4-00c04fd430c8";
-var URL = "6ba7b811-9dad-11d1-80b4-00c04fd430c8";
+var DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
+var URL = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
 function v35(name, version, hashfunc) {
   function generateUUID(value, namespace, buf, offset) {
     var _namespace;
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       value = stringToBytes(value);
     }
-    if (typeof namespace === "string") {
+    if (typeof namespace === 'string') {
       namespace = parse_default(namespace);
     }
-    if (((_namespace = namespace) === null || _namespace === void 0 ? void 0 : _namespace.length) !== 16) {
-      throw TypeError("Namespace must be array-like (16 iterable integer values, 0-255)");
+    if (
+      ((_namespace = namespace) === null || _namespace === void 0 ? void 0 : _namespace.length) !==
+      16
+    ) {
+      throw TypeError('Namespace must be array-like (16 iterable integer values, 0-255)');
     }
     let bytes = new Uint8Array(16 + value.length);
     bytes.set(namespace);
     bytes.set(value, namespace.length);
     bytes = hashfunc(bytes);
-    bytes[6] = bytes[6] & 15 | version;
-    bytes[8] = bytes[8] & 63 | 128;
+    bytes[6] = (bytes[6] & 15) | version;
+    bytes[8] = (bytes[8] & 63) | 128;
     if (buf) {
       offset = offset || 0;
       for (let i = 0; i < 16; ++i) {
@@ -109,8 +131,7 @@ function v35(name, version, hashfunc) {
   }
   try {
     generateUUID.name = name;
-  } catch (err) {
-  }
+  } catch (err) {}
   generateUUID.DNS = DNS;
   generateUUID.URL = URL;
   return generateUUID;
@@ -118,7 +139,7 @@ function v35(name, version, hashfunc) {
 
 // node_modules/.pnpm/uuid@9.0.1/node_modules/uuid/dist/esm-browser/md5.js
 function md5(bytes) {
-  if (typeof bytes === "string") {
+  if (typeof bytes === 'string') {
     const msg = unescape(encodeURIComponent(bytes));
     bytes = new Uint8Array(msg.length);
     for (let i = 0; i < msg.length; ++i) {
@@ -130,19 +151,19 @@ function md5(bytes) {
 function md5ToHexEncodedArray(input) {
   const output = [];
   const length32 = input.length * 32;
-  const hexTab = "0123456789abcdef";
+  const hexTab = '0123456789abcdef';
   for (let i = 0; i < length32; i += 8) {
-    const x = input[i >> 5] >>> i % 32 & 255;
-    const hex = parseInt(hexTab.charAt(x >>> 4 & 15) + hexTab.charAt(x & 15), 16);
+    const x = (input[i >> 5] >>> (i % 32)) & 255;
+    const hex = Number.parseInt(hexTab.charAt((x >>> 4) & 15) + hexTab.charAt(x & 15), 16);
     output.push(hex);
   }
   return output;
 }
 function getOutputLength(inputLength8) {
-  return (inputLength8 + 64 >>> 9 << 4) + 14 + 1;
+  return (((inputLength8 + 64) >>> 9) << 4) + 14 + 1;
 }
 function wordsToMd5(x, len) {
-  x[len >> 5] |= 128 << len % 32;
+  x[len >> 5] |= 128 << (len % 32);
   x[getOutputLength(len) - 1] = len;
   let a = 1732584193;
   let b = -271733879;
@@ -231,26 +252,26 @@ function bytesToWords(input) {
   const length8 = input.length * 8;
   const output = new Uint32Array(getOutputLength(length8));
   for (let i = 0; i < length8; i += 8) {
-    output[i >> 5] |= (input[i / 8] & 255) << i % 32;
+    output[i >> 5] |= (input[i / 8] & 255) << (i % 32);
   }
   return output;
 }
 function safeAdd(x, y) {
   const lsw = (x & 65535) + (y & 65535);
   const msw = (x >> 16) + (y >> 16) + (lsw >> 16);
-  return msw << 16 | lsw & 65535;
+  return (msw << 16) | (lsw & 65535);
 }
 function bitRotateLeft(num, cnt) {
-  return num << cnt | num >>> 32 - cnt;
+  return (num << cnt) | (num >>> (32 - cnt));
 }
 function md5cmn(q, a, b, x, s, t) {
   return safeAdd(bitRotateLeft(safeAdd(safeAdd(a, q), safeAdd(x, t)), s), b);
 }
 function md5ff(a, b, c, d, x, s, t) {
-  return md5cmn(b & c | ~b & d, a, b, x, s, t);
+  return md5cmn((b & c) | (~b & d), a, b, x, s, t);
 }
 function md5gg(a, b, c, d, x, s, t) {
-  return md5cmn(b & d | c & ~d, a, b, x, s, t);
+  return md5cmn((b & d) | (c & ~d), a, b, x, s, t);
 }
 function md5hh(a, b, c, d, x, s, t) {
   return md5cmn(b ^ c ^ d, a, b, x, s, t);
@@ -261,12 +282,13 @@ function md5ii(a, b, c, d, x, s, t) {
 var md5_default = md5;
 
 // node_modules/.pnpm/uuid@9.0.1/node_modules/uuid/dist/esm-browser/v3.js
-var v3 = v35("v3", 48, md5_default);
+var v3 = v35('v3', 48, md5_default);
 
 // node_modules/.pnpm/uuid@9.0.1/node_modules/uuid/dist/esm-browser/native.js
-var randomUUID = typeof crypto !== "undefined" && crypto.randomUUID && crypto.randomUUID.bind(crypto);
+var randomUUID =
+  typeof crypto !== 'undefined' && crypto.randomUUID && crypto.randomUUID.bind(crypto);
 var native_default = {
-  randomUUID
+  randomUUID,
 };
 
 // node_modules/.pnpm/uuid@9.0.1/node_modules/uuid/dist/esm-browser/v4.js
@@ -276,8 +298,8 @@ function v4(options, buf, offset) {
   }
   options = options || {};
   const rnds = options.random || (options.rng || rng)();
-  rnds[6] = rnds[6] & 15 | 64;
-  rnds[8] = rnds[8] & 63 | 128;
+  rnds[6] = (rnds[6] & 15) | 64;
+  rnds[8] = (rnds[8] & 63) | 128;
   if (buf) {
     offset = offset || 0;
     for (let i = 0; i < 16; ++i) {
@@ -293,22 +315,22 @@ var v4_default = v4;
 function f(s, x, y, z) {
   switch (s) {
     case 0:
-      return x & y ^ ~x & z;
+      return (x & y) ^ (~x & z);
     case 1:
       return x ^ y ^ z;
     case 2:
-      return x & y ^ x & z ^ y & z;
+      return (x & y) ^ (x & z) ^ (y & z);
     case 3:
       return x ^ y ^ z;
   }
 }
 function ROTL(x, n) {
-  return x << n | x >>> 32 - n;
+  return (x << n) | (x >>> (32 - n));
 }
 function sha1(bytes) {
   const K = [1518500249, 1859775393, 2400959708, 3395469782];
   const H = [1732584193, 4023233417, 2562383102, 271733878, 3285377520];
-  if (typeof bytes === "string") {
+  if (typeof bytes === 'string') {
     const msg = unescape(encodeURIComponent(bytes));
     bytes = [];
     for (let i = 0; i < msg.length; ++i) {
@@ -324,13 +346,17 @@ function sha1(bytes) {
   for (let i = 0; i < N; ++i) {
     const arr = new Uint32Array(16);
     for (let j = 0; j < 16; ++j) {
-      arr[j] = bytes[i * 64 + j * 4] << 24 | bytes[i * 64 + j * 4 + 1] << 16 | bytes[i * 64 + j * 4 + 2] << 8 | bytes[i * 64 + j * 4 + 3];
+      arr[j] =
+        (bytes[i * 64 + j * 4] << 24) |
+        (bytes[i * 64 + j * 4 + 1] << 16) |
+        (bytes[i * 64 + j * 4 + 2] << 8) |
+        bytes[i * 64 + j * 4 + 3];
     }
     M[i] = arr;
   }
-  M[N - 1][14] = (bytes.length - 1) * 8 / Math.pow(2, 32);
+  M[N - 1][14] = ((bytes.length - 1) * 8) / Math.pow(2, 32);
   M[N - 1][14] = Math.floor(M[N - 1][14]);
-  M[N - 1][15] = (bytes.length - 1) * 8 & 4294967295;
+  M[N - 1][15] = ((bytes.length - 1) * 8) & 4294967295;
   for (let i = 0; i < N; ++i) {
     const W = new Uint32Array(80);
     for (let t = 0; t < 16; ++t) {
@@ -346,90 +372,205 @@ function sha1(bytes) {
     let e = H[4];
     for (let t = 0; t < 80; ++t) {
       const s = Math.floor(t / 20);
-      const T = ROTL(a, 5) + f(s, b, c, d) + e + K[s] + W[t] >>> 0;
+      const T = (ROTL(a, 5) + f(s, b, c, d) + e + K[s] + W[t]) >>> 0;
       e = d;
       d = c;
       c = ROTL(b, 30) >>> 0;
       b = a;
       a = T;
     }
-    H[0] = H[0] + a >>> 0;
-    H[1] = H[1] + b >>> 0;
-    H[2] = H[2] + c >>> 0;
-    H[3] = H[3] + d >>> 0;
-    H[4] = H[4] + e >>> 0;
+    H[0] = (H[0] + a) >>> 0;
+    H[1] = (H[1] + b) >>> 0;
+    H[2] = (H[2] + c) >>> 0;
+    H[3] = (H[3] + d) >>> 0;
+    H[4] = (H[4] + e) >>> 0;
   }
-  return [H[0] >> 24 & 255, H[0] >> 16 & 255, H[0] >> 8 & 255, H[0] & 255, H[1] >> 24 & 255, H[1] >> 16 & 255, H[1] >> 8 & 255, H[1] & 255, H[2] >> 24 & 255, H[2] >> 16 & 255, H[2] >> 8 & 255, H[2] & 255, H[3] >> 24 & 255, H[3] >> 16 & 255, H[3] >> 8 & 255, H[3] & 255, H[4] >> 24 & 255, H[4] >> 16 & 255, H[4] >> 8 & 255, H[4] & 255];
+  return [
+    (H[0] >> 24) & 255,
+    (H[0] >> 16) & 255,
+    (H[0] >> 8) & 255,
+    H[0] & 255,
+    (H[1] >> 24) & 255,
+    (H[1] >> 16) & 255,
+    (H[1] >> 8) & 255,
+    H[1] & 255,
+    (H[2] >> 24) & 255,
+    (H[2] >> 16) & 255,
+    (H[2] >> 8) & 255,
+    H[2] & 255,
+    (H[3] >> 24) & 255,
+    (H[3] >> 16) & 255,
+    (H[3] >> 8) & 255,
+    H[3] & 255,
+    (H[4] >> 24) & 255,
+    (H[4] >> 16) & 255,
+    (H[4] >> 8) & 255,
+    H[4] & 255,
+  ];
 }
 var sha1_default = sha1;
 
 // node_modules/.pnpm/uuid@9.0.1/node_modules/uuid/dist/esm-browser/v5.js
-var v5 = v35("v5", 80, sha1_default);
+var v5 = v35('v5', 80, sha1_default);
 
-// node_modules/.pnpm/@storybook+addon-actions@8.2.9_storybook@8.2.9_@babel+preset-env@7.25.3_@babel+core@7.25.2__/node_modules/@storybook/addon-actions/dist/preview.mjs
+// node_modules/.pnpm/@storybook+addon-actions@8.2.9_storybook@8.2.9_@babel+preset-env@7.25.4_@babel+core@7.25.2__/node_modules/@storybook/addon-actions/dist/preview.mjs
 var import_preview_api = __toESM(require_preview_api(), 1);
 var import_global = __toESM(require_global(), 1);
 var import_preview_errors = __toESM(require_preview_errors(), 1);
-var ADDON_ID = "storybook/actions";
+var ADDON_ID = 'storybook/actions';
 var EVENT_ID = `${ADDON_ID}/action-event`;
 var config = { depth: 10, clearOnStoryChange: true, limit: 50 };
 var findProto = (obj, callback) => {
-  let proto = Object.getPrototypeOf(obj);
+  const proto = Object.getPrototypeOf(obj);
   return !proto || callback(proto) ? proto : findProto(proto, callback);
 };
-var isReactSyntheticEvent = (e) => !!(typeof e == "object" && e && findProto(e, (proto) => /^Synthetic(?:Base)?Event$/.test(proto.constructor.name)) && typeof e.persist == "function");
+var isReactSyntheticEvent = (e) =>
+  !!(
+    typeof e == 'object' &&
+    e &&
+    findProto(e, (proto) => /^Synthetic(?:Base)?Event$/.test(proto.constructor.name)) &&
+    typeof e.persist == 'function'
+  );
 var serializeArg = (a) => {
   if (isReactSyntheticEvent(a)) {
-    let e = Object.create(a.constructor.prototype, Object.getOwnPropertyDescriptors(a));
+    const e = Object.create(a.constructor.prototype, Object.getOwnPropertyDescriptors(a));
     e.persist();
-    let viewDescriptor = Object.getOwnPropertyDescriptor(e, "view"), view = viewDescriptor == null ? void 0 : viewDescriptor.value;
-    return typeof view == "object" && (view == null ? void 0 : view.constructor.name) === "Window" && Object.defineProperty(e, "view", { ...viewDescriptor, value: Object.create(view.constructor.prototype) }), e;
+    const viewDescriptor = Object.getOwnPropertyDescriptor(e, 'view'),
+      view = viewDescriptor == null ? void 0 : viewDescriptor.value;
+    return (
+      typeof view == 'object' &&
+        (view == null ? void 0 : view.constructor.name) === 'Window' &&
+        Object.defineProperty(e, 'view', {
+          ...viewDescriptor,
+          value: Object.create(view.constructor.prototype),
+        }),
+      e
+    );
   }
   return a;
 };
-var generateId = () => typeof crypto == "object" && typeof crypto.getRandomValues == "function" ? v4_default() : Date.now().toString(36) + Math.random().toString(36).substring(2);
+var generateId = () =>
+  typeof crypto == 'object' && typeof crypto.getRandomValues == 'function'
+    ? v4_default()
+    : Date.now().toString(36) + Math.random().toString(36).substring(2);
 function action(name, options = {}) {
-  let actionOptions = { ...config, ...options }, handler = function(...args) {
-    var _a, _b;
-    if (options.implicit) {
-      let storyRenderer = (_a = "__STORYBOOK_PREVIEW__" in import_global.global ? import_global.global.__STORYBOOK_PREVIEW__ : void 0) == null ? void 0 : _a.storyRenders.find((render) => render.phase === "playing" || render.phase === "rendering");
-      if (storyRenderer) {
-        let deprecated = !((_b = window == null ? void 0 : window.FEATURES) == null ? void 0 : _b.disallowImplicitActionsInRenderV8), error = new import_preview_errors.ImplicitActionsDuringRendering({ phase: storyRenderer.phase, name, deprecated });
-        if (deprecated) console.warn(error);
-        else throw error;
+  const actionOptions = { ...config, ...options },
+    handler = (...args) => {
+      var _a, _b;
+      if (options.implicit) {
+        const storyRenderer =
+          (_a =
+            '__STORYBOOK_PREVIEW__' in import_global.global
+              ? import_global.global.__STORYBOOK_PREVIEW__
+              : void 0) == null
+            ? void 0
+            : _a.storyRenders.find(
+                (render) => render.phase === 'playing' || render.phase === 'rendering',
+              );
+        if (storyRenderer) {
+          const deprecated = !((_b = window == null ? void 0 : window.FEATURES) == null
+              ? void 0
+              : _b.disallowImplicitActionsInRenderV8),
+            error = new import_preview_errors.ImplicitActionsDuringRendering({
+              phase: storyRenderer.phase,
+              name,
+              deprecated,
+            });
+          if (deprecated) console.warn(error);
+          else throw error;
+        }
       }
-    }
-    let channel = import_preview_api.addons.getChannel(), id = generateId(), minDepth = 5, serializedArgs = args.map(serializeArg), normalizedArgs = args.length > 1 ? serializedArgs : serializedArgs[0], actionDisplayToEmit = { id, count: 0, data: { name, args: normalizedArgs }, options: { ...actionOptions, maxDepth: minDepth + (actionOptions.depth || 3), allowFunction: actionOptions.allowFunction || false } };
-    channel.emit(EVENT_ID, actionDisplayToEmit);
-  };
-  return handler.isAction = true, handler.implicit = options.implicit, handler;
+      const channel = import_preview_api.addons.getChannel(),
+        id = generateId(),
+        minDepth = 5,
+        serializedArgs = args.map(serializeArg),
+        normalizedArgs = args.length > 1 ? serializedArgs : serializedArgs[0],
+        actionDisplayToEmit = {
+          id,
+          count: 0,
+          data: { name, args: normalizedArgs },
+          options: {
+            ...actionOptions,
+            maxDepth: minDepth + (actionOptions.depth || 3),
+            allowFunction: actionOptions.allowFunction || false,
+          },
+        };
+      channel.emit(EVENT_ID, actionDisplayToEmit);
+    };
+  return (handler.isAction = true), (handler.implicit = options.implicit), handler;
 }
-var isInInitialArgs = (name, initialArgs) => typeof initialArgs[name] > "u" && !(name in initialArgs);
+var isInInitialArgs = (name, initialArgs) =>
+  typeof initialArgs[name] > 'u' && !(name in initialArgs);
 var inferActionsFromArgTypesRegex = (context) => {
-  let { initialArgs, argTypes, id, parameters: { actions } } = context;
+  const {
+    initialArgs,
+    argTypes,
+    id,
+    parameters: { actions },
+  } = context;
   if (!actions || actions.disable || !actions.argTypesRegex || !argTypes) return {};
-  let argTypesRegex = new RegExp(actions.argTypesRegex);
-  return Object.entries(argTypes).filter(([name]) => !!argTypesRegex.test(name)).reduce((acc, [name, argType]) => (isInInitialArgs(name, initialArgs) && (acc[name] = action(name, { implicit: true, id })), acc), {});
+  const argTypesRegex = new RegExp(actions.argTypesRegex);
+  return Object.entries(argTypes)
+    .filter(([name]) => !!argTypesRegex.test(name))
+    .reduce(
+      (acc, [name, argType]) => (
+        isInInitialArgs(name, initialArgs) && (acc[name] = action(name, { implicit: true, id })),
+        acc
+      ),
+      {},
+    );
 };
 var addActionsFromArgTypes = (context) => {
-  let { initialArgs, argTypes, parameters: { actions } } = context;
-  return (actions == null ? void 0 : actions.disable) || !argTypes ? {} : Object.entries(argTypes).filter(([name, argType]) => !!argType.action).reduce((acc, [name, argType]) => (isInInitialArgs(name, initialArgs) && (acc[name] = action(typeof argType.action == "string" ? argType.action : name)), acc), {});
+  const {
+    initialArgs,
+    argTypes,
+    parameters: { actions },
+  } = context;
+  return (actions == null ? void 0 : actions.disable) || !argTypes
+    ? {}
+    : Object.entries(argTypes)
+        .filter(([name, argType]) => !!argType.action)
+        .reduce(
+          (acc, [name, argType]) => (
+            isInInitialArgs(name, initialArgs) &&
+              (acc[name] = action(typeof argType.action == 'string' ? argType.action : name)),
+            acc
+          ),
+          {},
+        );
 };
 var argsEnhancers = [addActionsFromArgTypes, inferActionsFromArgTypesRegex];
 var subscribed = false;
 var logActionsWhenMockCalled = (context) => {
-  let { parameters: { actions } } = context;
-  if (!(actions == null ? void 0 : actions.disable) && !subscribed && "__STORYBOOK_TEST_ON_MOCK_CALL__" in import_global.global && typeof import_global.global.__STORYBOOK_TEST_ON_MOCK_CALL__ == "function") {
-    let onMockCall = import_global.global.__STORYBOOK_TEST_ON_MOCK_CALL__;
+  const {
+    parameters: { actions },
+  } = context;
+  if (
+    !(actions == null ? void 0 : actions.disable) &&
+    !subscribed &&
+    '__STORYBOOK_TEST_ON_MOCK_CALL__' in import_global.global &&
+    typeof import_global.global.__STORYBOOK_TEST_ON_MOCK_CALL__ == 'function'
+  ) {
+    const onMockCall = import_global.global.__STORYBOOK_TEST_ON_MOCK_CALL__;
     onMockCall((mock, args) => {
-      let name = mock.getMockName();
-      name !== "spy" && (!/^next\/.*::/.test(name) || ["next/router::useRouter()", "next/navigation::useRouter()", "next/navigation::redirect", "next/cache::", "next/headers::cookies().set", "next/headers::cookies().delete", "next/headers::headers().set", "next/headers::headers().delete"].some((prefix) => name.startsWith(prefix))) && action(name)(args);
-    }), subscribed = true;
+      const name = mock.getMockName();
+      name !== 'spy' &&
+        (!/^next\/.*::/.test(name) ||
+          [
+            'next/router::useRouter()',
+            'next/navigation::useRouter()',
+            'next/navigation::redirect',
+            'next/cache::',
+            'next/headers::cookies().set',
+            'next/headers::cookies().delete',
+            'next/headers::headers().set',
+            'next/headers::headers().delete',
+          ].some((prefix) => name.startsWith(prefix))) &&
+        action(name)(args);
+    }),
+      (subscribed = true);
   }
 };
 var loaders = [logActionsWhenMockCalled];
-export {
-  argsEnhancers,
-  loaders
-};
+export { argsEnhancers, loaders };
 //# sourceMappingURL=@storybook_addon-essentials_actions_preview.js.map
