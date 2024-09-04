@@ -1,30 +1,31 @@
-'use client';
+"use client"
 
-import { useState } from 'react';
-import { Toaster } from 'sonner';
-import { useIsomorphicLayoutEffect } from 'usehooks-ts';
-import { ThemeProvider } from '~/components/theme-provider';
-import { Scraper } from '~components';
-import { Button } from '~components/ui/button';
+import { useState } from "react"
+import { Toaster } from "sonner"
+import { useIsomorphicLayoutEffect } from "usehooks-ts"
 
-import '~styles/style.css';
+import { ThemeProvider } from "~/components/theme-provider"
+import { Scraper } from "~components"
+import { Button } from "~components/ui/button"
+
+import "~styles/style.css"
 
 export default function Popup() {
-  const [url, setUrl] = useState<string>('');
+  const [url, setUrl] = useState<string>("")
 
   useIsomorphicLayoutEffect(() => {
     chrome.tabs
       .query({
         active: true,
-        currentWindow: true,
+        currentWindow: true
       })
       .then((tabs) => {
         if (tabs[0]?.url) {
-          setUrl(tabs[0].url);
+          setUrl(tabs[0].url)
         }
       })
-      .catch((error) => console.error(error));
-  }, []);
+      .catch((error) => console.error(error))
+  }, [])
 
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
@@ -33,5 +34,5 @@ export default function Popup() {
       </div>
       <Toaster position={`top-center`} />
     </ThemeProvider>
-  );
+  )
 }

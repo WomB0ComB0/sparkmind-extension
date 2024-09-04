@@ -1,13 +1,13 @@
 interface LogoProps {
-  width?: number;
-  height?: number;
-  className?: string;
+  width?: number
+  height?: number
+  className?: string
 }
 
 export default function LogoComponent({
   width = 512,
   height = 512,
-  className = '',
+  className = ""
 }: LogoProps = {}) {
   return (
     <svg
@@ -16,8 +16,7 @@ export default function LogoComponent({
       viewBox="0 0 512 512"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
-    >
+      className={className}>
       <path
         d="M0 256.001C0 397.382 114.619 512.001 256 512.001C397.381 512.001 512 397.382 512 256.001H0.0880518H0Z"
         fill="#003366"
@@ -54,7 +53,12 @@ export default function LogoComponent({
         strokeWidth="5"
         strokeMiterlimit="10"
       />
-      <path d="M163.304 256.001H347.557" stroke="#003366" strokeWidth="5" strokeMiterlimit="10" />
+      <path
+        d="M163.304 256.001H347.557"
+        stroke="#003366"
+        strokeWidth="5"
+        strokeMiterlimit="10"
+      />
     </svg>
-  );
+  )
 }
