@@ -413,7 +413,7 @@ var sha1_default = sha1;
 // node_modules/.pnpm/uuid@9.0.1/node_modules/uuid/dist/esm-browser/v5.js
 var v5 = v35('v5', 80, sha1_default);
 
-// node_modules/.pnpm/@storybook+addon-actions@8.2.9_storybook@8.2.9_@babel+preset-env@7.25.3_@babel+core@7.25.2__/node_modules/@storybook/addon-actions/dist/preview.mjs
+// node_modules/.pnpm/@storybook+addon-actions@8.2.9_storybook@8.2.9_@babel+preset-env@7.25.4_@babel+core@7.25.2__/node_modules/@storybook/addon-actions/dist/preview.mjs
 var import_preview_api = __toESM(require_preview_api(), 1);
 var import_global = __toESM(require_global(), 1);
 var import_preview_errors = __toESM(require_preview_errors(), 1);

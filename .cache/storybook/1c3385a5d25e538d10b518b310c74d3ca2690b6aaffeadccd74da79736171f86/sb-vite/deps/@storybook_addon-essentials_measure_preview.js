@@ -2,7 +2,7 @@ import { require_global } from './chunk-CYHXIIKI.js';
 import { require_preview_api } from './chunk-JQ2GWK6M.js';
 import { __toESM } from './chunk-LK32TJAX.js';
 
-// node_modules/.pnpm/@storybook+addon-measure@8.2.9_storybook@8.2.9_@babel+preset-env@7.25.3_@babel+core@7.25.2__/node_modules/@storybook/addon-measure/dist/preview.mjs
+// node_modules/.pnpm/@storybook+addon-measure@8.2.9_storybook@8.2.9_@babel+preset-env@7.25.4_@babel+core@7.25.2__/node_modules/@storybook/addon-measure/dist/preview.mjs
 var import_preview_api = __toESM(require_preview_api(), 1);
 var import_global = __toESM(require_global(), 1);
 
@@ -21,7 +21,7 @@ function invariant(condition, message) {
   throw new Error(value);
 }
 
-// node_modules/.pnpm/@storybook+addon-measure@8.2.9_storybook@8.2.9_@babel+preset-env@7.25.3_@babel+core@7.25.2__/node_modules/@storybook/addon-measure/dist/preview.mjs
+// node_modules/.pnpm/@storybook+addon-measure@8.2.9_storybook@8.2.9_@babel+preset-env@7.25.4_@babel+core@7.25.2__/node_modules/@storybook/addon-measure/dist/preview.mjs
 function getDocumentWidthAndHeight() {
   const container = import_global.global.document.documentElement,
     height = Math.max(container.scrollHeight, container.offsetHeight);

@@ -1,96 +1,113 @@
-import { HarmBlockThreshold, HarmCategory } from "@google/generative-ai"
-import { marked } from "marked"
-import type React from "react"
-import { memo, useCallback, useEffect, useMemo, useState } from "react"
-import { toast } from "sonner"
+import type { GenerateContentResult } from '@google/generative-ai';
+import { HarmBlockThreshold, HarmCategory } from '@google/generative-ai';
+import { marked } from 'marked';
+import type React from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { toast } from 'sonner';
 
-import { genAI } from "~/lib"
-import { studyGuidePrompt } from "~util"
+import { genAI } from '~/lib';
 
 const AiFrame: React.FC<{
-  topic: string
-  websiteData: string
-  isLoading: boolean
+  topic: string;
+  websiteData: string;
+  isLoading: boolean;
 }> = memo(({ topic, websiteData, isLoading: parentIsLoading }) => {
-  const [htmlContent, setHtmlContent] = useState<string>("")
-  const [isInserted, setIsInserted] = useState<boolean>(false)
-  const [isGenerating, setIsGenerating] = useState<boolean>(false)
+  const [htmlContent, setHtmlContent] = useState<string>('');
+  const [isGenerating, setIsGenerating] = useState<boolean>(false);
 
-  const googleGenerativeAI = useMemo(() => genAI, [])
+  const googleGenerativeAI = useMemo(() => genAI, []);
 
   const model = useMemo(
     () =>
       googleGenerativeAI.getGenerativeModel({
-        model: "gemini-1.5-flash",
+        model: 'gemini-1.5-flash',
         safetySettings: [
           {
             category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-            threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE
-          }
-        ]
+            threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+          },
+          {
+            category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+            threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+          },
+          {
+            category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+            threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+          },
+          {
+            category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+            threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+          },
+        ],
       }),
-    [googleGenerativeAI]
-  )
+    [googleGenerativeAI],
+  );
 
   const generateContent = useCallback(
     async (currentTopic: string, currentWebsiteData: string) => {
-      if (!currentTopic || !currentWebsiteData || isInserted) {
-        setHtmlContent("<p>Missing topic or website data.</p>")
-        return null
-      }
+      const maxAttempts = 3;
+      let attempts = 0;
 
-      try {
-        const prompt = await studyGuidePrompt(currentTopic, currentWebsiteData)
-        const result = await model.generateContent(prompt)
-        const text = await result.response.text()
-        const content = await marked(text)
-        setHtmlContent(content)
-        return text
-      } catch (error) {
-        console.error("Error generating content:", error)
-        setHtmlContent(
-          `<p>Error generating content: ${error instanceof Error ? error.message : "Unknown error"}</p>`
-        )
-        toast.error("Error generating content")
-        return null
+      while (attempts < maxAttempts) {
+        try {
+          const sanitizedData = currentWebsiteData.replace(/[^\w\s.,?!]/gi, '');
+
+          const prompt = `Generate a concise study guide for the topic: ${currentTopic}\n\nBased on this information:\n${sanitizedData}`;
+          const result = await model.generateContent(prompt);
+
+          if (result.response.promptFeedback?.blockReason) {
+            toast.info(
+              `Attempt ${attempts + 1}: Content blocked: ${result.response.promptFeedback.blockReason}`,
+            );
+            attempts++;
+            if (attempts >= maxAttempts) {
+              return 'The AI was unable to generate content due to safety restrictions after multiple attempts. Please try rephrasing your input.';
+            }
+            continue;
+          }
+
+          const text = result.response.text();
+          return text;
+        } catch (error) {
+          attempts++;
+          if (attempts >= maxAttempts) {
+            throw new Error(
+              `Error generating content after ${maxAttempts} attempts: ${error instanceof Error ? error.message : 'Unknown error'}`,
+            );
+          }
+        }
       }
+      return null;
     },
-    [model, isInserted]
-  )
+    [model],
+  );
 
   useEffect(() => {
-    if (!topic || !websiteData || isInserted || isGenerating || parentIsLoading)
-      return
+    if (!topic || !websiteData || parentIsLoading) return;
 
-    const checkExistingData = async () => {
-      setIsGenerating(true)
+    const generateAndSetContent = async () => {
+      setIsGenerating(true);
       try {
-        const generatedText = await generateContent(topic, websiteData)
+        const generatedText = await generateContent(topic, websiteData);
         if (generatedText) {
-          setIsInserted(true)
-          const content = await marked(generatedText)
-          setHtmlContent(content)
+          const content = await marked(generatedText);
+          setHtmlContent(content);
+        } else {
+          setHtmlContent('<p>Failed to generate content. Please try again.</p>');
         }
       } catch (error) {
-        console.error("Error checking existing data:", error)
+        console.error('Error generating content:', error);
         setHtmlContent(
-          `<p>Error checking existing data: ${error instanceof Error ? error.message : "Unknown error"}</p>`
-        )
-        toast.error("Error checking existing data")
+          `<p>Error generating content: ${error instanceof Error ? error.message : 'Unknown error'}</p>`,
+        );
+        toast.error('Error generating content');
       } finally {
-        setIsGenerating(false)
+        setIsGenerating(false);
       }
-    }
+    };
 
-    checkExistingData()
-  }, [
-    topic,
-    websiteData,
-    generateContent,
-    isInserted,
-    isGenerating,
-    parentIsLoading
-  ])
+    generateAndSetContent();
+  }, [topic, websiteData, generateContent, parentIsLoading]);
 
   return (
     <>
@@ -105,9 +122,9 @@ const AiFrame: React.FC<{
         <p>No content available.</p>
       )}
     </>
-  )
-})
+  );
+});
 
-AiFrame.displayName = "AiFrame"
+AiFrame.displayName = 'AiFrame';
 
-export { AiFrame }
+export { AiFrame };

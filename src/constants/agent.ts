@@ -1,2 +1,1 @@
-export const PING: string =
-  "https://sparkmind-scraper-api.onrender.com/scrape?url="
+export const PING: string = 'https://sparkmind-scraper-api.onrender.com/scrape?url=';

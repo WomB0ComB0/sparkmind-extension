@@ -1,1 +1,1 @@
-import 'C:/Users/airwo/Documents/GitHub/sparkmind-extension/node_modules/.pnpm/@storybook+addon-interactions@8.2.9_storybook@8.2.9_@babel+preset-env@7.25.3_@babel+core@7.25_iaesaaovso3gk2krpsruu22uye/node_modules/@storybook/addon-interactions/dist/manager.js';
+import 'C:/users/airwo/documents/github/sparkmind-extension/node_modules/.pnpm/@storybook+addon-interactions@8.2.9_storybook@8.2.9_@babel+preset-env@7.25.4_@babel+core@7.25_ltdp2d4pjnrvazvuocg2uadgxy/node_modules/@storybook/addon-interactions/dist/manager.js';

@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from 'axios';
 
 const studyGuidePrompt = (topic: string, websiteData: string): string => `
 You are a helpful AI assistant creating a 
@@ -28,20 +28,18 @@ applicable, include illustrative examples to
 aid understanding.
 
 ## Begin generating the study guide:
-`
+`;
 
 const fetchDescriptionFromURL = async (url: string) => {
   try {
     const { data } = await axios.get(
-      `https://slave-api.vercel.app/v1/opengraph/description?url=${url}`
-    )
+      `https://slave-api.vercel.app/v1/opengraph/description?url=${url}`,
+    );
 
-    return data.ogDescription
+    return data.ogDescription;
   } catch (error) {
-    throw new Error(
-      `${error instanceof Error ? error.message : "An unknown error occurred"}`
-    )
+    throw new Error(`${error instanceof Error ? error.message : 'An unknown error occurred'}`);
   }
-}
+};
 
-export { studyGuidePrompt, fetchDescriptionFromURL }
+export { studyGuidePrompt, fetchDescriptionFromURL };

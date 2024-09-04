@@ -3,7 +3,7 @@ import { require_core_events } from './chunk-JAV3BEES.js';
 import { require_preview_api } from './chunk-JQ2GWK6M.js';
 import { __toESM } from './chunk-LK32TJAX.js';
 
-// node_modules/.pnpm/@storybook+addon-highlight@8.2.9_storybook@8.2.9_@babel+preset-env@7.25.3_@babel+core@7.25.2__/node_modules/@storybook/addon-highlight/dist/preview.mjs
+// node_modules/.pnpm/@storybook+addon-highlight@8.2.9_storybook@8.2.9_@babel+preset-env@7.25.4_@babel+core@7.25.2__/node_modules/@storybook/addon-highlight/dist/preview.mjs
 var import_global = __toESM(require_global(), 1);
 var import_preview_api = __toESM(require_preview_api(), 1);
 var import_core_events = __toESM(require_core_events(), 1);

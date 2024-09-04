@@ -2,7 +2,7 @@ import './chunk-EGRHWZRV.js';
 import { require_global } from './chunk-CYHXIIKI.js';
 import { __toESM } from './chunk-LK32TJAX.js';
 
-// node_modules/.pnpm/@storybook+addon-docs@8.2.9_storybook@8.2.9_@babel+preset-env@7.25.3_@babel+core@7.25.2__/node_modules/@storybook/addon-docs/dist/preview.mjs
+// node_modules/.pnpm/@storybook+addon-docs@8.2.9_storybook@8.2.9_@babel+preset-env@7.25.4_@babel+core@7.25.2__/node_modules/@storybook/addon-docs/dist/preview.mjs
 var import_global = __toESM(require_global(), 1);
 var excludeTags = Object.entries(import_global.global.TAGS_OPTIONS ?? {}).reduce((acc, entry) => {
   const [tag, option] = entry;
@@ -11,7 +11,7 @@ var excludeTags = Object.entries(import_global.global.TAGS_OPTIONS ?? {}).reduce
 var parameters = {
   docs: {
     renderer: async () => {
-      const { DocsRenderer } = await import('./DocsRenderer-PKQXORMH-U7FPNJQV.js');
+      const { DocsRenderer } = await import('./DocsRenderer-PKQXORMH-CYRB27GX.js');
       return new DocsRenderer();
     },
     stories: {
