@@ -1,6 +1,4 @@
-import ogs from "open-graph-scraper"
-
-import { userAgent } from "~constants"
+import axios from "axios"
 
 const studyGuidePrompt = (topic: string, websiteData: string): string => `
 You are a helpful AI assistant creating a 
@@ -33,14 +31,12 @@ aid understanding.
 `
 
 const fetchDescriptionFromURL = async (url: string) => {
-  const options = {
-    url,
-    fetchOptions: { headers: { "user-agent": userAgent } }
-  }
-
   try {
-    const { result } = await ogs(options)
-    return result.ogDescription || "No description found"
+    const { data } = await axios.get(
+      `https://slave-api.vercel.app/v1/opengraph/description?url=${url}`
+    )
+
+    return data.ogDescription
   } catch (error) {
     throw new Error(
       `${error instanceof Error ? error.message : "An unknown error occurred"}`
