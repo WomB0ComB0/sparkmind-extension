@@ -1,16 +1,16 @@
-import { defineConfig } from "vitest/config"
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
     clearMocks: true,
     coverage: {
-      provider: "v8",
+      provider: 'v8',
       all: true,
-      exclude: ["dist"],
-      include: ["src"],
-      reporter: ["html", "lcov"]
+      exclude: ['dist'],
+      include: ['src'],
+      reporter: ['html', 'lcov'],
     },
-    exclude: ["lib", "node_modules"],
-    setupFiles: ["console-fail-test/setup"]
-  }
-})
+    exclude: ['lib', 'node_modules'],
+    setupFiles: ['console-fail-test/setup'],
+  },
+});

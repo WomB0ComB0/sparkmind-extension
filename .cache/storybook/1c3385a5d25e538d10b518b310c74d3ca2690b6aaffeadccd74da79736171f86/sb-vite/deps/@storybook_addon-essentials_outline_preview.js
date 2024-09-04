@@ -1,15 +1,7 @@
-import {
-  dedent
-} from "./chunk-7L5JYPT4.js";
-import {
-  require_preview_api
-} from "./chunk-JQ2GWK6M.js";
-import {
-  require_global
-} from "./chunk-CYHXIIKI.js";
-import {
-  __toESM
-} from "./chunk-LK32TJAX.js";
+import { dedent } from './chunk-7L5JYPT4.js';
+import { require_global } from './chunk-CYHXIIKI.js';
+import { require_preview_api } from './chunk-JQ2GWK6M.js';
+import { __toESM } from './chunk-LK32TJAX.js';
 
 // node_modules/.pnpm/@storybook+addon-outline@8.2.9_storybook@8.2.9_@babel+preset-env@7.25.3_@babel+core@7.25.2__/node_modules/@storybook/addon-outline/dist/preview.mjs
 var import_preview_api = __toESM(require_preview_api(), 1);
@@ -18,18 +10,21 @@ var clearStyles = (selector) => {
   (Array.isArray(selector) ? selector : [selector]).forEach(clearStyle);
 };
 var clearStyle = (input) => {
-  let selector = typeof input == "string" ? input : input.join(""), element = import_global.global.document.getElementById(selector);
+  const selector = typeof input == 'string' ? input : input.join(''),
+    element = import_global.global.document.getElementById(selector);
   element && element.parentElement && element.parentElement.removeChild(element);
 };
 var addOutlineStyles = (selector, css) => {
-  let existingStyle = import_global.global.document.getElementById(selector);
+  const existingStyle = import_global.global.document.getElementById(selector);
   if (existingStyle) existingStyle.innerHTML !== css && (existingStyle.innerHTML = css);
   else {
-    let style = import_global.global.document.createElement("style");
-    style.setAttribute("id", selector), style.innerHTML = css, import_global.global.document.head.appendChild(style);
+    const style = import_global.global.document.createElement('style');
+    style.setAttribute('id', selector),
+      (style.innerHTML = css),
+      import_global.global.document.head.appendChild(style);
   }
 };
-var PARAM_KEY = "outline";
+var PARAM_KEY = 'outline';
 function outlineCSS(selector) {
   return dedent`
     ${selector} body {
@@ -429,18 +424,27 @@ function outlineCSS(selector) {
     }`;
 }
 var withOutline = (StoryFn, context) => {
-  let { globals } = context, isActive = [true, "true"].includes(globals[PARAM_KEY]), isInDocs = context.viewMode === "docs", outlineStyles = (0, import_preview_api.useMemo)(() => outlineCSS(isInDocs ? '[data-story-block="true"]' : ".sb-show-main"), [context]);
-  return (0, import_preview_api.useEffect)(() => {
-    let selectorId = isInDocs ? `addon-outline-docs-${context.id}` : "addon-outline";
-    return isActive ? addOutlineStyles(selectorId, outlineStyles) : clearStyles(selectorId), () => {
-      clearStyles(selectorId);
-    };
-  }, [isActive, outlineStyles, context]), StoryFn();
+  const { globals } = context,
+    isActive = [true, 'true'].includes(globals[PARAM_KEY]),
+    isInDocs = context.viewMode === 'docs',
+    outlineStyles = (0, import_preview_api.useMemo)(
+      () => outlineCSS(isInDocs ? '[data-story-block="true"]' : '.sb-show-main'),
+      [context],
+    );
+  return (
+    (0, import_preview_api.useEffect)(() => {
+      const selectorId = isInDocs ? `addon-outline-docs-${context.id}` : 'addon-outline';
+      return (
+        isActive ? addOutlineStyles(selectorId, outlineStyles) : clearStyles(selectorId),
+        () => {
+          clearStyles(selectorId);
+        }
+      );
+    }, [isActive, outlineStyles, context]),
+    StoryFn()
+  );
 };
 var decorators = [withOutline];
 var initialGlobals = { [PARAM_KEY]: false };
-export {
-  decorators,
-  initialGlobals
-};
+export { decorators, initialGlobals };
 //# sourceMappingURL=@storybook_addon-essentials_outline_preview.js.map
