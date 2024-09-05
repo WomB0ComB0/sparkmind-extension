@@ -1,8 +1,10 @@
-import { getControlId, MarkupIcon, require_isSymbol } from "./chunk-6DJHIT5L.js"
-import { require_isObject, require_root } from "./chunk-BO5BVC2A.js"
+import { getControlId, MarkupIcon, require_isSymbol } from "./chunk-E2Q2WZ2I.js"
 import { FB, gB, Tr, wL } from "./chunk-SHF2D5Q7.js"
 
 import "./chunk-FAY27ZE3.js"
+
+import { require_isObject, require_root } from "./chunk-M2SMWPXR.js"
+
 import "./chunk-YGZ2ZWFG.js"
 
 import { __commonJS, __toESM } from "./chunk-LK32TJAX.js"
@@ -14,6 +16,7 @@ var require_color_name = __commonJS({
     exports,
     module
   ) {
+    "use strict"
     module.exports = {
       aliceblue: [240, 248, 255],
       antiquewhite: [250, 235, 215],
@@ -212,7 +215,7 @@ var require_conversions = __commonJS({
       Object.defineProperty(convert2[model], "channels", { value: channels })
       Object.defineProperty(convert2[model], "labels", { value: labels })
     }
-    convert2.rgb.hsl = (rgb) => {
+    convert2.rgb.hsl = function (rgb) {
       const r2 = rgb[0] / 255
       const g2 = rgb[1] / 255
       const b2 = rgb[2] / 255
@@ -244,7 +247,7 @@ var require_conversions = __commonJS({
       }
       return [h2, s2 * 100, l2 * 100]
     }
-    convert2.rgb.hsv = (rgb) => {
+    convert2.rgb.hsv = function (rgb) {
       let rdif
       let gdif
       let bdif
@@ -255,7 +258,9 @@ var require_conversions = __commonJS({
       const b2 = rgb[2] / 255
       const v2 = Math.max(r2, g2, b2)
       const diff = v2 - Math.min(r2, g2, b2)
-      const diffc = (c2) => (v2 - c2) / 6 / diff + 1 / 2
+      const diffc = function (c2) {
+        return (v2 - c2) / 6 / diff + 1 / 2
+      }
       if (diff === 0) {
         h2 = 0
         s2 = 0
@@ -279,7 +284,7 @@ var require_conversions = __commonJS({
       }
       return [h2 * 360, s2 * 100, v2 * 100]
     }
-    convert2.rgb.hwb = (rgb) => {
+    convert2.rgb.hwb = function (rgb) {
       const r2 = rgb[0]
       const g2 = rgb[1]
       let b2 = rgb[2]
@@ -288,7 +293,7 @@ var require_conversions = __commonJS({
       b2 = 1 - (1 / 255) * Math.max(r2, Math.max(g2, b2))
       return [h2, w2 * 100, b2 * 100]
     }
-    convert2.rgb.cmyk = (rgb) => {
+    convert2.rgb.cmyk = function (rgb) {
       const r2 = rgb[0] / 255
       const g2 = rgb[1] / 255
       const b2 = rgb[2] / 255
@@ -301,12 +306,12 @@ var require_conversions = __commonJS({
     function comparativeDistance(x2, y2) {
       return (x2[0] - y2[0]) ** 2 + (x2[1] - y2[1]) ** 2 + (x2[2] - y2[2]) ** 2
     }
-    convert2.rgb.keyword = (rgb) => {
+    convert2.rgb.keyword = function (rgb) {
       const reversed = reverseKeywords[rgb]
       if (reversed) {
         return reversed
       }
-      let currentClosestDistance = Number.POSITIVE_INFINITY
+      let currentClosestDistance = Infinity
       let currentClosestKeyword
       for (const keyword of Object.keys(cssKeywords)) {
         const value = cssKeywords[keyword]
@@ -318,8 +323,10 @@ var require_conversions = __commonJS({
       }
       return currentClosestKeyword
     }
-    convert2.keyword.rgb = (keyword) => cssKeywords[keyword]
-    convert2.rgb.xyz = (rgb) => {
+    convert2.keyword.rgb = function (keyword) {
+      return cssKeywords[keyword]
+    }
+    convert2.rgb.xyz = function (rgb) {
       let r2 = rgb[0] / 255
       let g2 = rgb[1] / 255
       let b2 = rgb[2] / 255
@@ -331,7 +338,7 @@ var require_conversions = __commonJS({
       const z2 = r2 * 0.0193 + g2 * 0.1192 + b2 * 0.9505
       return [x2 * 100, y2 * 100, z2 * 100]
     }
-    convert2.rgb.lab = (rgb) => {
+    convert2.rgb.lab = function (rgb) {
       const xyz = convert2.rgb.xyz(rgb)
       let x2 = xyz[0]
       let y2 = xyz[1]
@@ -347,7 +354,7 @@ var require_conversions = __commonJS({
       const b2 = 200 * (y2 - z2)
       return [l2, a2, b2]
     }
-    convert2.hsl.rgb = (hsl) => {
+    convert2.hsl.rgb = function (hsl) {
       const h2 = hsl[0] / 360
       const s2 = hsl[1] / 100
       const l2 = hsl[2] / 100
@@ -386,7 +393,7 @@ var require_conversions = __commonJS({
       }
       return rgb
     }
-    convert2.hsl.hsv = (hsl) => {
+    convert2.hsl.hsv = function (hsl) {
       const h2 = hsl[0]
       let s2 = hsl[1] / 100
       let l2 = hsl[2] / 100
@@ -399,7 +406,7 @@ var require_conversions = __commonJS({
       const sv = l2 === 0 ? (2 * smin) / (lmin + smin) : (2 * s2) / (l2 + s2)
       return [h2, sv * 100, v2 * 100]
     }
-    convert2.hsv.rgb = (hsv) => {
+    convert2.hsv.rgb = function (hsv) {
       const h2 = hsv[0] / 60
       const s2 = hsv[1] / 100
       let v2 = hsv[2] / 100
@@ -424,7 +431,7 @@ var require_conversions = __commonJS({
           return [v2, p2, q2]
       }
     }
-    convert2.hsv.hsl = (hsv) => {
+    convert2.hsv.hsl = function (hsv) {
       const h2 = hsv[0]
       const s2 = hsv[1] / 100
       const v2 = hsv[2] / 100
@@ -439,7 +446,7 @@ var require_conversions = __commonJS({
       l2 /= 2
       return [h2, sl * 100, l2 * 100]
     }
-    convert2.hwb.rgb = (hwb) => {
+    convert2.hwb.rgb = function (hwb) {
       const h2 = hwb[0] / 360
       let wh = hwb[1] / 100
       let bl = hwb[2] / 100
@@ -495,7 +502,7 @@ var require_conversions = __commonJS({
       }
       return [r2 * 255, g2 * 255, b2 * 255]
     }
-    convert2.cmyk.rgb = (cmyk) => {
+    convert2.cmyk.rgb = function (cmyk) {
       const c2 = cmyk[0] / 100
       const m2 = cmyk[1] / 100
       const y2 = cmyk[2] / 100
@@ -505,7 +512,7 @@ var require_conversions = __commonJS({
       const b2 = 1 - Math.min(1, y2 * (1 - k2) + k2)
       return [r2 * 255, g2 * 255, b2 * 255]
     }
-    convert2.xyz.rgb = (xyz) => {
+    convert2.xyz.rgb = function (xyz) {
       const x2 = xyz[0] / 100
       const y2 = xyz[1] / 100
       const z2 = xyz[2] / 100
@@ -523,7 +530,7 @@ var require_conversions = __commonJS({
       b2 = Math.min(Math.max(0, b2), 1)
       return [r2 * 255, g2 * 255, b2 * 255]
     }
-    convert2.xyz.lab = (xyz) => {
+    convert2.xyz.lab = function (xyz) {
       let x2 = xyz[0]
       let y2 = xyz[1]
       let z2 = xyz[2]
@@ -538,7 +545,7 @@ var require_conversions = __commonJS({
       const b2 = 200 * (y2 - z2)
       return [l2, a2, b2]
     }
-    convert2.lab.xyz = (lab) => {
+    convert2.lab.xyz = function (lab) {
       const l2 = lab[0]
       const a2 = lab[1]
       const b2 = lab[2]
@@ -559,7 +566,7 @@ var require_conversions = __commonJS({
       z2 *= 108.883
       return [x2, y2, z2]
     }
-    convert2.lab.lch = (lab) => {
+    convert2.lab.lch = function (lab) {
       const l2 = lab[0]
       const a2 = lab[1]
       const b2 = lab[2]
@@ -572,7 +579,7 @@ var require_conversions = __commonJS({
       const c2 = Math.sqrt(a2 * a2 + b2 * b2)
       return [l2, c2, h2]
     }
-    convert2.lch.lab = (lch) => {
+    convert2.lch.lab = function (lch) {
       const l2 = lch[0]
       const c2 = lch[1]
       const h2 = lch[2]
@@ -581,7 +588,7 @@ var require_conversions = __commonJS({
       const b2 = c2 * Math.sin(hr)
       return [l2, a2, b2]
     }
-    convert2.rgb.ansi16 = (args, saturation = null) => {
+    convert2.rgb.ansi16 = function (args, saturation = null) {
       const [r2, g2, b2] = args
       let value = saturation === null ? convert2.rgb.hsv(args)[2] : saturation
       value = Math.round(value / 50)
@@ -598,9 +605,10 @@ var require_conversions = __commonJS({
       }
       return ansi
     }
-    convert2.hsv.ansi16 = (args) =>
-      convert2.rgb.ansi16(convert2.hsv.rgb(args), args[2])
-    convert2.rgb.ansi256 = (args) => {
+    convert2.hsv.ansi16 = function (args) {
+      return convert2.rgb.ansi16(convert2.hsv.rgb(args), args[2])
+    }
+    convert2.rgb.ansi256 = function (args) {
       const r2 = args[0]
       const g2 = args[1]
       const b2 = args[2]
@@ -620,7 +628,7 @@ var require_conversions = __commonJS({
         Math.round((b2 / 255) * 5)
       return ansi
     }
-    convert2.ansi16.rgb = (args) => {
+    convert2.ansi16.rgb = function (args) {
       let color = args % 10
       if (color === 0 || color === 7) {
         if (args > 50) {
@@ -635,7 +643,7 @@ var require_conversions = __commonJS({
       const b2 = ((color >> 2) & 1) * mult * 255
       return [r2, g2, b2]
     }
-    convert2.ansi256.rgb = (args) => {
+    convert2.ansi256.rgb = function (args) {
       if (args >= 232) {
         const c2 = (args - 232) * 10 + 8
         return [c2, c2, c2]
@@ -647,7 +655,7 @@ var require_conversions = __commonJS({
       const b2 = ((rem % 6) / 5) * 255
       return [r2, g2, b2]
     }
-    convert2.rgb.hex = (args) => {
+    convert2.rgb.hex = function (args) {
       const integer =
         ((Math.round(args[0]) & 255) << 16) +
         ((Math.round(args[1]) & 255) << 8) +
@@ -655,7 +663,7 @@ var require_conversions = __commonJS({
       const string = integer.toString(16).toUpperCase()
       return "000000".substring(string.length) + string
     }
-    convert2.hex.rgb = (args) => {
+    convert2.hex.rgb = function (args) {
       const match = args.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i)
       if (!match) {
         return [0, 0, 0]
@@ -669,13 +677,13 @@ var require_conversions = __commonJS({
           })
           .join("")
       }
-      const integer = Number.parseInt(colorString, 16)
+      const integer = parseInt(colorString, 16)
       const r2 = (integer >> 16) & 255
       const g2 = (integer >> 8) & 255
       const b2 = integer & 255
       return [r2, g2, b2]
     }
-    convert2.rgb.hcg = (rgb) => {
+    convert2.rgb.hcg = function (rgb) {
       const r2 = rgb[0] / 255
       const g2 = rgb[1] / 255
       const b2 = rgb[2] / 255
@@ -702,7 +710,7 @@ var require_conversions = __commonJS({
       hue %= 1
       return [hue * 360, chroma * 100, grayscale * 100]
     }
-    convert2.hsl.hcg = (hsl) => {
+    convert2.hsl.hcg = function (hsl) {
       const s2 = hsl[1] / 100
       const l2 = hsl[2] / 100
       const c2 = l2 < 0.5 ? 2 * s2 * l2 : 2 * s2 * (1 - l2)
@@ -712,7 +720,7 @@ var require_conversions = __commonJS({
       }
       return [hsl[0], c2 * 100, f2 * 100]
     }
-    convert2.hsv.hcg = (hsv) => {
+    convert2.hsv.hcg = function (hsv) {
       const s2 = hsv[1] / 100
       const v2 = hsv[2] / 100
       const c2 = s2 * v2
@@ -722,7 +730,7 @@ var require_conversions = __commonJS({
       }
       return [hsv[0], c2 * 100, f2 * 100]
     }
-    convert2.hcg.rgb = (hcg) => {
+    convert2.hcg.rgb = function (hcg) {
       const h2 = hcg[0] / 360
       const c2 = hcg[1] / 100
       const g2 = hcg[2] / 100
@@ -772,7 +780,7 @@ var require_conversions = __commonJS({
         (c2 * pure[2] + mg) * 255
       ]
     }
-    convert2.hcg.hsv = (hcg) => {
+    convert2.hcg.hsv = function (hcg) {
       const c2 = hcg[1] / 100
       const g2 = hcg[2] / 100
       const v2 = c2 + g2 * (1 - c2)
@@ -782,7 +790,7 @@ var require_conversions = __commonJS({
       }
       return [hcg[0], f2 * 100, v2 * 100]
     }
-    convert2.hcg.hsl = (hcg) => {
+    convert2.hcg.hsl = function (hcg) {
       const c2 = hcg[1] / 100
       const g2 = hcg[2] / 100
       const l2 = g2 * (1 - c2) + 0.5 * c2
@@ -794,13 +802,13 @@ var require_conversions = __commonJS({
       }
       return [hcg[0], s2 * 100, l2 * 100]
     }
-    convert2.hcg.hwb = (hcg) => {
+    convert2.hcg.hwb = function (hcg) {
       const c2 = hcg[1] / 100
       const g2 = hcg[2] / 100
       const v2 = c2 + g2 * (1 - c2)
       return [hcg[0], (v2 - c2) * 100, (1 - v2) * 100]
     }
-    convert2.hwb.hcg = (hwb) => {
+    convert2.hwb.hcg = function (hwb) {
       const w2 = hwb[1] / 100
       const b2 = hwb[2] / 100
       const v2 = 1 - b2
@@ -811,33 +819,47 @@ var require_conversions = __commonJS({
       }
       return [hwb[0], c2 * 100, g2 * 100]
     }
-    convert2.apple.rgb = (apple) => [
-      (apple[0] / 65535) * 255,
-      (apple[1] / 65535) * 255,
-      (apple[2] / 65535) * 255
-    ]
-    convert2.rgb.apple = (rgb) => [
-      (rgb[0] / 255) * 65535,
-      (rgb[1] / 255) * 65535,
-      (rgb[2] / 255) * 65535
-    ]
-    convert2.gray.rgb = (args) => [
-      (args[0] / 100) * 255,
-      (args[0] / 100) * 255,
-      (args[0] / 100) * 255
-    ]
-    convert2.gray.hsl = (args) => [0, 0, args[0]]
+    convert2.apple.rgb = function (apple) {
+      return [
+        (apple[0] / 65535) * 255,
+        (apple[1] / 65535) * 255,
+        (apple[2] / 65535) * 255
+      ]
+    }
+    convert2.rgb.apple = function (rgb) {
+      return [
+        (rgb[0] / 255) * 65535,
+        (rgb[1] / 255) * 65535,
+        (rgb[2] / 255) * 65535
+      ]
+    }
+    convert2.gray.rgb = function (args) {
+      return [
+        (args[0] / 100) * 255,
+        (args[0] / 100) * 255,
+        (args[0] / 100) * 255
+      ]
+    }
+    convert2.gray.hsl = function (args) {
+      return [0, 0, args[0]]
+    }
     convert2.gray.hsv = convert2.gray.hsl
-    convert2.gray.hwb = (gray) => [0, 100, gray[0]]
-    convert2.gray.cmyk = (gray) => [0, 0, 0, gray[0]]
-    convert2.gray.lab = (gray) => [gray[0], 0, 0]
-    convert2.gray.hex = (gray) => {
+    convert2.gray.hwb = function (gray) {
+      return [0, 100, gray[0]]
+    }
+    convert2.gray.cmyk = function (gray) {
+      return [0, 0, 0, gray[0]]
+    }
+    convert2.gray.lab = function (gray) {
+      return [gray[0], 0, 0]
+    }
+    convert2.gray.hex = function (gray) {
       const val = Math.round((gray[0] / 100) * 255) & 255
       const integer = (val << 16) + (val << 8) + val
       const string = integer.toString(16).toUpperCase()
       return "000000".substring(string.length) + string
     }
-    convert2.rgb.gray = (rgb) => {
+    convert2.rgb.gray = function (rgb) {
       const val = (rgb[0] + rgb[1] + rgb[2]) / 3
       return [(val / 255) * 100]
     }
@@ -884,7 +906,9 @@ var require_route = __commonJS({
       return graph
     }
     function link(from, to) {
-      return (args) => to(from(args))
+      return function (args) {
+        return to(from(args))
+      }
     }
     function wrapConversion(toModel, graph) {
       const path = [graph[toModel].parent, toModel]
@@ -898,7 +922,7 @@ var require_route = __commonJS({
       fn.conversion = path
       return fn
     }
-    module.exports = (fromModel) => {
+    module.exports = function (fromModel) {
       const graph = deriveBFS(fromModel)
       const conversion = {}
       const models = Object.keys(graph)
@@ -926,7 +950,7 @@ var require_color_convert = __commonJS({
     var convert2 = {}
     var models = Object.keys(conversions)
     function wrapRaw(fn) {
-      const wrappedFn = (...args) => {
+      const wrappedFn = function (...args) {
         const arg0 = args[0]
         if (arg0 === void 0 || arg0 === null) {
           return arg0
@@ -942,7 +966,7 @@ var require_color_convert = __commonJS({
       return wrappedFn
     }
     function wrapRounded(fn) {
-      const wrappedFn = (...args) => {
+      const wrappedFn = function (...args) {
         const arg0 = args[0]
         if (arg0 === void 0 || arg0 === null) {
           return arg0
@@ -990,7 +1014,9 @@ var require_now = __commonJS({
     module
   ) {
     var root = require_root()
-    var now = () => root.Date.now()
+    var now = function () {
+      return root.Date.now()
+    }
     module.exports = now
   }
 })
@@ -1041,7 +1067,7 @@ var require_toNumber = __commonJS({
     var reIsBadHex = /^[-+]0x[0-9a-f]+$/i
     var reIsBinary = /^0b[01]+$/i
     var reIsOctal = /^0o[0-7]+$/i
-    var freeParseInt = Number.parseInt
+    var freeParseInt = parseInt
     function toNumber(value) {
       if (typeof value == "number") {
         return value
@@ -1196,14 +1222,14 @@ var import_react = __toESM(require_react(), 1)
 function u() {
   return (u =
     Object.assign ||
-    ((e2) => {
+    function (e2) {
       for (var r2 = 1; r2 < arguments.length; r2++) {
         var t2 = arguments[r2]
         for (var n2 in t2)
           Object.prototype.hasOwnProperty.call(t2, n2) && (e2[n2] = t2[n2])
       }
       return e2
-    })).apply(this, arguments)
+    }).apply(this, arguments)
 }
 function c(e2, r2) {
   if (null == e2) return {}
@@ -1217,22 +1243,28 @@ function c(e2, r2) {
 }
 function i(e2) {
   var t2 = (0, import_react.useRef)(e2),
-    n2 = (0, import_react.useRef)((e3) => {
+    n2 = (0, import_react.useRef)(function (e3) {
       t2.current && t2.current(e3)
     })
   return (t2.current = e2), n2.current
 }
-var s = (e2, r2, t2) => (
-  void 0 === r2 && (r2 = 0),
-  void 0 === t2 && (t2 = 1),
-  e2 > t2 ? t2 : e2 < r2 ? r2 : e2
-)
-var f = (e2) => "touches" in e2
-var v = (e2) => (e2 && e2.ownerDocument.defaultView) || self
-var d = (e2, r2, t2) => {
+var s = function (e2, r2, t2) {
+  return (
+    void 0 === r2 && (r2 = 0),
+    void 0 === t2 && (t2 = 1),
+    e2 > t2 ? t2 : e2 < r2 ? r2 : e2
+  )
+}
+var f = function (e2) {
+  return "touches" in e2
+}
+var v = function (e2) {
+  return (e2 && e2.ownerDocument.defaultView) || self
+}
+var d = function (e2, r2, t2) {
   var n2 = e2.getBoundingClientRect(),
     o2 = f(r2)
-      ? ((e3, r3) => {
+      ? (function (e3, r3) {
           for (var t3 = 0; t3 < e3.length; t3++)
             if (e3[t3].identifier === r3) return e3[t3]
           return e3[0]
@@ -1243,10 +1275,10 @@ var d = (e2, r2, t2) => {
     top: s((o2.pageY - (n2.top + v(e2).pageYOffset)) / n2.height)
   }
 }
-var h = (e2) => {
+var h = function (e2) {
   !f(e2) && e2.preventDefault()
 }
-var m = import_react.default.memo((o2) => {
+var m = import_react.default.memo(function (o2) {
   var a2 = o2.onMove,
     l2 = o2.onKey,
     s2 = c(o2, ["onMove", "onKey"]),
@@ -1255,55 +1287,68 @@ var m = import_react.default.memo((o2) => {
     p2 = i(l2),
     b2 = (0, import_react.useRef)(null),
     _2 = (0, import_react.useRef)(false),
-    x2 = (0, import_react.useMemo)(() => {
-      var e2 = (e3) => {
-          h(e3),
-            (f(e3) ? e3.touches.length > 0 : e3.buttons > 0) && m2.current
-              ? g2(d(m2.current, e3, b2.current))
-              : t2(false)
-        },
-        r2 = () => t2(false)
-      function t2(t3) {
-        var n2 = _2.current,
-          o3 = v(m2.current),
-          a3 = t3 ? o3.addEventListener : o3.removeEventListener
-        a3(n2 ? "touchmove" : "mousemove", e2),
-          a3(n2 ? "touchend" : "mouseup", r2)
-      }
-      return [
-        (e3) => {
-          var r3 = e3.nativeEvent,
-            n2 = m2.current
-          if (
-            n2 &&
-            (h(r3), !((e4, r4) => r4 && !f(e4))(r3, _2.current) && n2)
-          ) {
-            if (f(r3)) {
-              _2.current = true
-              var o3 = r3.changedTouches || []
-              o3.length && (b2.current = o3[0].identifier)
-            }
-            n2.focus(), g2(d(n2, r3, b2.current)), t2(true)
+    x2 = (0, import_react.useMemo)(
+      function () {
+        var e2 = function (e3) {
+            h(e3),
+              (f(e3) ? e3.touches.length > 0 : e3.buttons > 0) && m2.current
+                ? g2(d(m2.current, e3, b2.current))
+                : t2(false)
+          },
+          r2 = function () {
+            return t2(false)
           }
-        },
-        (e3) => {
-          var r3 = e3.which || e3.keyCode
-          r3 < 37 ||
-            r3 > 40 ||
-            (e3.preventDefault(),
-            p2({
-              left: 39 === r3 ? 0.05 : 37 === r3 ? -0.05 : 0,
-              top: 40 === r3 ? 0.05 : 38 === r3 ? -0.05 : 0
-            }))
-        },
-        t2
-      ]
-    }, [p2, g2]),
+        function t2(t3) {
+          var n2 = _2.current,
+            o3 = v(m2.current),
+            a3 = t3 ? o3.addEventListener : o3.removeEventListener
+          a3(n2 ? "touchmove" : "mousemove", e2),
+            a3(n2 ? "touchend" : "mouseup", r2)
+        }
+        return [
+          function (e3) {
+            var r3 = e3.nativeEvent,
+              n2 = m2.current
+            if (
+              n2 &&
+              (h(r3),
+              !(function (e4, r4) {
+                return r4 && !f(e4)
+              })(r3, _2.current) && n2)
+            ) {
+              if (f(r3)) {
+                _2.current = true
+                var o3 = r3.changedTouches || []
+                o3.length && (b2.current = o3[0].identifier)
+              }
+              n2.focus(), g2(d(n2, r3, b2.current)), t2(true)
+            }
+          },
+          function (e3) {
+            var r3 = e3.which || e3.keyCode
+            r3 < 37 ||
+              r3 > 40 ||
+              (e3.preventDefault(),
+              p2({
+                left: 39 === r3 ? 0.05 : 37 === r3 ? -0.05 : 0,
+                top: 40 === r3 ? 0.05 : 38 === r3 ? -0.05 : 0
+              }))
+          },
+          t2
+        ]
+      },
+      [p2, g2]
+    ),
     C2 = x2[0],
     E2 = x2[1],
     H2 = x2[2]
   return (
-    (0, import_react.useEffect)(() => H2, [H2]),
+    (0, import_react.useEffect)(
+      function () {
+        return H2
+      },
+      [H2]
+    ),
     import_react.default.createElement(
       "div",
       u({}, s2, {
@@ -1318,8 +1363,10 @@ var m = import_react.default.memo((o2) => {
     )
   )
 })
-var g = (e2) => e2.filter(Boolean).join(" ")
-var p = (r2) => {
+var g = function (e2) {
+  return e2.filter(Boolean).join(" ")
+}
+var p = function (r2) {
   var t2 = r2.color,
     n2 = r2.left,
     o2 = r2.top,
@@ -1334,34 +1381,39 @@ var p = (r2) => {
     })
   )
 }
-var b = (e2, r2, t2) => (
-  void 0 === r2 && (r2 = 0),
-  void 0 === t2 && (t2 = Math.pow(10, r2)),
-  Math.round(t2 * e2) / t2
-)
+var b = function (e2, r2, t2) {
+  return (
+    void 0 === r2 && (r2 = 0),
+    void 0 === t2 && (t2 = Math.pow(10, r2)),
+    Math.round(t2 * e2) / t2
+  )
+}
 var _ = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) }
-var x = (e2) => L(C(e2))
-var C = (e2) => (
-  "#" === e2[0] && (e2 = e2.substring(1)),
-  e2.length < 6
-    ? {
-        r: Number.parseInt(e2[0] + e2[0], 16),
-        g: Number.parseInt(e2[1] + e2[1], 16),
-        b: Number.parseInt(e2[2] + e2[2], 16),
-        a: 4 === e2.length ? b(Number.parseInt(e2[3] + e2[3], 16) / 255, 2) : 1
-      }
-    : {
-        r: Number.parseInt(e2.substring(0, 2), 16),
-        g: Number.parseInt(e2.substring(2, 4), 16),
-        b: Number.parseInt(e2.substring(4, 6), 16),
-        a:
-          8 === e2.length
-            ? b(Number.parseInt(e2.substring(6, 8), 16) / 255, 2)
-            : 1
-      }
-)
-var E = (e2, r2) => (void 0 === r2 && (r2 = "deg"), Number(e2) * (_[r2] || 1))
-var H = (e2) => {
+var x = function (e2) {
+  return L(C(e2))
+}
+var C = function (e2) {
+  return (
+    "#" === e2[0] && (e2 = e2.substring(1)),
+    e2.length < 6
+      ? {
+          r: parseInt(e2[0] + e2[0], 16),
+          g: parseInt(e2[1] + e2[1], 16),
+          b: parseInt(e2[2] + e2[2], 16),
+          a: 4 === e2.length ? b(parseInt(e2[3] + e2[3], 16) / 255, 2) : 1
+        }
+      : {
+          r: parseInt(e2.substring(0, 2), 16),
+          g: parseInt(e2.substring(2, 4), 16),
+          b: parseInt(e2.substring(4, 6), 16),
+          a: 8 === e2.length ? b(parseInt(e2.substring(6, 8), 16) / 255, 2) : 1
+        }
+  )
+}
+var E = function (e2, r2) {
+  return void 0 === r2 && (r2 = "deg"), Number(e2) * (_[r2] || 1)
+}
+var H = function (e2) {
   var r2 =
     /hsla?\(?\s*(-?\d*\.?\d+)(deg|rad|grad|turn)?[,\s]+(-?\d*\.?\d+)%?[,\s]+(-?\d*\.?\d+)%?,?\s*[/\s]*(-?\d*\.?\d+)?(%)?\s*\)?/i.exec(
       e2
@@ -1375,7 +1427,7 @@ var H = (e2) => {
       })
     : { h: 0, s: 0, v: 0, a: 1 }
 }
-var N = (e2) => {
+var N = function (e2) {
   var r2 = e2.s,
     t2 = e2.l
   return {
@@ -1388,8 +1440,10 @@ var N = (e2) => {
     a: e2.a
   }
 }
-var w = (e2) => K(I(e2))
-var y = (e2) => {
+var w = function (e2) {
+  return K(I(e2))
+}
+var y = function (e2) {
   var r2 = e2.s,
     t2 = e2.v,
     n2 = e2.a,
@@ -1405,15 +1459,15 @@ var y = (e2) => {
     a: b(n2, 2)
   }
 }
-var q = (e2) => {
+var q = function (e2) {
   var r2 = y(e2)
   return "hsl(" + r2.h + ", " + r2.s + "%, " + r2.l + "%)"
 }
-var k = (e2) => {
+var k = function (e2) {
   var r2 = y(e2)
   return "hsla(" + r2.h + ", " + r2.s + "%, " + r2.l + "%, " + r2.a + ")"
 }
-var I = (e2) => {
+var I = function (e2) {
   var r2 = e2.h,
     t2 = e2.s,
     n2 = e2.v,
@@ -1431,7 +1485,7 @@ var I = (e2) => {
     a: b(o2, 2)
   }
 }
-var z = (e2) => {
+var z = function (e2) {
   var r2 =
     /rgba?\(?\s*(-?\d*\.?\d+)(%)?[,\s]+(-?\d*\.?\d+)(%)?[,\s]+(-?\d*\.?\d+)(%)?,?\s*[/\s]*(-?\d*\.?\d+)?(%)?\s*\)?/i.exec(
       e2
@@ -1445,11 +1499,11 @@ var z = (e2) => {
       })
     : { h: 0, s: 0, v: 0, a: 1 }
 }
-var D = (e2) => {
+var D = function (e2) {
   var r2 = e2.toString(16)
   return r2.length < 2 ? "0" + r2 : r2
 }
-var K = (e2) => {
+var K = function (e2) {
   var r2 = e2.r,
     t2 = e2.g,
     n2 = e2.b,
@@ -1457,7 +1511,7 @@ var K = (e2) => {
     a2 = o2 < 1 ? D(b(255 * o2)) : ""
   return "#" + D(r2) + D(t2) + D(n2) + a2
 }
-var L = (e2) => {
+var L = function (e2) {
   var r2 = e2.r,
     t2 = e2.g,
     n2 = e2.b,
@@ -1478,7 +1532,7 @@ var L = (e2) => {
     a: o2
   }
 }
-var S = import_react.default.memo((r2) => {
+var S = import_react.default.memo(function (r2) {
   var t2 = r2.hue,
     n2 = r2.onChange,
     o2 = g(["react-colorful__hue", r2.className])
@@ -1488,10 +1542,10 @@ var S = import_react.default.memo((r2) => {
     import_react.default.createElement(
       m,
       {
-        onMove: (e2) => {
+        onMove: function (e2) {
           n2({ h: 360 * e2.left })
         },
-        onKey: (e2) => {
+        onKey: function (e2) {
           n2({ h: s(t2 + 360 * e2.left, 0, 360) })
         },
         "aria-label": "Hue",
@@ -1507,7 +1561,7 @@ var S = import_react.default.memo((r2) => {
     )
   )
 })
-var T = import_react.default.memo((r2) => {
+var T = import_react.default.memo(function (r2) {
   var t2 = r2.hsva,
     n2 = r2.onChange,
     o2 = { backgroundColor: q({ h: t2.h, s: 100, v: 100, a: 1 }) }
@@ -1517,10 +1571,10 @@ var T = import_react.default.memo((r2) => {
     import_react.default.createElement(
       m,
       {
-        onMove: (e2) => {
+        onMove: function (e2) {
           n2({ s: 100 * e2.left, v: 100 - 100 * e2.top })
         },
-        onKey: (e2) => {
+        onKey: function (e2) {
           n2({
             s: s(t2.s + 100 * e2.left, 0, 100),
             v: s(t2.v - 100 * e2.top, 0, 100)
@@ -1539,33 +1593,47 @@ var T = import_react.default.memo((r2) => {
     )
   )
 })
-var F = (e2, r2) => {
+var F = function (e2, r2) {
   if (e2 === r2) return true
   for (var t2 in e2) if (e2[t2] !== r2[t2]) return false
   return true
 }
-var P = (e2, r2) => e2.replace(/\s/g, "") === r2.replace(/\s/g, "")
-var X = (e2, r2) => e2.toLowerCase() === r2.toLowerCase() || F(C(e2), C(r2))
+var P = function (e2, r2) {
+  return e2.replace(/\s/g, "") === r2.replace(/\s/g, "")
+}
+var X = function (e2, r2) {
+  return e2.toLowerCase() === r2.toLowerCase() || F(C(e2), C(r2))
+}
 function Y(e2, t2, l2) {
   var u2 = i(l2),
-    c2 = (0, import_react.useState)(() => e2.toHsva(t2)),
+    c2 = (0, import_react.useState)(function () {
+      return e2.toHsva(t2)
+    }),
     s2 = c2[0],
     f2 = c2[1],
     v2 = (0, import_react.useRef)({ color: t2, hsva: s2 })
-  ;(0, import_react.useEffect)(() => {
-    if (!e2.equal(t2, v2.current.color)) {
-      var r2 = e2.toHsva(t2)
-      ;(v2.current = { hsva: r2, color: t2 }), f2(r2)
-    }
-  }, [t2, e2]),
-    (0, import_react.useEffect)(() => {
-      var r2
-      F(s2, v2.current.hsva) ||
-        e2.equal((r2 = e2.fromHsva(s2)), v2.current.color) ||
-        ((v2.current = { hsva: s2, color: r2 }), u2(r2))
-    }, [s2, e2, u2])
-  var d2 = (0, import_react.useCallback)((e3) => {
-    f2((r2) => Object.assign({}, r2, e3))
+  ;(0, import_react.useEffect)(
+    function () {
+      if (!e2.equal(t2, v2.current.color)) {
+        var r2 = e2.toHsva(t2)
+        ;(v2.current = { hsva: r2, color: t2 }), f2(r2)
+      }
+    },
+    [t2, e2]
+  ),
+    (0, import_react.useEffect)(
+      function () {
+        var r2
+        F(s2, v2.current.hsva) ||
+          e2.equal((r2 = e2.fromHsva(s2)), v2.current.color) ||
+          ((v2.current = { hsva: s2, color: r2 }), u2(r2))
+      },
+      [s2, e2, u2]
+    )
+  var d2 = (0, import_react.useCallback)(function (e3) {
+    f2(function (r2) {
+      return Object.assign({}, r2, e3)
+    })
   }, [])
   return [s2, d2]
 }
@@ -1574,11 +1642,14 @@ var V =
   "undefined" != typeof window
     ? import_react.useLayoutEffect
     : import_react.useEffect
-var $ = () =>
-  R || ("undefined" != typeof __webpack_nonce__ ? __webpack_nonce__ : void 0)
+var $ = function () {
+  return (
+    R || ("undefined" != typeof __webpack_nonce__ ? __webpack_nonce__ : void 0)
+  )
+}
 var J = /* @__PURE__ */ new Map()
-var Q = (e2) => {
-  V(() => {
+var Q = function (e2) {
+  V(function () {
     var r2 = e2.current ? e2.current.ownerDocument : document
     if (void 0 !== r2 && !J.has(r2)) {
       var t2 = r2.createElement("style")
@@ -1589,7 +1660,7 @@ var Q = (e2) => {
     }
   }, [])
 }
-var U = (t2) => {
+var U = function (t2) {
   var n2 = t2.className,
     o2 = t2.colorModel,
     a2 = t2.color,
@@ -1616,12 +1687,15 @@ var U = (t2) => {
 var W = {
   defaultColor: "000",
   toHsva: x,
-  fromHsva: (e2) => w({ h: e2.h, s: e2.s, v: e2.v, a: 1 }),
+  fromHsva: function (e2) {
+    return w({ h: e2.h, s: e2.s, v: e2.v, a: 1 })
+  },
   equal: X
 }
-var Z = (r2) =>
-  import_react.default.createElement(U, u({}, r2, { colorModel: W }))
-var ee = (r2) => {
+var Z = function (r2) {
+  return import_react.default.createElement(U, u({}, r2, { colorModel: W }))
+}
+var ee = function (r2) {
   var t2 = r2.className,
     n2 = r2.hsva,
     o2 = r2.onChange,
@@ -1645,10 +1719,10 @@ var ee = (r2) => {
     import_react.default.createElement(
       m,
       {
-        onMove: (e2) => {
+        onMove: function (e2) {
           o2({ a: e2.left })
         },
-        onKey: (e2) => {
+        onKey: function (e2) {
           o2({ a: s(n2.a + e2.left) })
         },
         "aria-label": "Alpha",
@@ -1665,7 +1739,7 @@ var ee = (r2) => {
     )
   )
 }
-var re = (t2) => {
+var re = function (t2) {
   var n2 = t2.className,
     o2 = t2.colorModel,
     a2 = t2.color,
@@ -1696,19 +1770,21 @@ var le = {
   fromHsva: k,
   equal: P
 }
-var ue = (r2) =>
-  import_react.default.createElement(re, u({}, r2, { colorModel: le }))
+var ue = function (r2) {
+  return import_react.default.createElement(re, u({}, r2, { colorModel: le }))
+}
 var Ee = {
   defaultColor: "rgba(0, 0, 0, 1)",
   toHsva: z,
-  fromHsva: (e2) => {
+  fromHsva: function (e2) {
     var r2 = I(e2)
     return "rgba(" + r2.r + ", " + r2.g + ", " + r2.b + ", " + r2.a + ")"
   },
   equal: P
 }
-var He = (r2) =>
-  import_react.default.createElement(re, u({}, r2, { colorModel: Ee }))
+var He = function (r2) {
+  return import_react.default.createElement(re, u({}, r2, { colorModel: Ee }))
+}
 
 // node_modules/.pnpm/@storybook+blocks@8.2.9_react-dom@18.3.1_react@18.3.1__react@18.3.1_storybook@8.2.9_@babel+pr_6cc5odt3xmihpgdygh6iolouyi/node_modules/@storybook/blocks/dist/Color-KGDBMAHA.mjs
 var import_color_convert = __toESM(require_color_convert(), 1)
@@ -1751,7 +1827,7 @@ var SwatchColor = Tr.div(({ theme, active }) => ({
 }))
 var swatchBackground = `url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill-opacity=".05"><path d="M8 0h8v8H8zM0 8h8v8H0z"/></svg>')`
 var Swatch = ({ value, style, ...props }) => {
-  const backgroundImage = `linear-gradient(${value}, ${value}), ${swatchBackground}, linear-gradient(#fff, #fff)`
+  let backgroundImage = `linear-gradient(${value}, ${value}), ${swatchBackground}, linear-gradient(#fff, #fff)`
   return import_react2.default.createElement(SwatchColor, {
     ...props,
     style: { ...style, backgroundImage }
@@ -1797,16 +1873,16 @@ var fallbackColor = {
   hsl: "hsla(0, 0%, 0%, 0)"
 }
 var stringToArgs = (value) => {
-  const match = value == null ? void 0 : value.match(COLOR_REGEXP)
+  let match = value == null ? void 0 : value.match(COLOR_REGEXP)
   if (!match) return [0, 0, 0, 1]
-  const [, x2, y2, z2, a2 = 1] = match
+  let [, x2, y2, z2, a2 = 1] = match
   return [x2, y2, z2, a2].map(Number)
 }
 var parseValue = (value) => {
   if (!value) return
   let valid = true
   if (RGB_REGEXP.test(value)) {
-    const [r2, g2, b2, a2] = stringToArgs(value),
+    let [r2, g2, b2, a2] = stringToArgs(value),
       [h2, s2, l2] = import_color_convert.default.rgb.hsl([r2, g2, b2]) || [
         0, 0, 0
       ]
@@ -1821,7 +1897,7 @@ var parseValue = (value) => {
     }
   }
   if (HSL_REGEXP.test(value)) {
-    const [h2, s2, l2, a2] = stringToArgs(value),
+    let [h2, s2, l2, a2] = stringToArgs(value),
       [r2, g2, b2] = import_color_convert.default.hsl.rgb([h2, s2, l2]) || [
         0, 0, 0
       ]
@@ -1877,19 +1953,19 @@ var getRealValue = (value, color, colorSpace) => {
     } catch {
       return fallbackColor.hex
     }
-  const short = color.hex.match(SHORTHEX_REGEXP)
+  let short = color.hex.match(SHORTHEX_REGEXP)
   if (!short) return HEX_REGEXP.test(color.hex) ? color.hex : fallbackColor.hex
-  const [r2, g2, b2] = short[1].split("")
+  let [r2, g2, b2] = short[1].split("")
   return `#${r2}${r2}${g2}${g2}${b2}${b2}`
 }
 var useColorInput = (initialValue, onChange) => {
-  const [value, setValue] = (0, import_react2.useState)(initialValue || ""),
+  let [value, setValue] = (0, import_react2.useState)(initialValue || ""),
     [color, setColor] = (0, import_react2.useState)(() => parseValue(value)),
     [colorSpace, setColorSpace] = (0, import_react2.useState)(
       (color == null ? void 0 : color.colorSpace) || "hex"
     )
   ;(0, import_react2.useEffect)(() => {
-    const nextValue = initialValue || "",
+    let nextValue = initialValue || "",
       nextColor = parseValue(nextValue)
     setValue(nextValue),
       setColor(nextColor),
@@ -1897,13 +1973,13 @@ var useColorInput = (initialValue, onChange) => {
         (nextColor == null ? void 0 : nextColor.colorSpace) || "hex"
       )
   }, [initialValue])
-  const realValue = (0, import_react2.useMemo)(
+  let realValue = (0, import_react2.useMemo)(
       () => getRealValue(value, color, colorSpace).toLowerCase(),
       [value, color, colorSpace]
     ),
     updateValue = (0, import_react2.useCallback)(
       (update) => {
-        const parsed = parseValue(update),
+        let parsed = parseValue(update),
           v2 = (parsed == null ? void 0 : parsed.value) || update || ""
         setValue(v2),
           v2 === "" && (setColor(void 0), onChange(void 0)),
@@ -1918,20 +1994,20 @@ var useColorInput = (initialValue, onChange) => {
       let next = COLOR_SPACES.indexOf(colorSpace) + 1
       next >= COLOR_SPACES.length && (next = 0),
         setColorSpace(COLOR_SPACES[next])
-      const update = (color == null ? void 0 : color[COLOR_SPACES[next]]) || ""
+      let update = (color == null ? void 0 : color[COLOR_SPACES[next]]) || ""
       setValue(update), onChange(update)
     }, [color, colorSpace, onChange])
   return { value, realValue, updateValue, color, colorSpace, cycleColorSpace }
 }
 var id = (value) => value.replace(/\s*/, "").toLowerCase()
 var usePresets = (presetColors, currentColor, colorSpace) => {
-  const [selectedColors, setSelectedColors] = (0, import_react2.useState)(
+  let [selectedColors, setSelectedColors] = (0, import_react2.useState)(
     (currentColor == null ? void 0 : currentColor.valid) ? [currentColor] : []
   )
   ;(0, import_react2.useEffect)(() => {
     currentColor === void 0 && setSelectedColors([])
   }, [currentColor])
-  const presets = (0, import_react2.useMemo)(
+  let presets = (0, import_react2.useMemo)(
       () =>
         (presetColors || [])
           .map((preset) =>
@@ -1969,7 +2045,7 @@ var ColorControl = ({
   argType
 }) => {
   var _a
-  const debouncedOnChange = (0, import_react2.useCallback)(
+  let debouncedOnChange = (0, import_react2.useCallback)(
       (0, import_debounce.default)(onChange, 200),
       [onChange]
     ),
@@ -2046,4 +2122,4 @@ var ColorControl = ({
 }
 var Color_default = ColorControl
 export { ColorControl, Color_default as default }
-//# sourceMappingURL=Color-KGDBMAHA-VAAYIDO3.js.map
+//# sourceMappingURL=Color-KGDBMAHA-YALDFIYE.js.map

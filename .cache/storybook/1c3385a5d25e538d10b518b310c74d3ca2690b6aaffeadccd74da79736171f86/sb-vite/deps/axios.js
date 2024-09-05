@@ -1321,19 +1321,20 @@ var AxiosHeaders = class {
     return deleted
   }
   normalize(format) {
+    const self2 = this
     const headers = {}
     utils_default.forEach(this, (value, header) => {
       const key = utils_default.findKey(headers, header)
       if (key) {
-        this[key] = normalizeValue(value)
-        delete this[header]
+        self2[key] = normalizeValue(value)
+        delete self2[header]
         return
       }
       const normalized = format ? formatHeader(header) : String(header).trim()
       if (normalized !== header) {
-        delete this[header]
+        delete self2[header]
       }
-      this[normalized] = normalizeValue(value)
+      self2[normalized] = normalizeValue(value)
       headers[normalized] = true
     })
     return this
@@ -1401,7 +1402,7 @@ AxiosHeaders.accessor([
   "Authorization"
 ])
 utils_default.reduceDescriptors(AxiosHeaders.prototype, ({ value }, key) => {
-  const mapped = key[0].toUpperCase() + key.slice(1)
+  let mapped = key[0].toUpperCase() + key.slice(1)
   return {
     get: () => value,
     set(headerValue) {
@@ -1521,7 +1522,7 @@ var speedometer_default = speedometer
 // node_modules/.pnpm/axios@1.7.7/node_modules/axios/lib/helpers/throttle.js
 function throttle(fn, freq) {
   let timestamp = 0
-  const threshold = 1e3 / freq
+  let threshold = 1e3 / freq
   let lastArgs
   let timer
   const invoke = (args, now = Date.now()) => {
@@ -1854,14 +1855,14 @@ var resolveConfig_default = (config) => {
 var isXHRAdapterSupported = typeof XMLHttpRequest !== "undefined"
 var xhr_default =
   isXHRAdapterSupported &&
-  ((config) =>
-    new Promise(function dispatchXhrRequest(resolve, reject) {
+  function (config) {
+    return new Promise(function dispatchXhrRequest(resolve, reject) {
       const _config = resolveConfig_default(config)
-      const requestData = _config.data
+      let requestData = _config.data
       const requestHeaders = AxiosHeaders_default.from(
         _config.headers
       ).normalize()
-      const { responseType, onUploadProgress, onDownloadProgress } = _config
+      let { responseType, onUploadProgress, onDownloadProgress } = _config
       let onCanceled
       let uploadThrottled, downloadThrottled
       let flushUpload, flushDownload
@@ -2027,13 +2028,14 @@ var xhr_default =
         return
       }
       request.send(requestData || null)
-    }))
+    })
+  }
 
 // node_modules/.pnpm/axios@1.7.7/node_modules/axios/lib/helpers/composeSignals.js
 var composeSignals = (signals, timeout) => {
   const { length } = (signals = signals ? signals.filter(Boolean) : [])
   if (timeout || length) {
-    const controller = new AbortController()
+    let controller = new AbortController()
     let aborted
     const onabort = function (reason) {
       if (!aborted) {
@@ -2082,7 +2084,7 @@ var composeSignals_default = composeSignals
 
 // node_modules/.pnpm/axios@1.7.7/node_modules/axios/lib/helpers/trackStream.js
 var streamChunk = function* (chunk, chunkSize) {
-  const len = chunk.byteLength
+  let len = chunk.byteLength
   if (!chunkSize || len < chunkSize) {
     yield chunk
     return
@@ -2122,7 +2124,7 @@ var trackStream = (stream, chunkSize, onProgress, onFinish) => {
   const iterator = readBytes(stream, chunkSize)
   let bytes = 0
   let done
-  const _onFinish = (e) => {
+  let _onFinish = (e) => {
     if (!done) {
       done = true
       onFinish && onFinish(e)
@@ -2138,9 +2140,9 @@ var trackStream = (stream, chunkSize, onProgress, onFinish) => {
             controller.close()
             return
           }
-          const len = value.byteLength
+          let len = value.byteLength
           if (onProgress) {
-            const loadedBytes = (bytes += len)
+            let loadedBytes = (bytes += len)
             onProgress(loadedBytes)
           }
           controller.enqueue(new Uint8Array(value))
@@ -2267,7 +2269,7 @@ var fetch_default =
       fetchOptions
     } = resolveConfig_default(config)
     responseType = responseType ? (responseType + "").toLowerCase() : "text"
-    const composedSignal = composeSignals_default(
+    let composedSignal = composeSignals_default(
       [signal, cancelToken && cancelToken.toAbortSignal()],
       timeout
     )
@@ -2287,7 +2289,7 @@ var fetch_default =
         method !== "head" &&
         (requestContentLength = await resolveBodyLength(headers, data)) !== 0
       ) {
-        const _request = new Request(url, {
+        let _request = new Request(url, {
           method: "POST",
           body: data,
           duplex: "half"
@@ -2356,7 +2358,7 @@ var fetch_default =
         )
       }
       responseType = responseType || "text"
-      const responseData = await resolvers[
+      let responseData = await resolvers[
         utils_default.findKey(resolvers, responseType) || "text"
       ](response, config)
       !isStreamResponse && unsubscribe && unsubscribe()
@@ -2436,7 +2438,7 @@ var adapters_default = {
             ? "is not supported by the environment"
             : "is not available in the build")
       )
-      const s = length
+      let s = length
         ? reasons.length > 1
           ? "since :\n" + reasons.map(renderReason).join("\n")
           : " " + renderReason(reasons[0])
@@ -2668,7 +2670,7 @@ var Axios = class {
       this.defaults.method ||
       "get"
     ).toLowerCase()
-    const contextHeaders =
+    let contextHeaders =
       headers && utils_default.merge(headers.common, headers[config.method])
     headers &&
       utils_default.forEach(

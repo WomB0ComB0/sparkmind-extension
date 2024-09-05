@@ -3,11 +3,12 @@ import {
   HarmBlockThreshold,
   HarmCategory
 } from "@google/generative-ai"
+import dotenv from "dotenv"
 
-// import dotenv from 'dotenv';
+dotenv.config()
 
 export const model = "gemini-1.5-flash"
-export const API_KEY = import.meta.env.PLASMO_PUBLIC_GOOGLE_AI_API_KEY || ""
+export const API_KEY = process.env.PLASMO_PUBLIC_GOOGLE_AI_API_KEY || ""
 export const genAI = new GoogleGenerativeAI(API_KEY || "")
 
 export const generationConfig = undefined

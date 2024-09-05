@@ -1,5 +1,5 @@
 try {
-  (() => {
+  ;(() => {
     var T = __STORYBOOK_API__,
       {
         ActiveTabs: _,
@@ -33,35 +33,41 @@ try {
         useSharedState: J,
         useStoryPrepared: Q,
         useStorybookApi: U,
-        useStorybookState: V,
-      } = __STORYBOOK_API__;
+        useStorybookState: V
+      } = __STORYBOOK_API__
     var S = (() => {
-        let e;
+        let e
         return (
-          typeof window < 'u'
+          typeof window < "u"
             ? (e = window)
-            : typeof globalThis < 'u'
+            : typeof globalThis < "u"
               ? (e = globalThis)
-              : typeof window < 'u'
+              : typeof window < "u"
                 ? (e = window)
-                : typeof self < 'u'
+                : typeof self < "u"
                   ? (e = self)
                   : (e = {}),
           e
-        );
+        )
       })(),
-      u = 'static-filter';
+      u = "static-filter"
     n.register(u, (e) => {
       let i = Object.entries(S.TAGS_OPTIONS ?? {}).reduce((t, r) => {
-        let [o, c] = r;
-        return c.excludeFromSidebar && (t[o] = !0), t;
-      }, {});
+        let [o, c] = r
+        return c.excludeFromSidebar && (t[o] = !0), t
+      }, {})
       e.experimental_setFilter(u, (t) => {
-        let r = t.tags ?? [];
-        return (r.includes('dev') || t.type === 'docs') && r.filter((o) => i[o]).length === 0;
-      });
-    });
-  })();
+        let r = t.tags ?? []
+        return (
+          (r.includes("dev") || t.type === "docs") &&
+          r.filter((o) => i[o]).length === 0
+        )
+      })
+    })
+  })()
 } catch (e) {
-  console.error('[Storybook] One of your manager-entries failed: ' + import.meta.url, e);
+  console.error(
+    "[Storybook] One of your manager-entries failed: " + import.meta.url,
+    e
+  )
 }

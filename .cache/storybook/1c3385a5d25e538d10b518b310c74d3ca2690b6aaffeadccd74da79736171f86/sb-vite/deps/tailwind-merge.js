@@ -209,7 +209,7 @@ var createParseClassName = (config) => {
     let modifierStart = 0
     let postfixModifierPosition
     for (let index = 0; index < className.length; index++) {
-      const currentCharacter = className[index]
+      let currentCharacter = className[index]
       if (bracketDepth === 0) {
         if (
           currentCharacter === firstSeparatorCharacter &&

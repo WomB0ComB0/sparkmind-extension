@@ -715,7 +715,7 @@ function $5cb92bef7577960e$var$usePointerDownOutside(
   ;(0, import_react9.useEffect)(() => {
     const handlePointerDown = (event) => {
       if (event.target && !isPointerInsideReactTreeRef.current) {
-        const handleAndDispatchPointerDownOutsideEvent = () => {
+        let handleAndDispatchPointerDownOutsideEvent = function () {
           $5cb92bef7577960e$var$handleAndDispatchCustomEvent(
             $5cb92bef7577960e$var$POINTER_DOWN_OUTSIDE,
             handlePointerDownOutside,
@@ -849,7 +849,7 @@ var $d3863c46a17e8a28$export$20e40289641fbbb6 = (0, import_react10.forwardRef)(
     }).current
     ;(0, import_react10.useEffect)(() => {
       if (trapped) {
-        const handleFocusIn = (event) => {
+        let handleFocusIn = function (event) {
             if (focusScope.paused || !container1) return
             const target = event.target
             if (container1.contains(target))
@@ -859,7 +859,7 @@ var $d3863c46a17e8a28$export$20e40289641fbbb6 = (0, import_react10.forwardRef)(
                 select: true
               })
           },
-          handleFocusOut = (event) => {
+          handleFocusOut = function (event) {
             if (focusScope.paused || !container1) return
             const relatedTarget = event.relatedTarget
             if (relatedTarget === null) return
@@ -868,7 +868,7 @@ var $d3863c46a17e8a28$export$20e40289641fbbb6 = (0, import_react10.forwardRef)(
                 select: true
               })
           },
-          handleMutations = (mutations) => {
+          handleMutations = function (mutations) {
             const focusedElement = document.activeElement
             if (focusedElement !== document.body) return
             for (const mutation of mutations)
@@ -1311,10 +1311,10 @@ var React = __toESM(require_react())
 var effectCar = createSidecarMedium()
 
 // node_modules/.pnpm/react-remove-scroll@2.5.5_@types+react@18.3.5_react@18.3.1/node_modules/react-remove-scroll/dist/es2015/UI.js
-var nothing = () => {
+var nothing = function () {
   return
 }
-var RemoveScroll = React.forwardRef((props, parentRef) => {
+var RemoveScroll = React.forwardRef(function (props, parentRef) {
   var ref = React.useRef(null)
   var _a = React.useState({
       onScrollCapture: nothing,
@@ -1395,7 +1395,7 @@ var passiveSupported = false
 if (typeof window !== "undefined") {
   try {
     options = Object.defineProperty({}, "passive", {
-      get: () => {
+      get: function () {
         passiveSupported = true
         return true
       }
@@ -1410,8 +1410,10 @@ var options
 var nonPassive = passiveSupported ? { passive: false } : false
 
 // node_modules/.pnpm/react-remove-scroll@2.5.5_@types+react@18.3.5_react@18.3.1/node_modules/react-remove-scroll/dist/es2015/handleScroll.js
-var alwaysContainsScroll = (node) => node.tagName === "TEXTAREA"
-var elementCanBeScrolled = (node, overflow) => {
+var alwaysContainsScroll = function (node) {
+  return node.tagName === "TEXTAREA"
+}
+var elementCanBeScrolled = function (node, overflow) {
   var styles = window.getComputedStyle(node)
   return (
     // not-not-scrollable
@@ -1423,9 +1425,13 @@ var elementCanBeScrolled = (node, overflow) => {
     )
   )
 }
-var elementCouldBeVScrolled = (node) => elementCanBeScrolled(node, "overflowY")
-var elementCouldBeHScrolled = (node) => elementCanBeScrolled(node, "overflowX")
-var locationCouldBeScrolled = (axis, node) => {
+var elementCouldBeVScrolled = function (node) {
+  return elementCanBeScrolled(node, "overflowY")
+}
+var elementCouldBeHScrolled = function (node) {
+  return elementCanBeScrolled(node, "overflowX")
+}
+var locationCouldBeScrolled = function (axis, node) {
   var current = node
   do {
     if (typeof ShadowRoot !== "undefined" && current instanceof ShadowRoot) {
@@ -1444,25 +1450,36 @@ var locationCouldBeScrolled = (axis, node) => {
   } while (current && current !== document.body)
   return false
 }
-var getVScrollVariables = (_a) => {
+var getVScrollVariables = function (_a) {
   var scrollTop = _a.scrollTop,
     scrollHeight = _a.scrollHeight,
     clientHeight = _a.clientHeight
   return [scrollTop, scrollHeight, clientHeight]
 }
-var getHScrollVariables = (_a) => {
+var getHScrollVariables = function (_a) {
   var scrollLeft = _a.scrollLeft,
     scrollWidth = _a.scrollWidth,
     clientWidth = _a.clientWidth
   return [scrollLeft, scrollWidth, clientWidth]
 }
-var elementCouldBeScrolled = (axis, node) =>
-  axis === "v" ? elementCouldBeVScrolled(node) : elementCouldBeHScrolled(node)
-var getScrollVariables = (axis, node) =>
-  axis === "v" ? getVScrollVariables(node) : getHScrollVariables(node)
-var getDirectionFactor = (axis, direction) =>
-  axis === "h" && direction === "rtl" ? -1 : 1
-var handleScroll = (axis, endTarget, event, sourceDelta, noOverscroll) => {
+var elementCouldBeScrolled = function (axis, node) {
+  return axis === "v"
+    ? elementCouldBeVScrolled(node)
+    : elementCouldBeHScrolled(node)
+}
+var getScrollVariables = function (axis, node) {
+  return axis === "v" ? getVScrollVariables(node) : getHScrollVariables(node)
+}
+var getDirectionFactor = function (axis, direction) {
+  return axis === "h" && direction === "rtl" ? -1 : 1
+}
+var handleScroll = function (
+  axis,
+  endTarget,
+  event,
+  sourceDelta,
+  noOverscroll
+) {
   var directionFactor = getDirectionFactor(
     axis,
     window.getComputedStyle(endTarget).direction
@@ -1509,17 +1526,25 @@ var handleScroll = (axis, endTarget, event, sourceDelta, noOverscroll) => {
 }
 
 // node_modules/.pnpm/react-remove-scroll@2.5.5_@types+react@18.3.5_react@18.3.1/node_modules/react-remove-scroll/dist/es2015/SideEffect.js
-var getTouchXY = (event) =>
-  "changedTouches" in event
+var getTouchXY = function (event) {
+  return "changedTouches" in event
     ? [event.changedTouches[0].clientX, event.changedTouches[0].clientY]
     : [0, 0]
-var getDeltaXY = (event) => [event.deltaX, event.deltaY]
-var extractRef = (ref) => (ref && "current" in ref ? ref.current : ref)
-var deltaCompare = (x, y) => x[0] === y[0] && x[1] === y[1]
-var generateStyle = (id) =>
-  "\n  .block-interactivity-"
+}
+var getDeltaXY = function (event) {
+  return [event.deltaX, event.deltaY]
+}
+var extractRef = function (ref) {
+  return ref && "current" in ref ? ref.current : ref
+}
+var deltaCompare = function (x, y) {
+  return x[0] === y[0] && x[1] === y[1]
+}
+var generateStyle = function (id) {
+  return "\n  .block-interactivity-"
     .concat(id, " {pointer-events: none;}\n  .allow-interactivity-")
     .concat(id, " {pointer-events: all;}\n")
+}
 var idCounter = 0
 var lockStack = []
 function RemoveScrollSideCar(props) {
@@ -1527,32 +1552,40 @@ function RemoveScrollSideCar(props) {
   var touchStartRef = React2.useRef([0, 0])
   var activeAxis = React2.useRef()
   var id = React2.useState(idCounter++)[0]
-  var Style = React2.useState(() => styleSingleton())[0]
+  var Style = React2.useState(function () {
+    return styleSingleton()
+  })[0]
   var lastProps = React2.useRef(props)
-  React2.useEffect(() => {
-    lastProps.current = props
-  }, [props])
-  React2.useEffect(() => {
-    if (props.inert) {
-      document.body.classList.add("block-interactivity-".concat(id))
-      var allow_1 = __spreadArray(
-        [props.lockRef.current],
-        (props.shards || []).map(extractRef),
-        true
-      ).filter(Boolean)
-      allow_1.forEach((el) =>
-        el.classList.add("allow-interactivity-".concat(id))
-      )
-      return () => {
-        document.body.classList.remove("block-interactivity-".concat(id))
-        allow_1.forEach((el) =>
-          el.classList.remove("allow-interactivity-".concat(id))
-        )
+  React2.useEffect(
+    function () {
+      lastProps.current = props
+    },
+    [props]
+  )
+  React2.useEffect(
+    function () {
+      if (props.inert) {
+        document.body.classList.add("block-interactivity-".concat(id))
+        var allow_1 = __spreadArray(
+          [props.lockRef.current],
+          (props.shards || []).map(extractRef),
+          true
+        ).filter(Boolean)
+        allow_1.forEach(function (el) {
+          return el.classList.add("allow-interactivity-".concat(id))
+        })
+        return function () {
+          document.body.classList.remove("block-interactivity-".concat(id))
+          allow_1.forEach(function (el) {
+            return el.classList.remove("allow-interactivity-".concat(id))
+          })
+        }
       }
-    }
-    return
-  }, [props.inert, props.lockRef.current, props.shards])
-  var shouldCancelEvent = React2.useCallback((event, parent) => {
+      return
+    },
+    [props.inert, props.lockRef.current, props.shards]
+  )
+  var shouldCancelEvent = React2.useCallback(function (event, parent) {
     if ("touches" in event && event.touches.length === 2) {
       return !lastProps.current.allowPinchZoom
     }
@@ -1608,18 +1641,19 @@ function RemoveScrollSideCar(props) {
       true
     )
   }, [])
-  var shouldPrevent = React2.useCallback((_event) => {
+  var shouldPrevent = React2.useCallback(function (_event) {
     var event = _event
     if (!lockStack.length || lockStack[lockStack.length - 1] !== Style) {
       return
     }
     var delta = "deltaY" in event ? getDeltaXY(event) : getTouchXY(event)
-    var sourceEvent = shouldPreventQueue.current.filter(
-      (e) =>
+    var sourceEvent = shouldPreventQueue.current.filter(function (e) {
+      return (
         e.name === event.type &&
         e.target === event.target &&
         deltaCompare(e.delta, delta)
-    )[0]
+      )
+    })[0]
     if (sourceEvent && sourceEvent.should) {
       if (event.cancelable) {
         event.preventDefault()
@@ -1630,7 +1664,9 @@ function RemoveScrollSideCar(props) {
       var shardNodes = (lastProps.current.shards || [])
         .map(extractRef)
         .filter(Boolean)
-        .filter((node) => node.contains(event.target))
+        .filter(function (node) {
+          return node.contains(event.target)
+        })
       var shouldStop =
         shardNodes.length > 0
           ? shouldCancelEvent(event, shardNodes[0])
@@ -1642,20 +1678,22 @@ function RemoveScrollSideCar(props) {
       }
     }
   }, [])
-  var shouldCancel = React2.useCallback((name, delta, target, should) => {
+  var shouldCancel = React2.useCallback(function (name, delta, target, should) {
     var event = { name, delta, target, should }
     shouldPreventQueue.current.push(event)
-    setTimeout(() => {
+    setTimeout(function () {
       shouldPreventQueue.current = shouldPreventQueue.current.filter(
-        (e) => e !== event
+        function (e) {
+          return e !== event
+        }
       )
     }, 1)
   }, [])
-  var scrollTouchStart = React2.useCallback((event) => {
+  var scrollTouchStart = React2.useCallback(function (event) {
     touchStartRef.current = getTouchXY(event)
     activeAxis.current = void 0
   }, [])
-  var scrollWheel = React2.useCallback((event) => {
+  var scrollWheel = React2.useCallback(function (event) {
     shouldCancel(
       event.type,
       getDeltaXY(event),
@@ -1663,7 +1701,7 @@ function RemoveScrollSideCar(props) {
       shouldCancelEvent(event, props.lockRef.current)
     )
   }, [])
-  var scrollTouchMove = React2.useCallback((event) => {
+  var scrollTouchMove = React2.useCallback(function (event) {
     shouldCancel(
       event.type,
       getTouchXY(event),
@@ -1671,7 +1709,7 @@ function RemoveScrollSideCar(props) {
       shouldCancelEvent(event, props.lockRef.current)
     )
   }, [])
-  React2.useEffect(() => {
+  React2.useEffect(function () {
     lockStack.push(Style)
     props.setCallbacks({
       onScrollCapture: scrollWheel,
@@ -1681,8 +1719,10 @@ function RemoveScrollSideCar(props) {
     document.addEventListener("wheel", shouldPrevent, nonPassive)
     document.addEventListener("touchmove", shouldPrevent, nonPassive)
     document.addEventListener("touchstart", scrollTouchStart, nonPassive)
-    return () => {
-      lockStack = lockStack.filter((inst) => inst !== Style)
+    return function () {
+      lockStack = lockStack.filter(function (inst) {
+        return inst !== Style
+      })
       document.removeEventListener("wheel", shouldPrevent, nonPassive)
       document.removeEventListener("touchmove", shouldPrevent, nonPassive)
       document.removeEventListener("touchstart", scrollTouchStart, nonPassive)
@@ -1704,12 +1744,12 @@ function RemoveScrollSideCar(props) {
 var sidecar_default = exportSidecar(effectCar, RemoveScrollSideCar)
 
 // node_modules/.pnpm/react-remove-scroll@2.5.5_@types+react@18.3.5_react@18.3.1/node_modules/react-remove-scroll/dist/es2015/Combination.js
-var ReactRemoveScroll = React3.forwardRef((props, ref) =>
-  React3.createElement(
+var ReactRemoveScroll = React3.forwardRef(function (props, ref) {
+  return React3.createElement(
     RemoveScroll,
     __assign({}, props, { ref, sideCar: sidecar_default })
   )
-)
+})
 ReactRemoveScroll.classNames = RemoveScroll.classNames
 var Combination_default = ReactRemoveScroll
 
@@ -2224,7 +2264,7 @@ var de = t.createContext(void 0)
 var Z = () => t.useContext(de)
 var fe = t.createContext(void 0)
 var me = t.forwardRef((r, o) => {
-  const n = k2(() => {
+  let n = k2(() => {
       var e, s
       return {
         search: "",
@@ -2261,14 +2301,14 @@ var me = t.forwardRef((r, o) => {
     g = Me()
   T(() => {
     if (l !== void 0) {
-      const e = l.trim()
+      let e = l.trim()
       ;(n.current.value = e), h.emit()
     }
   }, [l]),
     T(() => {
       g(6, re)
     }, [])
-  const h = t.useMemo(
+  let h = t.useMemo(
       () => ({
         subscribe: (e) => (f.current.add(e), () => f.current.delete(e)),
         snapshot: () => n.current,
@@ -2281,7 +2321,7 @@ var me = t.forwardRef((r, o) => {
               (i || g(5, re),
               ((a = p2.current) == null ? void 0 : a.value) !== void 0)
             ) {
-              const E = s != null ? s : ""
+              let E = s != null ? s : ""
               ;(R = (m2 = p2.current).onValueChange) == null || R.call(m2, E)
               return
             }
@@ -2318,7 +2358,7 @@ var me = t.forwardRef((r, o) => {
             d.current.delete(e),
               u2.current.delete(e),
               n.current.filtered.items.delete(e)
-            const i = O()
+            let i = O()
             g(4, () => {
               z(),
                 (i == null ? void 0 : i.getAttribute("id")) === e && U2(),
@@ -2344,35 +2384,35 @@ var me = t.forwardRef((r, o) => {
     )
   function ne(e, s) {
     var a, m2
-    const i =
+    let i =
       (m2 = (a = p2.current) == null ? void 0 : a.filter) != null ? m2 : Re
     return e ? i(e, n.current.search, s) : 0
   }
   function q() {
     if (!n.current.search || p2.current.shouldFilter === false) return
-    const e = n.current.filtered.items,
+    let e = n.current.filtered.items,
       s = []
     n.current.filtered.groups.forEach((a) => {
       let m2 = c.current.get(a),
         R = 0
       m2.forEach((E) => {
-        const P = e.get(E)
+        let P = e.get(E)
         R = Math.max(P, R)
       }),
         s.push([a, R])
     })
-    const i = x.current
+    let i = x.current
     A()
       .sort((a, m2) => {
         var P, _
-        const R = a.getAttribute("id"),
+        let R = a.getAttribute("id"),
           E = m2.getAttribute("id")
         return (
           ((P = e.get(E)) != null ? P : 0) - ((_ = e.get(R)) != null ? _ : 0)
         )
       })
       .forEach((a) => {
-        const m2 = a.closest(X2)
+        let m2 = a.closest(X2)
         m2
           ? m2.appendChild(a.parentElement === m2 ? a : a.closest(`${X2} > *`))
           : i.appendChild(a.parentElement === i ? a : a.closest(`${X2} > *`))
@@ -2380,14 +2420,14 @@ var me = t.forwardRef((r, o) => {
       s
         .sort((a, m2) => m2[1] - a[1])
         .forEach((a) => {
-          const m2 = x.current.querySelector(
+          let m2 = x.current.querySelector(
             `${V}[${M}="${encodeURIComponent(a[0])}"]`
           )
           m2 == null || m2.parentElement.appendChild(m2)
         })
   }
   function U2() {
-    const e = A().find((i) => i.getAttribute("aria-disabled") !== "true"),
+    let e = A().find((i) => i.getAttribute("aria-disabled") !== "true"),
       s = e == null ? void 0 : e.getAttribute(M)
     h.setState("value", s || void 0)
   }
@@ -2399,8 +2439,8 @@ var me = t.forwardRef((r, o) => {
     }
     n.current.filtered.groups = /* @__PURE__ */ new Set()
     let e = 0
-    for (const R of u2.current) {
-      const E =
+    for (let R of u2.current) {
+      let E =
           (i = (s = d.current.get(R)) == null ? void 0 : s.value) != null
             ? i
             : "",
@@ -2411,8 +2451,8 @@ var me = t.forwardRef((r, o) => {
         _ = ne(E, P)
       n.current.filtered.items.set(R, _), _ > 0 && e++
     }
-    for (const [R, E] of c.current)
-      for (const P of E)
+    for (let [R, E] of c.current)
+      for (let P of E)
         if (n.current.filtered.items.get(P) > 0) {
           n.current.filtered.groups.add(R)
           break
@@ -2421,7 +2461,7 @@ var me = t.forwardRef((r, o) => {
   }
   function re() {
     var s, i, a
-    const e = O()
+    let e = O()
     e &&
       (((s = e.parentElement) == null ? void 0 : s.firstChild) === e &&
         ((a = (i = e.closest(V)) == null ? void 0 : i.querySelector(ge)) ==
@@ -2440,7 +2480,7 @@ var me = t.forwardRef((r, o) => {
     return Array.from((e = x.current) == null ? void 0 : e.querySelectorAll(le))
   }
   function W2(e) {
-    const i = A()[e]
+    let i = A()[e]
     i && h.setState("value", i.getAttribute(M))
   }
   function J2(e) {
@@ -2458,12 +2498,12 @@ var me = t.forwardRef((r, o) => {
     let s = O(),
       i = s == null ? void 0 : s.closest(V),
       a
-    while (i && !a)
+    for (; i && !a; )
       (i = e > 0 ? we(i, V) : Ie(i, V)),
         (a = i == null ? void 0 : i.querySelector(le))
     a ? h.setState("value", a.getAttribute(M)) : J2(e)
   }
-  const ie = () => W2(A().length - 1),
+  let ie = () => W2(A().length - 1),
     ae = (e) => {
       e.preventDefault(), e.metaKey ? ie() : e.altKey ? oe(1) : J2(1)
     },
@@ -2510,9 +2550,9 @@ var me = t.forwardRef((r, o) => {
             case "Enter":
               if (!e.nativeEvent.isComposing && e.keyCode !== 229) {
                 e.preventDefault()
-                const i = O()
+                let i = O()
                 if (i) {
-                  const a = new Event(Q)
+                  let a = new Event(Q)
                   i.dispatchEvent(a)
                 }
               }
@@ -2535,7 +2575,7 @@ var me = t.forwardRef((r, o) => {
 })
 var be = t.forwardRef((r, o) => {
   var K2, x
-  const n = t.useId(),
+  let n = t.useId(),
     u2 = t.useRef(null),
     c = t.useContext(fe),
     d = G2(),
@@ -2549,7 +2589,7 @@ var be = t.forwardRef((r, o) => {
   T(() => {
     if (!p2) return d.item(n, c == null ? void 0 : c.id)
   }, [p2])
-  const v = ve(n, u2, [r.value, r.children, u2], r.keywords),
+  let v = ve(n, u2, [r.value, r.children, u2], r.keywords),
     b = Z(),
     l = D2((g) => g.value && g.value === v.current),
     y = D2((g) =>
@@ -2560,7 +2600,7 @@ var be = t.forwardRef((r, o) => {
           : true
     )
   t.useEffect(() => {
-    const g = u2.current
+    let g = u2.current
     if (!(!g || r.disabled))
       return g.addEventListener(Q, S), () => g.removeEventListener(Q, S)
   }, [y, r.onSelect, r.disabled])
@@ -2572,7 +2612,7 @@ var be = t.forwardRef((r, o) => {
     b.setState("value", v.current, true)
   }
   if (!y) return null
-  const {
+  let {
     disabled: L,
     value: ee,
     onSelect: j,
@@ -2599,7 +2639,7 @@ var be = t.forwardRef((r, o) => {
   )
 })
 var he = t.forwardRef((r, o) => {
-  const { heading: n, children: u2, forceMount: c, ...d } = r,
+  let { heading: n, children: u2, forceMount: c, ...d } = r,
     f = t.useId(),
     p2 = t.useRef(null),
     v = t.useRef(null),
@@ -2613,7 +2653,7 @@ var he = t.forwardRef((r, o) => {
           : true
     )
   T(() => l.group(f), []), ve(f, p2, [r.value, r.heading, v])
-  const S = t.useMemo(() => ({ id: f, forceMount: c }), [c])
+  let S = t.useMemo(() => ({ id: f, forceMount: c }), [c])
   return t.createElement(
     $8927f6f2acc4f386$export$250ffa63cdc0d034.div,
     {
@@ -2643,7 +2683,7 @@ var he = t.forwardRef((r, o) => {
   )
 })
 var ye = t.forwardRef((r, o) => {
-  const { alwaysRender: n, ...u2 } = r,
+  let { alwaysRender: n, ...u2 } = r,
     c = t.useRef(null),
     d = D2((f) => !f.search)
   return !n && !d
@@ -2656,7 +2696,7 @@ var ye = t.forwardRef((r, o) => {
       })
 })
 var Ee = t.forwardRef((r, o) => {
-  const { onValueChange: n, ...u2 } = r,
+  let { onValueChange: n, ...u2 } = r,
     c = r.value != null,
     d = Z(),
     f = D2((l) => l.search),
@@ -2664,7 +2704,7 @@ var Ee = t.forwardRef((r, o) => {
     v = G2(),
     b = t.useMemo(() => {
       var y
-      const l =
+      let l =
         (y = v.listInnerRef.current) == null
           ? void 0
           : y.querySelector(`${Y2}[${M}="${encodeURIComponent(p2)}"]`)
@@ -2698,7 +2738,7 @@ var Ee = t.forwardRef((r, o) => {
   )
 })
 var Se = t.forwardRef((r, o) => {
-  const { children: n, label: u2 = "Suggestions", ...c } = r,
+  let { children: n, label: u2 = "Suggestions", ...c } = r,
     d = t.useRef(null),
     f = t.useRef(null),
     p2 = G2()
@@ -2710,7 +2750,7 @@ var Se = t.forwardRef((r, o) => {
           l,
           y = new ResizeObserver(() => {
             l = requestAnimationFrame(() => {
-              const S = v.offsetHeight
+              let S = v.offsetHeight
               b.style.setProperty("--cmdk-list-height", S.toFixed(1) + "px")
             })
           })
@@ -2743,7 +2783,7 @@ var Se = t.forwardRef((r, o) => {
   )
 })
 var Ce = t.forwardRef((r, o) => {
-  const {
+  let {
     open: n,
     onOpenChange: u2,
     overlayClassName: c,
@@ -2780,7 +2820,7 @@ var xe = t.forwardRef((r, o) =>
     : null
 )
 var Pe = t.forwardRef((r, o) => {
-  const { progress: n, children: u2, label: c = "Loading...", ...d } = r
+  let { progress: n, children: u2, label: c = "Loading...", ...d } = r
   return t.createElement(
     $8927f6f2acc4f386$export$250ffa63cdc0d034.div,
     {
@@ -2808,20 +2848,20 @@ var He = Object.assign(me, {
 })
 function we(r, o) {
   let n = r.nextElementSibling
-  while (n) {
+  for (; n; ) {
     if (n.matches(o)) return n
     n = n.nextElementSibling
   }
 }
 function Ie(r, o) {
   let n = r.previousElementSibling
-  while (n) {
+  for (; n; ) {
     if (n.matches(o)) return n
     n = n.previousElementSibling
   }
 }
 function pe(r) {
-  const o = t.useRef(r)
+  let o = t.useRef(r)
   return (
     T(() => {
       o.current = r
@@ -2831,7 +2871,7 @@ function pe(r) {
 }
 var T = typeof window == "undefined" ? t.useEffect : t.useLayoutEffect
 function k2(r) {
-  const o = t.useRef()
+  let o = t.useRef()
   return o.current === void 0 && (o.current = r()), o
 }
 function N(r) {
@@ -2842,19 +2882,19 @@ function N(r) {
   }
 }
 function D2(r) {
-  const o = Z(),
+  let o = Z(),
     n = () => r(o.snapshot())
   return t.useSyncExternalStore(o.subscribe, n, n)
 }
 function ve(r, o, n, u2 = []) {
-  const c = t.useRef(),
+  let c = t.useRef(),
     d = G2()
   return (
     T(() => {
       var v
-      const f = (() => {
+      let f = (() => {
           var b
-          for (const l of n) {
+          for (let l of n) {
             if (typeof l == "string") return l.trim()
             if (typeof l == "object" && "current" in l)
               return l.current
@@ -2873,7 +2913,7 @@ function ve(r, o, n, u2 = []) {
   )
 }
 var Me = () => {
-  const [r, o] = t.useState(),
+  let [r, o] = t.useState(),
     n = k2(() => /* @__PURE__ */ new Map())
   return (
     T(() => {
@@ -2885,7 +2925,7 @@ var Me = () => {
   )
 }
 function Te(r) {
-  const o = r.type
+  let o = r.type
   return typeof o == "function"
     ? o(r.props)
     : "render" in o

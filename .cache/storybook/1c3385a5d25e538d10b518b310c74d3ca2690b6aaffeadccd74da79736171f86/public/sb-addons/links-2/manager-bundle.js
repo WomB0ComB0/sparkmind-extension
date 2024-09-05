@@ -1,5 +1,5 @@
 try {
-  (() => {
+  ;(() => {
     var E = __STORYBOOK_API__,
       {
         ActiveTabs: T,
@@ -33,17 +33,24 @@ try {
         useSharedState: H,
         useStoryPrepared: L,
         useStorybookApi: j,
-        useStorybookState: w,
-      } = __STORYBOOK_API__;
-    var e = 'storybook/links',
-      n = { NAVIGATE: `${e}/navigate`, REQUEST: `${e}/request`, RECEIVE: `${e}/receive` };
+        useStorybookState: w
+      } = __STORYBOOK_API__
+    var e = "storybook/links",
+      n = {
+        NAVIGATE: `${e}/navigate`,
+        REQUEST: `${e}/request`,
+        RECEIVE: `${e}/receive`
+      }
     a.register(e, (t) => {
       t.on(n.REQUEST, ({ kind: u, name: S }) => {
-        let c = t.storyId(u, S);
-        t.emit(n.RECEIVE, c);
-      });
-    });
-  })();
+        let c = t.storyId(u, S)
+        t.emit(n.RECEIVE, c)
+      })
+    })
+  })()
 } catch (e) {
-  console.error('[Storybook] One of your manager-entries failed: ' + import.meta.url, e);
+  console.error(
+    "[Storybook] One of your manager-entries failed: " + import.meta.url,
+    e
+  )
 }

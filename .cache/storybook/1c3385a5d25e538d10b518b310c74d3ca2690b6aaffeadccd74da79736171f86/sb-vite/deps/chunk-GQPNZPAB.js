@@ -15,7 +15,7 @@ __export(entry_preview_exports, {
   renderToCanvas: () => renderToCanvas
 })
 var render = (args, context) => {
-  const { id, component: Component2 } = context
+  let { id, component: Component2 } = context
   if (!Component2)
     throw new Error(
       `Unable to render story ${id} as the component annotation is missing from the default export`
@@ -32,16 +32,16 @@ var ErrorBoundary = class extends import_react.Component {
     return { hasError: true }
   }
   componentDidMount() {
-    const { hasError } = this.state,
+    let { hasError } = this.state,
       { showMain } = this.props
     hasError || showMain()
   }
   componentDidCatch(err) {
-    const { showException } = this.props
+    let { showException } = this.props
     showException(err)
   }
   render() {
-    const { hasError } = this.state,
+    let { hasError } = this.state,
       { children } = this.props
     return hasError ? null : children
   }
@@ -56,7 +56,7 @@ async function renderToCanvas(
   canvasElement
 ) {
   var _a, _b
-  const content = import_react.default.createElement(
+  let content = import_react.default.createElement(
       ErrorBoundary,
       { showMain, showException },
       import_react.default.createElement(unboundStoryFn, { ...storyContext })

@@ -100,10 +100,10 @@ var Ut = import_react2.default.createElement(
   })
 )
 var Dt = () => {
-  const [s, o] = import_react3.default.useState(document.hidden)
+  let [s, o] = import_react3.default.useState(document.hidden)
   return (
     import_react3.default.useEffect(() => {
-      const t = () => {
+      let t = () => {
         o(document.hidden)
       }
       return (
@@ -120,7 +120,7 @@ var ut = class {
     this.subscribe = (o) => (
       this.subscribers.push(o),
       () => {
-        const t = this.subscribers.indexOf(o)
+        let t = this.subscribers.indexOf(o)
         this.subscribers.splice(t, 1)
       }
     )
@@ -132,7 +132,7 @@ var ut = class {
     }
     this.create = (o) => {
       var b
-      const { message: t, ...n } = o,
+      let { message: t, ...n } = o,
         h =
           typeof (o == null ? void 0 : o.id) == "number" ||
           ((b = o.id) == null ? void 0 : b.length) > 0
@@ -185,7 +185,7 @@ var ut = class {
           .then(async (g) => {
             if (Ot(g) && !g.ok) {
               u = false
-              const b =
+              let b =
                   typeof t.error == "function"
                     ? await t.error(`HTTP error! status: ${g.status}`)
                     : t.error,
@@ -196,7 +196,7 @@ var ut = class {
               this.create({ id: n, type: "error", message: b, description: d })
             } else if (t.success !== void 0) {
               u = false
-              const b =
+              let b =
                   typeof t.success == "function"
                     ? await t.success(g)
                     : t.success,
@@ -215,8 +215,7 @@ var ut = class {
           .catch(async (g) => {
             if (t.error !== void 0) {
               u = false
-              const b =
-                  typeof t.error == "function" ? await t.error(g) : t.error,
+              let b = typeof t.error == "function" ? await t.error(g) : t.error,
                 d =
                   typeof t.description == "function"
                     ? await t.description(g)
@@ -233,7 +232,7 @@ var ut = class {
       )
     }
     this.custom = (o, t) => {
-      const n = (t == null ? void 0 : t.id) || ct++
+      let n = (t == null ? void 0 : t.id) || ct++
       return this.create({ jsx: o(n), id: n, ...t }), n
     }
     ;(this.subscribers = []), (this.toasts = [])
@@ -241,7 +240,7 @@ var ut = class {
 }
 var v = new ut()
 var Vt = (s, o) => {
-  const t = (o == null ? void 0 : o.id) || ct++
+  let t = (o == null ? void 0 : o.id) || ct++
   return v.addToast({ title: s, ...o, id: t }), t
 }
 var Ot = (s) =>
@@ -270,7 +269,7 @@ var Jt = Object.assign(
 )
 function ft(s, { insertAt: o } = {}) {
   if (!s || typeof document == "undefined") return
-  const t = document.head || document.getElementsByTagName("head")[0],
+  let t = document.head || document.getElementsByTagName("head")[0],
     n = document.createElement("style")
   ;(n.type = "text/css"),
     o === "top" && t.firstChild
@@ -297,7 +296,7 @@ function ne(...s) {
 }
 var se = (s) => {
   var yt, xt, vt, wt, Tt, St, Rt, Et, Nt, Pt
-  const {
+  let {
       invert: o,
       toast: t,
       unstyled: n,
@@ -371,10 +370,10 @@ var se = (s) => {
     }, []),
     import_react.default.useLayoutEffect(() => {
       if (!z) return
-      const a = l.current,
+      let a = l.current,
         f = a.style.height
       a.style.height = "auto"
-      const p = a.getBoundingClientRect().height
+      let p = a.getBoundingClientRect().height
       ;(a.style.height = f),
         S(p),
         u((B) =>
@@ -383,7 +382,7 @@ var se = (s) => {
             : [{ toastId: t.id, height: p, position: t.position }, ...B]
         )
     }, [z, t.title, t.description, u, t.id])
-  const L = import_react.default.useCallback(() => {
+  let L = import_react.default.useCallback(() => {
     H(true),
       m(Y.current),
       u((a) => a.filter((f) => f.toastId !== t.id)),
@@ -404,7 +403,7 @@ var se = (s) => {
       $ || h || (k && bt)
         ? (() => {
             if (pt.current < it.current) {
-              const C = /* @__PURE__ */ new Date().getTime() - it.current
+              let C = /* @__PURE__ */ new Date().getTime() - it.current
               f = f - C
             }
             pt.current = /* @__PURE__ */ new Date().getTime()
@@ -421,9 +420,9 @@ var se = (s) => {
     )
   }, [$, h, W, t, mt, L, t.promise, x, k, bt]),
     import_react.default.useEffect(() => {
-      const a = l.current
+      let a = l.current
       if (a) {
-        const f = a.getBoundingClientRect().height
+        let f = a.getBoundingClientRect().height
         return (
           S(f),
           u((p) => [{ toastId: t.id, height: f, position: t.position }, ...p]),
@@ -505,7 +504,7 @@ var se = (s) => {
         var B, C, R, dt
         if (M || !P) return
         F.current = null
-        const a = Number(
+        let a = Number(
             ((B = l.current) == null
               ? void 0
               : B.style.getPropertyValue("--swipe-amount").replace("px", "")) ||
@@ -526,7 +525,7 @@ var se = (s) => {
       onPointerMove: (a) => {
         var Bt
         if (!F.current || !P) return
-        const f = a.clientY - F.current.y,
+        let f = a.clientY - F.current.y,
           p = a.clientX - F.current.x,
           C = (gt === "top" ? Math.min : Math.max)(0, f),
           R = a.pointerType === "touch" ? 10 : 2
@@ -710,13 +709,13 @@ var se = (s) => {
 function Ht() {
   if (typeof window == "undefined" || typeof document == "undefined")
     return "ltr"
-  const s = document.documentElement.getAttribute("dir")
+  let s = document.documentElement.getAttribute("dir")
   return s === "auto" || !s
     ? window.getComputedStyle(document.documentElement).direction
     : s
 }
 function we() {
-  const [s, o] = import_react.default.useState([])
+  let [s, o] = import_react.default.useState([])
   return (
     import_react.default.useEffect(
       () =>
@@ -724,9 +723,9 @@ function we() {
           o((n) => {
             if ("dismiss" in t && t.dismiss)
               return n.filter((u) => u.id !== t.id)
-            const h = n.findIndex((u) => u.id === t.id)
+            let h = n.findIndex((u) => u.id === t.id)
             if (h !== -1) {
-              const u = [...n]
+              let u = [...n]
               return (u[h] = { ...u[h], ...t }), u
             } else return [t, ...n]
           })
@@ -737,7 +736,7 @@ function we() {
   )
 }
 var Te = (s) => {
-  const {
+  let {
       invert: o,
       position: t = "bottom-right",
       hotkey: n = ["altKey", "KeyT"],
@@ -805,7 +804,7 @@ var Te = (s) => {
           setTimeout(() => {
             import_react_dom.default.flushSync(() => {
               j((m) => {
-                const y = m.findIndex((S) => S.id === c.id)
+                let y = m.findIndex((S) => S.id === c.id)
                 return y !== -1
                   ? [...m.slice(0, y), { ...m[y], ...c }, ...m.slice(y + 1)]
                   : [c, ...m]
@@ -836,7 +835,7 @@ var Te = (s) => {
       w.length <= 1 && k(false)
     }, [w]),
     import_react.default.useEffect(() => {
-      const c = (m) => {
+      let c = (m) => {
         var S, A
         n.every((l) => m[l] || m.code === l) &&
           (k(true), (S = H.current) == null || S.focus()),
@@ -866,7 +865,7 @@ var Te = (s) => {
           { "aria-label": `${et} ${st}`, tabIndex: -1 },
           W.map((c, m) => {
             var A
-            const [y, S] = c.split("-")
+            let [y, S] = c.split("-")
             return import_react.default.createElement(
               "ol",
               {

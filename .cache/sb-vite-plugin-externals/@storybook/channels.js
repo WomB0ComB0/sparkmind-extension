@@ -1,1 +1,1 @@
-module.exports = __STORYBOOK_MODULE_CHANNELS__;
+module.exports = __STORYBOOK_MODULE_CHANNELS__

@@ -19,23 +19,7 @@ import {
   ZoomIcon,
   ZoomOutIcon,
   ZoomResetIcon
-} from "./chunk-6DJHIT5L.js"
-import {
-  require_baseGetTag,
-  require_freeGlobal,
-  require_isObject,
-  require_isObjectLike,
-  require_root,
-  require_Symbol
-} from "./chunk-BO5BVC2A.js"
-import {
-  eP,
-  require_getPrototype,
-  require_isArray,
-  require_isFunction,
-  require_overArg,
-  sT
-} from "./chunk-KSEZAJGR.js"
+} from "./chunk-E2Q2WZ2I.js"
 import {
   _m,
   Ao,
@@ -77,7 +61,23 @@ import { P } from "./chunk-FAY27ZE3.js"
 import { require_core_events } from "./chunk-JAV3BEES.js"
 import { require_preview_api } from "./chunk-JQ2GWK6M.js"
 import { renderElement, unmountElement } from "./chunk-JWMAGIS2.js"
+import {
+  require_baseGetTag,
+  require_freeGlobal,
+  require_isObject,
+  require_isObjectLike,
+  require_root,
+  require_Symbol
+} from "./chunk-M2SMWPXR.js"
 import { require_client_logger } from "./chunk-UHU3NK7Q.js"
+import {
+  eP,
+  require_getPrototype,
+  require_isArray,
+  require_isFunction,
+  require_overArg,
+  sT
+} from "./chunk-ZW6SQOMU.js"
 
 import "./chunk-GDNJB6U6.js"
 import "./chunk-YGZ2ZWFG.js"
@@ -12138,7 +12138,7 @@ var FilesControl = ({
   )
 }
 var LazyColorControl = (0, import_react.lazy)(
-  () => import("./Color-KGDBMAHA-VAAYIDO3.js")
+  () => import("./Color-KGDBMAHA-YALDFIYE.js")
 )
 var ColorControl = (props) =>
   import_react.default.createElement(
@@ -14344,4 +14344,4 @@ telejson/dist/index.mjs:
    * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
    *)
 */
-//# sourceMappingURL=DocsRenderer-PKQXORMH-CYRB27GX.js.map
+//# sourceMappingURL=DocsRenderer-PKQXORMH-NDDX43FS.js.map

@@ -2,7 +2,7 @@ import "./chunk-LK32TJAX.js"
 
 // node_modules/.pnpm/@google+generative-ai@0.17.1/node_modules/@google/generative-ai/dist/index.mjs
 var SchemaType
-;((SchemaType2) => {
+;(function (SchemaType2) {
   SchemaType2["STRING"] = "STRING"
   SchemaType2["NUMBER"] = "NUMBER"
   SchemaType2["INTEGER"] = "INTEGER"
@@ -11,12 +11,12 @@ var SchemaType
   SchemaType2["OBJECT"] = "OBJECT"
 })(SchemaType || (SchemaType = {}))
 var ExecutableCodeLanguage
-;((ExecutableCodeLanguage2) => {
+;(function (ExecutableCodeLanguage2) {
   ExecutableCodeLanguage2["LANGUAGE_UNSPECIFIED"] = "language_unspecified"
   ExecutableCodeLanguage2["PYTHON"] = "python"
 })(ExecutableCodeLanguage || (ExecutableCodeLanguage = {}))
 var Outcome
-;((Outcome2) => {
+;(function (Outcome2) {
   Outcome2["OUTCOME_UNSPECIFIED"] = "outcome_unspecified"
   Outcome2["OUTCOME_OK"] = "outcome_ok"
   Outcome2["OUTCOME_FAILED"] = "outcome_failed"
@@ -24,7 +24,7 @@ var Outcome
 })(Outcome || (Outcome = {}))
 var POSSIBLE_ROLES = ["user", "model", "function", "system"]
 var HarmCategory
-;((HarmCategory2) => {
+;(function (HarmCategory2) {
   HarmCategory2["HARM_CATEGORY_UNSPECIFIED"] = "HARM_CATEGORY_UNSPECIFIED"
   HarmCategory2["HARM_CATEGORY_HATE_SPEECH"] = "HARM_CATEGORY_HATE_SPEECH"
   HarmCategory2["HARM_CATEGORY_SEXUALLY_EXPLICIT"] =
@@ -34,7 +34,7 @@ var HarmCategory
     "HARM_CATEGORY_DANGEROUS_CONTENT"
 })(HarmCategory || (HarmCategory = {}))
 var HarmBlockThreshold
-;((HarmBlockThreshold2) => {
+;(function (HarmBlockThreshold2) {
   HarmBlockThreshold2["HARM_BLOCK_THRESHOLD_UNSPECIFIED"] =
     "HARM_BLOCK_THRESHOLD_UNSPECIFIED"
   HarmBlockThreshold2["BLOCK_LOW_AND_ABOVE"] = "BLOCK_LOW_AND_ABOVE"
@@ -43,7 +43,7 @@ var HarmBlockThreshold
   HarmBlockThreshold2["BLOCK_NONE"] = "BLOCK_NONE"
 })(HarmBlockThreshold || (HarmBlockThreshold = {}))
 var HarmProbability
-;((HarmProbability2) => {
+;(function (HarmProbability2) {
   HarmProbability2["HARM_PROBABILITY_UNSPECIFIED"] =
     "HARM_PROBABILITY_UNSPECIFIED"
   HarmProbability2["NEGLIGIBLE"] = "NEGLIGIBLE"
@@ -52,13 +52,13 @@ var HarmProbability
   HarmProbability2["HIGH"] = "HIGH"
 })(HarmProbability || (HarmProbability = {}))
 var BlockReason
-;((BlockReason2) => {
+;(function (BlockReason2) {
   BlockReason2["BLOCKED_REASON_UNSPECIFIED"] = "BLOCKED_REASON_UNSPECIFIED"
   BlockReason2["SAFETY"] = "SAFETY"
   BlockReason2["OTHER"] = "OTHER"
 })(BlockReason || (BlockReason = {}))
 var FinishReason
-;((FinishReason2) => {
+;(function (FinishReason2) {
   FinishReason2["FINISH_REASON_UNSPECIFIED"] = "FINISH_REASON_UNSPECIFIED"
   FinishReason2["STOP"] = "STOP"
   FinishReason2["MAX_TOKENS"] = "MAX_TOKENS"
@@ -68,7 +68,7 @@ var FinishReason
   FinishReason2["OTHER"] = "OTHER"
 })(FinishReason || (FinishReason = {}))
 var TaskType
-;((TaskType2) => {
+;(function (TaskType2) {
   TaskType2["TASK_TYPE_UNSPECIFIED"] = "TASK_TYPE_UNSPECIFIED"
   TaskType2["RETRIEVAL_QUERY"] = "RETRIEVAL_QUERY"
   TaskType2["RETRIEVAL_DOCUMENT"] = "RETRIEVAL_DOCUMENT"
@@ -77,7 +77,7 @@ var TaskType
   TaskType2["CLUSTERING"] = "CLUSTERING"
 })(TaskType || (TaskType = {}))
 var FunctionCallingMode
-;((FunctionCallingMode2) => {
+;(function (FunctionCallingMode2) {
   FunctionCallingMode2["MODE_UNSPECIFIED"] = "MODE_UNSPECIFIED"
   FunctionCallingMode2["AUTO"] = "AUTO"
   FunctionCallingMode2["ANY"] = "ANY"
@@ -108,7 +108,7 @@ var DEFAULT_API_VERSION = "v1beta"
 var PACKAGE_VERSION = "0.17.1"
 var PACKAGE_LOG_HEADER = "genai-js"
 var Task
-;((Task2) => {
+;(function (Task2) {
   Task2["GENERATE_CONTENT"] = "generateContent"
   Task2["STREAM_GENERATE_CONTENT"] = "streamGenerateContent"
   Task2["COUNT_TOKENS"] = "countTokens"
@@ -200,11 +200,7 @@ async function constructModelRequest(
     url: url.toString(),
     fetchOptions: Object.assign(
       Object.assign({}, buildFetchOptions(requestOptions)),
-      {
-        method: "POST",
-        headers: await getHeaders(url),
-        body
-      }
+      { method: "POST", headers: await getHeaders(url), body }
     )
   }
 }
@@ -506,10 +502,11 @@ function __asyncGenerator(thisArg, _arguments, generator) {
   )
   function verb(n) {
     if (g[n])
-      i[n] = (v) =>
-        new Promise((a, b) => {
+      i[n] = function (v) {
+        return new Promise(function (a, b) {
           q.push([n, v, a, b]) > 1 || resume(n, v)
         })
+      }
   }
   function resume(n, v) {
     try {

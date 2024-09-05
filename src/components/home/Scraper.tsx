@@ -183,9 +183,9 @@ export const Scraper = memo(({ initialUrl = "" }: ScraperProps) => {
         <div className="w-10"></div>
       </div>
       <div className="flex-none p-2 border-b border-[#0257AC]">
-        <div className="flex items-center space-x-2 text-sm text-[#0257AC]">
+        <div className="flex items-center space-x-2 text-sm text-[#0257AC] border-x ">
           <Globe className="w-4 h-4" />
-          <span className="truncate">{url}</span>
+          <span className="truncate text-[#0257ac]">{url}</span>
         </div>
       </div>
       <div className="flex-none p-4">
@@ -203,18 +203,28 @@ export const Scraper = memo(({ initialUrl = "" }: ScraperProps) => {
                 variant="outline"
                 role="combobox"
                 aria-expanded={open}
-                className="justify-between w-full text-white border-[#0257AC]">
+                className={`
+                  justify-between w-full text-white 
+                  border-[#0257AC] bg-[#0257AC]
+                  hover:bg-[#03407d] hover:text-white
+                `}>
                 {command
                   ? presets.find((preset) => preset.label === command)?.label
                   : "Select preset..."}
                 <CaretSortIcon className="w-4 h-4 ml-2 opacity-50 shrink-0" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-full p-0 bg-[#ffffff] border-[#0257AC]">
-              <Command className="border-[#0257AC]">
+            <PopoverContent
+              className={`
+                w-full p-0 bg-[#ffffff] 
+                border-[#0257AC]
+              `}>
+              <Command className="border-[#0257AC] bg-[#0257AC]">
                 <CommandInput
                   placeholder="Search preset..."
-                  className="text-white h-9"
+                  className={`
+                      text-white bg-[#0257AC] h-9
+                  `}
                 />
                 <CommandList>
                   <CommandEmpty className="text-[#0257AC]">
@@ -226,7 +236,9 @@ export const Scraper = memo(({ initialUrl = "" }: ScraperProps) => {
                         key={preset.value}
                         value={preset.label}
                         onSelect={handleCommandChange}
-                        className="text-white">
+                        className={`
+                          text-white bg-[#0257AC] hover:bg-[#03407d] hover:text-white
+                        `}>
                         {preset.label}
                         <CheckIcon
                           className={cn(

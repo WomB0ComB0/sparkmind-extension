@@ -1,5 +1,5 @@
 try {
-  (() => {
+  ;(() => {
     var t = __REACT__,
       {
         Children: B,
@@ -36,8 +36,8 @@ try {
         useState: no,
         useSyncExternalStore: eo,
         useTransition: co,
-        version: to,
-      } = __REACT__;
+        version: to
+      } = __REACT__
     var io = __STORYBOOK_API__,
       {
         ActiveTabs: so,
@@ -71,8 +71,8 @@ try {
         useSharedState: vo,
         useStoryPrepared: Ho,
         useStorybookApi: S,
-        useStorybookState: Uo,
-      } = __STORYBOOK_API__;
+        useStorybookState: Uo
+      } = __STORYBOOK_API__
     var Ko = __STORYBOOK_COMPONENTS__,
       {
         A: Yo,
@@ -142,8 +142,8 @@ try {
         interleaveSeparators: oe,
         nameSpaceClassNames: ne,
         resetComponents: ee,
-        withReset: ce,
-      } = __STORYBOOK_COMPONENTS__;
+        withReset: ce
+      } = __STORYBOOK_COMPONENTS__
     var le = __STORYBOOK_ICONS__,
       {
         AccessibilityAltIcon: ie,
@@ -373,41 +373,44 @@ try {
         ZoomIcon: CI,
         ZoomOutIcon: hI,
         ZoomResetIcon: bI,
-        iconList: TI,
-      } = __STORYBOOK_ICONS__;
-    var i = 'storybook/measure-addon',
+        iconList: TI
+      } = __STORYBOOK_ICONS__
+    var i = "storybook/measure-addon",
       b = `${i}/tool`,
       T = () => {
         let [r, c] = p(),
           { measureEnabled: I } = r,
           s = S(),
-          a = u(() => c({ measureEnabled: !I }), [c, I]);
+          a = u(() => c({ measureEnabled: !I }), [c, I])
         return (
           d(() => {
             s.setAddonShortcut(i, {
-              label: 'Toggle Measure [M]',
-              defaultShortcut: ['M'],
-              actionName: 'measure',
+              label: "Toggle Measure [M]",
+              defaultShortcut: ["M"],
+              actionName: "measure",
               showInMenu: !1,
-              action: a,
-            });
+              action: a
+            })
           }, [a, s]),
           t.createElement(
             C,
-            { key: b, active: I, title: 'Enable measure', onClick: a },
-            t.createElement(h, null),
+            { key: b, active: I, title: "Enable measure", onClick: a },
+            t.createElement(h, null)
           )
-        );
-      };
+        )
+      }
     l.register(i, () => {
       l.add(b, {
         type: m.TOOL,
-        title: 'Measure',
-        match: ({ viewMode: r, tabId: c }) => r === 'story' && !c,
-        render: () => t.createElement(T, null),
-      });
-    });
-  })();
+        title: "Measure",
+        match: ({ viewMode: r, tabId: c }) => r === "story" && !c,
+        render: () => t.createElement(T, null)
+      })
+    })
+  })()
 } catch (e) {
-  console.error('[Storybook] One of your manager-entries failed: ' + import.meta.url, e);
+  console.error(
+    "[Storybook] One of your manager-entries failed: " + import.meta.url,
+    e
+  )
 }

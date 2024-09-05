@@ -716,7 +716,7 @@ var ScrollAreaCornerImpl = React2.forwardRef((props, forwardedRef) => {
     : null
 })
 function toInt(value) {
-  return value ? Number.parseInt(value, 10) : 0
+  return value ? parseInt(value, 10) : 0
 }
 function getThumbRatio(viewportSize, contentSize) {
   const ratio = viewportSize / contentSize
