@@ -2,7 +2,7 @@
   "name": "sparkmind-extension",
   "displayName": "Sparkmind extension",
   "version": "0.0.1",
-  "description": "A basic Plasmo extension.",
+  "description": "SparkMind is an AI-driven learning hub that personalizes your educational journey. Upload content, get AI-generated study materials, and enhance your learning experience with smart tools and insights.",
   "license": "EPL-2.0",
   "repository": {
     "type": "git",
