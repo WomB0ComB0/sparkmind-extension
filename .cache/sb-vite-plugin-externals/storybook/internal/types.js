@@ -1,1 +1,1 @@
-module.exports = __STORYBOOK_MODULE_TYPES__;
+module.exports = __STORYBOOK_MODULE_TYPES__

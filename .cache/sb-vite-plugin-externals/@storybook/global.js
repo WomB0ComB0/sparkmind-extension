@@ -1,1 +1,1 @@
-module.exports = __STORYBOOK_MODULE_GLOBAL__;
+module.exports = __STORYBOOK_MODULE_GLOBAL__

@@ -1,11 +1,15 @@
 {
   "extends": "plasmo/templates/tsconfig.base",
   "exclude": ["node_modules"],
-  "include": [".plasmo/index.d.ts", "./**/*.ts", "./**/*.tsx"],
+  "include": [".plasmo/index.d.ts", "./**/*.ts", "./**/*.tsx", "global.d.ts"],
   "compilerOptions": {
     "paths": {
       "~*": ["./src/*"]
     },
-    "baseUrl": "."
+    "baseUrl": ".",
+    "types": ["chrome", "node"],
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   }
 }
