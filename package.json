@@ -2,12 +2,11 @@
   "name": "sparkmind-extension",
   "displayName": "Sparkmind extension",
   "version": "0.0.1",
-  "description": "A basic Plasmo extension.",
-  "author": "Mike Odnis <mikeodnis3242004@gmail.com>",
+  "description": "SparkMind is an AI-driven learning hub that personalizes your educational journey. Upload content, get AI-generated study materials, and enhance your learning experience with smart tools and insights.",
   "license": "EPL-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/WomB0ComB0/sparkmind-extension"
+    "url": "git+https://github.com/WomB0ComB0/sparkmind-extension.git"
   },
   "scripts": {
     "dev": "plasmo dev",
@@ -21,7 +20,8 @@
     "prepare": "husky",
     "test": "vitest",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_89b2f8c42840ce8"
   },
   "dependencies": {
     "@biomejs/biome": "1.8.3",
@@ -80,6 +80,7 @@
     "@types/react": "18.3.5",
     "@types/react-dom": "18.3.0",
     "@vitest/coverage-v8": "^2.0.5",
+    "chromatic": "^11.7.1",
     "console-fail-test": "^0.5.0",
     "cspell": "^8.14.2",
     "husky": "^9.1.5",
@@ -106,7 +107,15 @@
   },
   "manifest": {
     "host_permissions": [
-      "https://*/*"
+      "https://sparkmind-scraper-api.onrender.com/*",
+      "https://slave-api.vercel.app/*"
+    ],
+    "permissions": [
+      "activeTab"
     ]
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/WomB0ComB0/sparkmind-extension/issues"
+  },
+  "homepage": "https://github.com/WomB0ComB0/sparkmind-extension#readme"
 }

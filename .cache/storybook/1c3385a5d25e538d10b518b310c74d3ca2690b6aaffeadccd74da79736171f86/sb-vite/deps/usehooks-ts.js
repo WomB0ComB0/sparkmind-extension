@@ -14,7 +14,7 @@ var require_lodash = __commonJS({
     var reIsBadHex = /^[-+]0x[0-9a-f]+$/i
     var reIsBinary = /^0b[01]+$/i
     var reIsOctal = /^0o[0-7]+$/i
-    var freeParseInt = Number.parseInt
+    var freeParseInt = parseInt
     var freeGlobal =
       typeof global == "object" && global && global.Object === Object && global
     var freeSelf =
@@ -24,7 +24,9 @@ var require_lodash = __commonJS({
     var objectToString = objectProto.toString
     var nativeMax = Math.max
     var nativeMin = Math.min
-    var now = () => root.Date.now()
+    var now = function () {
+      return root.Date.now()
+    }
     function debounce2(func, wait, options) {
       var lastArgs,
         lastThis,
@@ -988,10 +990,8 @@ function useScrollLock(options = {}) {
             ? window.innerWidth
             : target.current.offsetWidth
         const currentPaddingRight =
-          Number.parseInt(
-            window.getComputedStyle(target.current).paddingRight,
-            10
-          ) || 0
+          parseInt(window.getComputedStyle(target.current).paddingRight, 10) ||
+          0
         const scrollbarWidth = offsetWidth - target.current.scrollWidth
         target.current.style.paddingRight = `${scrollbarWidth + currentPaddingRight}px`
       }

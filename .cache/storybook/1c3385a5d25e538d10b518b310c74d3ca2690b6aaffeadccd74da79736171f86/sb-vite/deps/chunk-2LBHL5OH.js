@@ -4,12 +4,15 @@ import { require_react } from "./chunk-VMU3GUP3.js"
 // node_modules/.pnpm/@mdx-js+react@3.0.1_@types+react@18.3.5_react@18.3.1/node_modules/@mdx-js/react/lib/index.js
 function useMDXComponents(components) {
   const contextComponents = import_react.default.useContext(MDXContext)
-  return import_react.default.useMemo(() => {
-    if (typeof components === "function") {
-      return components(contextComponents)
-    }
-    return { ...contextComponents, ...components }
-  }, [contextComponents, components])
+  return import_react.default.useMemo(
+    function () {
+      if (typeof components === "function") {
+        return components(contextComponents)
+      }
+      return { ...contextComponents, ...components }
+    },
+    [contextComponents, components]
+  )
 }
 function MDXProvider(properties) {
   let allComponents

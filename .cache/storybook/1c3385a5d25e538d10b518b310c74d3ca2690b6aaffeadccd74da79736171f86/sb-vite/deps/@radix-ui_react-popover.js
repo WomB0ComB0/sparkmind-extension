@@ -183,7 +183,7 @@ function rectToClientRect(rect) {
 
 // node_modules/.pnpm/@floating-ui+core@1.6.7/node_modules/@floating-ui/core/dist/floating-ui.core.mjs
 function computeCoordsFromPlacement(_ref, placement, rtl) {
-  const { reference, floating } = _ref
+  let { reference, floating } = _ref
   const sideAxis = getSideAxis(placement)
   const alignmentAxis = getAlignmentAxis(placement)
   const alignLength = getAxisLength(alignmentAxis)
@@ -485,7 +485,7 @@ var arrow = (options) => ({
     }
   }
 })
-var flip = (options) => {
+var flip = function (options) {
   if (options === void 0) {
     options = {}
   }
@@ -643,7 +643,7 @@ function getSideOffsets(overflow, rect) {
 function isAnySideFullyClipped(overflow) {
   return sides.some((side) => overflow[side] >= 0)
 }
-var hide = (options) => {
+var hide = function (options) {
   if (options === void 0) {
     options = {}
   }
@@ -725,7 +725,7 @@ async function convertValueToCoords(state, options) {
         y: crossAxis * crossAxisMulti
       }
 }
-var offset = (options) => {
+var offset = function (options) {
   if (options === void 0) {
     options = 0
   }
@@ -757,7 +757,7 @@ var offset = (options) => {
     }
   }
 }
-var shift = (options) => {
+var shift = function (options) {
   if (options === void 0) {
     options = {}
   }
@@ -771,7 +771,7 @@ var shift = (options) => {
         crossAxis: checkCrossAxis = false,
         limiter = {
           fn: (_ref) => {
-            const { x: x2, y: y2 } = _ref
+            let { x: x2, y: y2 } = _ref
             return {
               x: x2,
               y: y2
@@ -818,7 +818,7 @@ var shift = (options) => {
     }
   }
 }
-var limitShift = (options) => {
+var limitShift = function (options) {
   if (options === void 0) {
     options = {}
   }
@@ -902,7 +902,7 @@ var limitShift = (options) => {
     }
   }
 }
-var size = (options) => {
+var size = function (options) {
   if (options === void 0) {
     options = {}
   }
@@ -1175,8 +1175,8 @@ function getFrameElement(win) {
 // node_modules/.pnpm/@floating-ui+dom@1.6.10/node_modules/@floating-ui/dom/dist/floating-ui.dom.mjs
 function getCssDimensions(element) {
   const css = getComputedStyle(element)
-  let width = Number.parseFloat(css.width) || 0
-  let height = Number.parseFloat(css.height) || 0
+  let width = parseFloat(css.width) || 0
+  let height = parseFloat(css.height) || 0
   const hasOffset = isHTMLElement(element)
   const offsetWidth = hasOffset ? element.offsetWidth : width
   const offsetHeight = hasOffset ? element.offsetHeight : height
@@ -1287,12 +1287,10 @@ function getBoundingClientRect(
       const css = getComputedStyle(currentIFrame)
       const left =
         iframeRect.left +
-        (currentIFrame.clientLeft + Number.parseFloat(css.paddingLeft)) *
-          iframeScale.x
+        (currentIFrame.clientLeft + parseFloat(css.paddingLeft)) * iframeScale.x
       const top =
         iframeRect.top +
-        (currentIFrame.clientTop + Number.parseFloat(css.paddingTop)) *
-          iframeScale.y
+        (currentIFrame.clientTop + parseFloat(css.paddingTop)) * iframeScale.y
       x *= iframeScale.x
       y *= iframeScale.y
       width *= iframeScale.x
@@ -1311,7 +1309,7 @@ function getBoundingClientRect(
   })
 }
 function convertOffsetParentRelativeRectToViewportRelativeRect(_ref) {
-  const { elements, rect, offsetParent, strategy } = _ref
+  let { elements, rect, offsetParent, strategy } = _ref
   const isFixed = strategy === "fixed"
   const documentElement = getDocumentElement(offsetParent)
   const topLayer = elements ? isTopLayer(elements.floating) : false
@@ -1498,7 +1496,7 @@ function getClippingElementAncestors(element, cache) {
   return result
 }
 function getClippingRect(_ref) {
-  const { element, boundary, rootBoundary, strategy } = _ref
+  let { element, boundary, rootBoundary, strategy } = _ref
   const elementClippingAncestors =
     boundary === "clippingAncestors"
       ? isTopLayer(element)
@@ -1761,7 +1759,7 @@ function autoUpdate(reference, floating, update, options) {
   let resizeObserver = null
   if (elementResize) {
     resizeObserver = new ResizeObserver((_ref) => {
-      const [firstEntry] = _ref
+      let [firstEntry] = _ref
       if (firstEntry && firstEntry.target === referenceEl && resizeObserver) {
         resizeObserver.unobserve(floating)
         cancelAnimationFrame(reobserveFrame)

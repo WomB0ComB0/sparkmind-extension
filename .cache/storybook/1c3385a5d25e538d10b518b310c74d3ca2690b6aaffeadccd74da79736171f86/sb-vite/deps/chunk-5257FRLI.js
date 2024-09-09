@@ -257,7 +257,7 @@ function usePointerDownOutside(
   React4.useEffect(() => {
     const handlePointerDown = (event) => {
       if (event.target && !isPointerInsideReactTreeRef.current) {
-        const handleAndDispatchPointerDownOutsideEvent2 = () => {
+        let handleAndDispatchPointerDownOutsideEvent2 = function () {
           handleAndDispatchCustomEvent(
             POINTER_DOWN_OUTSIDE,
             handlePointerDownOutside,
@@ -376,7 +376,7 @@ var FocusScope = React5.forwardRef((props, forwardedRef) => {
   }).current
   React5.useEffect(() => {
     if (trapped) {
-      const handleFocusIn2 = (event) => {
+      let handleFocusIn2 = function (event) {
           if (focusScope.paused || !container) return
           const target = event.target
           if (container.contains(target)) {
@@ -385,7 +385,7 @@ var FocusScope = React5.forwardRef((props, forwardedRef) => {
             focus(lastFocusedElementRef.current, { select: true })
           }
         },
-        handleFocusOut2 = (event) => {
+        handleFocusOut2 = function (event) {
           if (focusScope.paused || !container) return
           const relatedTarget = event.relatedTarget
           if (relatedTarget === null) return
@@ -393,7 +393,7 @@ var FocusScope = React5.forwardRef((props, forwardedRef) => {
             focus(lastFocusedElementRef.current, { select: true })
           }
         },
-        handleMutations2 = (mutations) => {
+        handleMutations2 = function (mutations) {
           const focusedElement = document.activeElement
           if (focusedElement !== document.body) return
           for (const mutation of mutations) {
@@ -648,10 +648,10 @@ var React8 = __toESM(require_react())
 var effectCar = createSidecarMedium()
 
 // node_modules/.pnpm/react-remove-scroll@2.5.7_@types+react@18.3.5_react@18.3.1/node_modules/react-remove-scroll/dist/es2015/UI.js
-var nothing = () => {
+var nothing = function () {
   return
 }
-var RemoveScroll = React8.forwardRef((props, parentRef) => {
+var RemoveScroll = React8.forwardRef(function (props, parentRef) {
   var ref = React8.useRef(null)
   var _a = React8.useState({
       onScrollCapture: nothing,
@@ -735,7 +735,7 @@ var passiveSupported = false
 if (typeof window !== "undefined") {
   try {
     options = Object.defineProperty({}, "passive", {
-      get: () => {
+      get: function () {
         passiveSupported = true
         return true
       }
@@ -750,8 +750,10 @@ var options
 var nonPassive = passiveSupported ? { passive: false } : false
 
 // node_modules/.pnpm/react-remove-scroll@2.5.7_@types+react@18.3.5_react@18.3.1/node_modules/react-remove-scroll/dist/es2015/handleScroll.js
-var alwaysContainsScroll = (node) => node.tagName === "TEXTAREA"
-var elementCanBeScrolled = (node, overflow) => {
+var alwaysContainsScroll = function (node) {
+  return node.tagName === "TEXTAREA"
+}
+var elementCanBeScrolled = function (node, overflow) {
   var styles = window.getComputedStyle(node)
   return (
     // not-not-scrollable
@@ -763,9 +765,13 @@ var elementCanBeScrolled = (node, overflow) => {
     )
   )
 }
-var elementCouldBeVScrolled = (node) => elementCanBeScrolled(node, "overflowY")
-var elementCouldBeHScrolled = (node) => elementCanBeScrolled(node, "overflowX")
-var locationCouldBeScrolled = (axis, node) => {
+var elementCouldBeVScrolled = function (node) {
+  return elementCanBeScrolled(node, "overflowY")
+}
+var elementCouldBeHScrolled = function (node) {
+  return elementCanBeScrolled(node, "overflowX")
+}
+var locationCouldBeScrolled = function (axis, node) {
   var ownerDocument = node.ownerDocument
   var current = node
   do {
@@ -785,25 +791,36 @@ var locationCouldBeScrolled = (axis, node) => {
   } while (current && current !== ownerDocument.body)
   return false
 }
-var getVScrollVariables = (_a) => {
+var getVScrollVariables = function (_a) {
   var scrollTop = _a.scrollTop,
     scrollHeight = _a.scrollHeight,
     clientHeight = _a.clientHeight
   return [scrollTop, scrollHeight, clientHeight]
 }
-var getHScrollVariables = (_a) => {
+var getHScrollVariables = function (_a) {
   var scrollLeft = _a.scrollLeft,
     scrollWidth = _a.scrollWidth,
     clientWidth = _a.clientWidth
   return [scrollLeft, scrollWidth, clientWidth]
 }
-var elementCouldBeScrolled = (axis, node) =>
-  axis === "v" ? elementCouldBeVScrolled(node) : elementCouldBeHScrolled(node)
-var getScrollVariables = (axis, node) =>
-  axis === "v" ? getVScrollVariables(node) : getHScrollVariables(node)
-var getDirectionFactor = (axis, direction) =>
-  axis === "h" && direction === "rtl" ? -1 : 1
-var handleScroll = (axis, endTarget, event, sourceDelta, noOverscroll) => {
+var elementCouldBeScrolled = function (axis, node) {
+  return axis === "v"
+    ? elementCouldBeVScrolled(node)
+    : elementCouldBeHScrolled(node)
+}
+var getScrollVariables = function (axis, node) {
+  return axis === "v" ? getVScrollVariables(node) : getHScrollVariables(node)
+}
+var getDirectionFactor = function (axis, direction) {
+  return axis === "h" && direction === "rtl" ? -1 : 1
+}
+var handleScroll = function (
+  axis,
+  endTarget,
+  event,
+  sourceDelta,
+  noOverscroll
+) {
   var directionFactor = getDirectionFactor(
     axis,
     window.getComputedStyle(endTarget).direction
@@ -854,17 +871,25 @@ var handleScroll = (axis, endTarget, event, sourceDelta, noOverscroll) => {
 }
 
 // node_modules/.pnpm/react-remove-scroll@2.5.7_@types+react@18.3.5_react@18.3.1/node_modules/react-remove-scroll/dist/es2015/SideEffect.js
-var getTouchXY = (event) =>
-  "changedTouches" in event
+var getTouchXY = function (event) {
+  return "changedTouches" in event
     ? [event.changedTouches[0].clientX, event.changedTouches[0].clientY]
     : [0, 0]
-var getDeltaXY = (event) => [event.deltaX, event.deltaY]
-var extractRef = (ref) => (ref && "current" in ref ? ref.current : ref)
-var deltaCompare = (x, y) => x[0] === y[0] && x[1] === y[1]
-var generateStyle = (id) =>
-  "\n  .block-interactivity-"
+}
+var getDeltaXY = function (event) {
+  return [event.deltaX, event.deltaY]
+}
+var extractRef = function (ref) {
+  return ref && "current" in ref ? ref.current : ref
+}
+var deltaCompare = function (x, y) {
+  return x[0] === y[0] && x[1] === y[1]
+}
+var generateStyle = function (id) {
+  return "\n  .block-interactivity-"
     .concat(id, " {pointer-events: none;}\n  .allow-interactivity-")
     .concat(id, " {pointer-events: all;}\n")
+}
 var idCounter = 0
 var lockStack = []
 function RemoveScrollSideCar(props) {
@@ -874,30 +899,36 @@ function RemoveScrollSideCar(props) {
   var id = React9.useState(idCounter++)[0]
   var Style = React9.useState(styleSingleton)[0]
   var lastProps = React9.useRef(props)
-  React9.useEffect(() => {
-    lastProps.current = props
-  }, [props])
-  React9.useEffect(() => {
-    if (props.inert) {
-      document.body.classList.add("block-interactivity-".concat(id))
-      var allow_1 = __spreadArray(
-        [props.lockRef.current],
-        (props.shards || []).map(extractRef),
-        true
-      ).filter(Boolean)
-      allow_1.forEach((el) =>
-        el.classList.add("allow-interactivity-".concat(id))
-      )
-      return () => {
-        document.body.classList.remove("block-interactivity-".concat(id))
-        allow_1.forEach((el) =>
-          el.classList.remove("allow-interactivity-".concat(id))
-        )
+  React9.useEffect(
+    function () {
+      lastProps.current = props
+    },
+    [props]
+  )
+  React9.useEffect(
+    function () {
+      if (props.inert) {
+        document.body.classList.add("block-interactivity-".concat(id))
+        var allow_1 = __spreadArray(
+          [props.lockRef.current],
+          (props.shards || []).map(extractRef),
+          true
+        ).filter(Boolean)
+        allow_1.forEach(function (el) {
+          return el.classList.add("allow-interactivity-".concat(id))
+        })
+        return function () {
+          document.body.classList.remove("block-interactivity-".concat(id))
+          allow_1.forEach(function (el) {
+            return el.classList.remove("allow-interactivity-".concat(id))
+          })
+        }
       }
-    }
-    return
-  }, [props.inert, props.lockRef.current, props.shards])
-  var shouldCancelEvent = React9.useCallback((event, parent) => {
+      return
+    },
+    [props.inert, props.lockRef.current, props.shards]
+  )
+  var shouldCancelEvent = React9.useCallback(function (event, parent) {
     if ("touches" in event && event.touches.length === 2) {
       return !lastProps.current.allowPinchZoom
     }
@@ -953,18 +984,19 @@ function RemoveScrollSideCar(props) {
       true
     )
   }, [])
-  var shouldPrevent = React9.useCallback((_event) => {
+  var shouldPrevent = React9.useCallback(function (_event) {
     var event = _event
     if (!lockStack.length || lockStack[lockStack.length - 1] !== Style) {
       return
     }
     var delta = "deltaY" in event ? getDeltaXY(event) : getTouchXY(event)
-    var sourceEvent = shouldPreventQueue.current.filter(
-      (e) =>
+    var sourceEvent = shouldPreventQueue.current.filter(function (e) {
+      return (
         e.name === event.type &&
         (e.target === event.target || event.target === e.shadowParent) &&
         deltaCompare(e.delta, delta)
-    )[0]
+      )
+    })[0]
     if (sourceEvent && sourceEvent.should) {
       if (event.cancelable) {
         event.preventDefault()
@@ -975,7 +1007,9 @@ function RemoveScrollSideCar(props) {
       var shardNodes = (lastProps.current.shards || [])
         .map(extractRef)
         .filter(Boolean)
-        .filter((node) => node.contains(event.target))
+        .filter(function (node) {
+          return node.contains(event.target)
+        })
       var shouldStop =
         shardNodes.length > 0
           ? shouldCancelEvent(event, shardNodes[0])
@@ -987,7 +1021,7 @@ function RemoveScrollSideCar(props) {
       }
     }
   }, [])
-  var shouldCancel = React9.useCallback((name, delta, target, should) => {
+  var shouldCancel = React9.useCallback(function (name, delta, target, should) {
     var event = {
       name,
       delta,
@@ -996,17 +1030,19 @@ function RemoveScrollSideCar(props) {
       shadowParent: getOutermostShadowParent(target)
     }
     shouldPreventQueue.current.push(event)
-    setTimeout(() => {
+    setTimeout(function () {
       shouldPreventQueue.current = shouldPreventQueue.current.filter(
-        (e) => e !== event
+        function (e) {
+          return e !== event
+        }
       )
     }, 1)
   }, [])
-  var scrollTouchStart = React9.useCallback((event) => {
+  var scrollTouchStart = React9.useCallback(function (event) {
     touchStartRef.current = getTouchXY(event)
     activeAxis.current = void 0
   }, [])
-  var scrollWheel = React9.useCallback((event) => {
+  var scrollWheel = React9.useCallback(function (event) {
     shouldCancel(
       event.type,
       getDeltaXY(event),
@@ -1014,7 +1050,7 @@ function RemoveScrollSideCar(props) {
       shouldCancelEvent(event, props.lockRef.current)
     )
   }, [])
-  var scrollTouchMove = React9.useCallback((event) => {
+  var scrollTouchMove = React9.useCallback(function (event) {
     shouldCancel(
       event.type,
       getTouchXY(event),
@@ -1022,7 +1058,7 @@ function RemoveScrollSideCar(props) {
       shouldCancelEvent(event, props.lockRef.current)
     )
   }, [])
-  React9.useEffect(() => {
+  React9.useEffect(function () {
     lockStack.push(Style)
     props.setCallbacks({
       onScrollCapture: scrollWheel,
@@ -1032,8 +1068,10 @@ function RemoveScrollSideCar(props) {
     document.addEventListener("wheel", shouldPrevent, nonPassive)
     document.addEventListener("touchmove", shouldPrevent, nonPassive)
     document.addEventListener("touchstart", scrollTouchStart, nonPassive)
-    return () => {
-      lockStack = lockStack.filter((inst) => inst !== Style)
+    return function () {
+      lockStack = lockStack.filter(function (inst) {
+        return inst !== Style
+      })
       document.removeEventListener("wheel", shouldPrevent, nonPassive)
       document.removeEventListener("touchmove", shouldPrevent, nonPassive)
       document.removeEventListener("touchstart", scrollTouchStart, nonPassive)
@@ -1066,12 +1104,12 @@ function getOutermostShadowParent(node) {
 var sidecar_default = exportSidecar(effectCar, RemoveScrollSideCar)
 
 // node_modules/.pnpm/react-remove-scroll@2.5.7_@types+react@18.3.5_react@18.3.1/node_modules/react-remove-scroll/dist/es2015/Combination.js
-var ReactRemoveScroll = React10.forwardRef((props, ref) =>
-  React10.createElement(
+var ReactRemoveScroll = React10.forwardRef(function (props, ref) {
+  return React10.createElement(
     RemoveScroll,
     __assign({}, props, { ref, sideCar: sidecar_default })
   )
-)
+})
 ReactRemoveScroll.classNames = RemoveScroll.classNames
 var Combination_default = ReactRemoveScroll
 

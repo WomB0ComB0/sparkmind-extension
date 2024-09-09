@@ -28,11 +28,8 @@ import { PING } from "~constants"
 import type { ScrapeSchema } from "~schema"
 import { fetchDescriptionFromURL } from "~util"
 
+import features1 from "../../../assets/features1.png"
 import { AiFrame } from "./AiFrame"
-
-interface ScraperProps {
-  initialUrl?: string
-}
 
 const presets = [
   { value: "summarize", label: "Summarize this topic" },
@@ -44,6 +41,10 @@ const presets = [
   { value: "reading", label: "Suggest further reading materials" },
   { value: "mind-map", label: "Create a mind map of key concepts" }
 ]
+
+interface ScraperProps {
+  initialUrl?: string
+}
 
 export const Scraper = memo(({ initialUrl = "" }: ScraperProps) => {
   const [url, setUrl] = useState(initialUrl)
@@ -176,16 +177,20 @@ export const Scraper = memo(({ initialUrl = "" }: ScraperProps) => {
   }, [websiteData])
 
   return (
-    <div className="flex flex-col h-[600px] bg-[#ffffff] text-[#0257AC]">
+    <div className="flex flex-col h-[600px] bg-white text-[#0257AC]">
       <div className="flex-none p-4 border-b border-[#0257AC] flex items-center justify-between">
+        <img
+          src={features1}
+          className={"w-[10%] h-auto transform scale-x-[-1]"}
+          alt={""}
+        />
         <LogoComponent width={40} height={40} />
-        <h1 className="text-2xl font-bold">SparkMind</h1>
-        <div className="w-10"></div>
+        <img src={features1} className={"w-[10%] h-auto"} alt={""} />
       </div>
-      <div className="flex-none p-2 border-b border-[#0257AC]">
+      <div className="flex-none p-3 border-b border-[#0257AC] bg-[#0257AC]/5">
         <div className="flex items-center space-x-2 text-sm text-[#0257AC]">
-          <Globe className="w-4 h-4" />
-          <span className="truncate">{url}</span>
+          <Globe className="w-5 h-5 text-[#0257AC]" />
+          <span className="truncate text-[#0257AC]">{url}</span>
         </div>
       </div>
       <div className="flex-none p-4">
@@ -195,7 +200,10 @@ export const Scraper = memo(({ initialUrl = "" }: ScraperProps) => {
             placeholder="Enter your prompt or customize the preset..."
             value={userPrompt}
             onChange={handleUserPromptChange}
-            className="w-full text-[#0257AC] placeholder-[#0257AC] bg-transparent border-[#0257AC] focus-visible:ring-[#0257AC] focus-visible:ring-offset-0"
+            className="
+              w-full text-[#0257AC] placeholder-[#0257AC] bg-transparent border-[#0257AC] 
+              focus-visible:ring-[#0257AC] focus-visible:ring-offset-0
+            "
           />
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
@@ -203,18 +211,18 @@ export const Scraper = memo(({ initialUrl = "" }: ScraperProps) => {
                 variant="outline"
                 role="combobox"
                 aria-expanded={open}
-                className="justify-between w-full text-white border-[#0257AC]">
+                className="justify-between w-full text-white border-[#0257AC] bg-[#0257AC] hover:bg-[#03407d] hover:text-white">
                 {command
                   ? presets.find((preset) => preset.label === command)?.label
                   : "Select preset..."}
                 <CaretSortIcon className="w-4 h-4 ml-2 opacity-50 shrink-0" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-full p-0 bg-[#ffffff] border-[#0257AC]">
-              <Command className="border-[#0257AC]">
+            <PopoverContent className="w-full p-0 bg-white border-[#0257AC]">
+              <Command className="border-[#0257AC] bg-[#0257AC]">
                 <CommandInput
                   placeholder="Search preset..."
-                  className="text-white h-9"
+                  className="text-white bg-[#0257AC] h-9"
                 />
                 <CommandList>
                   <CommandEmpty className="text-[#0257AC]">
@@ -226,7 +234,7 @@ export const Scraper = memo(({ initialUrl = "" }: ScraperProps) => {
                         key={preset.value}
                         value={preset.label}
                         onSelect={handleCommandChange}
-                        className="text-white">
+                        className="text-white bg-[#0257AC] hover:bg-[#03407d] hover:text-white">
                         {preset.label}
                         <CheckIcon
                           className={cn(
@@ -245,7 +253,7 @@ export const Scraper = memo(({ initialUrl = "" }: ScraperProps) => {
           </Popover>
           <Button
             type="submit"
-            className="w-full text-[#ffffff] bg-[#0257AC] hover:bg-[#0257AC] hover:opacity-90"
+            className="w-full text-white bg-[#0257AC] hover:bg-[#03407d]"
             disabled={!userPrompt || isLoading}>
             {isLoading ? (
               <div className="flex items-center">
@@ -277,26 +285,18 @@ export const Scraper = memo(({ initialUrl = "" }: ScraperProps) => {
               variant="outline"
               size="sm"
               onClick={handleCopy}
-              className="mt-4 text-white border-[#0257AC] hover:bg-white hover:text-[#0257AC]">
+              className="mt-4 flex items-center space-x-2">
               {isCopied ? (
-                <>
-                  <Check className="w-4 h-4 mr-2" />
-                  Copied
-                </>
+                <Check className="w-4 h-4" />
               ) : (
-                <>
-                  <Copy className="w-4 h-4 mr-2" />
-                  Copy to Clipboard
-                </>
+                <Copy className="w-4 h-4" />
               )}
+              <span>{isCopied ? "Copied" : "Copy to Clipboard"}</span>
             </Button>
           </div>
         ) : (
           <div className="flex items-center justify-center h-full">
-            <p className="text-center text-sm text-[#0257AC]">
-              Select a preset or enter a custom prompt to get started with
-              SparkMind.
-            </p>
+            <p className="text-[#0257AC] text-lg">Submit a URL to begin.</p>
           </div>
         )}
       </ScrollArea>

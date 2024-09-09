@@ -2,7 +2,7 @@ import { __toESM } from "./chunk-LK32TJAX.js"
 import { require_react } from "./chunk-VMU3GUP3.js"
 
 // node_modules/.pnpm/aria-hidden@1.2.4/node_modules/aria-hidden/dist/es2015/index.js
-var getDefaultParent = (originalTarget) => {
+var getDefaultParent = function (originalTarget) {
   if (typeof document === "undefined") {
     return null
   }
@@ -15,10 +15,12 @@ var counterMap = /* @__PURE__ */ new WeakMap()
 var uncontrolledNodes = /* @__PURE__ */ new WeakMap()
 var markerMap = {}
 var lockCount = 0
-var unwrapHost = (node) => node && (node.host || unwrapHost(node.parentNode))
-var correctTargets = (parent, targets) =>
-  targets
-    .map((target) => {
+var unwrapHost = function (node) {
+  return node && (node.host || unwrapHost(node.parentNode))
+}
+var correctTargets = function (parent, targets) {
+  return targets
+    .map(function (target) {
       if (parent.contains(target)) {
         return target
       }
@@ -35,13 +37,16 @@ var correctTargets = (parent, targets) =>
       )
       return null
     })
-    .filter((x) => Boolean(x))
-var applyAttributeToOthers = (
+    .filter(function (x) {
+      return Boolean(x)
+    })
+}
+var applyAttributeToOthers = function (
   originalTarget,
   parentNode,
   markerName,
   controlAttribute
-) => {
+) {
   var targets = correctTargets(
     parentNode,
     Array.isArray(originalTarget) ? originalTarget : [originalTarget]
@@ -53,7 +58,7 @@ var applyAttributeToOthers = (
   var hiddenNodes = []
   var elementsToKeep = /* @__PURE__ */ new Set()
   var elementsToStop = new Set(targets)
-  var keep = (el) => {
+  var keep = function (el) {
     if (!el || elementsToKeep.has(el)) {
       return
     }
@@ -61,11 +66,11 @@ var applyAttributeToOthers = (
     keep(el.parentNode)
   }
   targets.forEach(keep)
-  var deep = (parent) => {
+  var deep = function (parent) {
     if (!parent || elementsToStop.has(parent)) {
       return
     }
-    Array.prototype.forEach.call(parent.children, (node) => {
+    Array.prototype.forEach.call(parent.children, function (node) {
       if (elementsToKeep.has(node)) {
         deep(node)
       } else {
@@ -95,8 +100,8 @@ var applyAttributeToOthers = (
   deep(parentNode)
   elementsToKeep.clear()
   lockCount++
-  return () => {
-    hiddenNodes.forEach((node) => {
+  return function () {
+    hiddenNodes.forEach(function (node) {
       var counterValue = counterMap.get(node) - 1
       var markerValue = markerCounter.get(node) - 1
       counterMap.set(node, counterValue)
@@ -120,7 +125,7 @@ var applyAttributeToOthers = (
     }
   }
 }
-var hideOthers = (originalTarget, parentNode, markerName) => {
+var hideOthers = function (originalTarget, parentNode, markerName) {
   if (markerName === void 0) {
     markerName = "data-aria-hidden"
   }
@@ -129,7 +134,9 @@ var hideOthers = (originalTarget, parentNode, markerName) => {
   )
   var activeParentNode = parentNode || getDefaultParent(originalTarget)
   if (!activeParentNode) {
-    return () => null
+    return function () {
+      return null
+    }
   }
   targets.push.apply(
     targets,
@@ -205,25 +212,27 @@ function assignRef(ref, value) {
 // node_modules/.pnpm/use-callback-ref@1.3.2_@types+react@18.3.5_react@18.3.1/node_modules/use-callback-ref/dist/es2015/useRef.js
 var import_react = __toESM(require_react())
 function useCallbackRef(initialValue, callback) {
-  var ref = (0, import_react.useState)(() => ({
-    // value
-    value: initialValue,
-    // last callback
-    callback,
-    // "memoized" public interface
-    facade: {
-      get current() {
-        return ref.value
-      },
-      set current(value) {
-        var last = ref.value
-        if (last !== value) {
-          ref.value = value
-          ref.callback(value, last)
+  var ref = (0, import_react.useState)(function () {
+    return {
+      // value
+      value: initialValue,
+      // last callback
+      callback,
+      // "memoized" public interface
+      facade: {
+        get current() {
+          return ref.value
+        },
+        set current(value) {
+          var last = ref.value
+          if (last !== value) {
+            ref.value = value
+            ref.callback(value, last)
+          }
         }
       }
     }
-  }))[0]
+  })[0]
   ref.callback = callback
   return ref.facade
 }
@@ -233,34 +242,39 @@ var useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect
 var currentValues = /* @__PURE__ */ new WeakMap()
 function useMergeRefs(refs, defaultValue) {
-  var callbackRef = useCallbackRef(defaultValue || null, (newValue) =>
-    refs.forEach((ref) => assignRef(ref, newValue))
+  var callbackRef = useCallbackRef(defaultValue || null, function (newValue) {
+    return refs.forEach(function (ref) {
+      return assignRef(ref, newValue)
+    })
+  })
+  useIsomorphicLayoutEffect(
+    function () {
+      var oldValue = currentValues.get(callbackRef)
+      if (oldValue) {
+        var prevRefs_1 = new Set(oldValue)
+        var nextRefs_1 = new Set(refs)
+        var current_1 = callbackRef.current
+        prevRefs_1.forEach(function (ref) {
+          if (!nextRefs_1.has(ref)) {
+            assignRef(ref, null)
+          }
+        })
+        nextRefs_1.forEach(function (ref) {
+          if (!prevRefs_1.has(ref)) {
+            assignRef(ref, current_1)
+          }
+        })
+      }
+      currentValues.set(callbackRef, refs)
+    },
+    [refs]
   )
-  useIsomorphicLayoutEffect(() => {
-    var oldValue = currentValues.get(callbackRef)
-    if (oldValue) {
-      var prevRefs_1 = new Set(oldValue)
-      var nextRefs_1 = new Set(refs)
-      var current_1 = callbackRef.current
-      prevRefs_1.forEach((ref) => {
-        if (!nextRefs_1.has(ref)) {
-          assignRef(ref, null)
-        }
-      })
-      nextRefs_1.forEach((ref) => {
-        if (!prevRefs_1.has(ref)) {
-          assignRef(ref, current_1)
-        }
-      })
-    }
-    currentValues.set(callbackRef, refs)
-  }, [refs])
   return callbackRef
 }
 
 // node_modules/.pnpm/use-sidecar@1.1.2_@types+react@18.3.5_react@18.3.1/node_modules/use-sidecar/dist/es2015/exports.js
 var React2 = __toESM(require_react())
-var SideCar = (_a) => {
+var SideCar = function (_a) {
   var sideCar = _a.sideCar,
     rest = __rest(_a, ["sideCar"])
   if (!sideCar) {
@@ -297,7 +311,7 @@ function innerCreateMedium(defaults, middleware) {
   var buffer = []
   var assigned = false
   var medium = {
-    read: () => {
+    read: function () {
       if (assigned) {
         throw new Error(
           "Sidecar: could not `read` from an `assigned` medium. `read` could be used only with `useMedium`."
@@ -308,14 +322,16 @@ function innerCreateMedium(defaults, middleware) {
       }
       return defaults
     },
-    useMedium: (data) => {
+    useMedium: function (data) {
       var item = middleware(data, assigned)
       buffer.push(item)
-      return () => {
-        buffer = buffer.filter((x) => x !== item)
+      return function () {
+        buffer = buffer.filter(function (x) {
+          return x !== item
+        })
       }
     },
-    assignSyncMedium: (cb) => {
+    assignSyncMedium: function (cb) {
       assigned = true
       while (buffer.length) {
         var cbs = buffer
@@ -323,11 +339,15 @@ function innerCreateMedium(defaults, middleware) {
         cbs.forEach(cb)
       }
       buffer = {
-        push: (x) => cb(x),
-        filter: () => buffer
+        push: function (x) {
+          return cb(x)
+        },
+        filter: function () {
+          return buffer
+        }
       }
     },
-    assignMedium: (cb) => {
+    assignMedium: function (cb) {
       assigned = true
       var pendingQueue = []
       if (buffer.length) {
@@ -336,19 +356,21 @@ function innerCreateMedium(defaults, middleware) {
         cbs.forEach(cb)
         pendingQueue = buffer
       }
-      var executeQueue = () => {
+      var executeQueue = function () {
         var cbs2 = pendingQueue
         pendingQueue = []
         cbs2.forEach(cb)
       }
-      var cycle = () => Promise.resolve().then(executeQueue)
+      var cycle = function () {
+        return Promise.resolve().then(executeQueue)
+      }
       cycle()
       buffer = {
-        push: (x) => {
+        push: function (x) {
           pendingQueue.push(x)
           cycle()
         },
-        filter: (filter) => {
+        filter: function (filter) {
           pendingQueue = pendingQueue.filter(filter)
           return buffer
         }
@@ -375,7 +397,7 @@ var React5 = __toESM(require_react())
 
 // node_modules/.pnpm/get-nonce@1.0.1/node_modules/get-nonce/dist/es2015/index.js
 var currentNonce
-var getNonce = () => {
+var getNonce = function () {
   if (currentNonce) {
     return currentNonce
   }
@@ -407,11 +429,11 @@ function insertStyleTag(tag) {
   var head = document.head || document.getElementsByTagName("head")[0]
   head.appendChild(tag)
 }
-var stylesheetSingleton = () => {
+var stylesheetSingleton = function () {
   var counter = 0
   var stylesheet = null
   return {
-    add: (style) => {
+    add: function (style) {
       if (counter == 0) {
         if ((stylesheet = makeStyleTag())) {
           injectStyles(stylesheet, style)
@@ -420,7 +442,7 @@ var stylesheetSingleton = () => {
       }
       counter++
     },
-    remove: () => {
+    remove: function () {
       counter--
       if (!counter && stylesheet) {
         stylesheet.parentNode && stylesheet.parentNode.removeChild(stylesheet)
@@ -431,22 +453,25 @@ var stylesheetSingleton = () => {
 }
 
 // node_modules/.pnpm/react-style-singleton@2.2.1_@types+react@18.3.5_react@18.3.1/node_modules/react-style-singleton/dist/es2015/hook.js
-var styleHookSingleton = () => {
+var styleHookSingleton = function () {
   var sheet = stylesheetSingleton()
-  return (styles, isDynamic) => {
-    React5.useEffect(() => {
-      sheet.add(styles)
-      return () => {
-        sheet.remove()
-      }
-    }, [styles && isDynamic])
+  return function (styles, isDynamic) {
+    React5.useEffect(
+      function () {
+        sheet.add(styles)
+        return function () {
+          sheet.remove()
+        }
+      },
+      [styles && isDynamic]
+    )
   }
 }
 
 // node_modules/.pnpm/react-style-singleton@2.2.1_@types+react@18.3.5_react@18.3.1/node_modules/react-style-singleton/dist/es2015/component.js
-var styleSingleton = () => {
+var styleSingleton = function () {
   var useStyle = styleHookSingleton()
-  var Sheet = (_a) => {
+  var Sheet = function (_a) {
     var styles = _a.styles,
       dynamic = _a.dynamic
     useStyle(styles, dynamic)
@@ -465,15 +490,17 @@ var zeroGap = {
   right: 0,
   gap: 0
 }
-var parse = (x) => Number.parseInt(x || "", 10) || 0
-var getOffset = (gapMode) => {
+var parse = function (x) {
+  return parseInt(x || "", 10) || 0
+}
+var getOffset = function (gapMode) {
   var cs = window.getComputedStyle(document.body)
   var left = cs[gapMode === "padding" ? "paddingLeft" : "marginLeft"]
   var top = cs[gapMode === "padding" ? "paddingTop" : "marginTop"]
   var right = cs[gapMode === "padding" ? "paddingRight" : "marginRight"]
   return [parse(left), parse(top), parse(right)]
 }
-var getGapWidth = (gapMode) => {
+var getGapWidth = function (gapMode) {
   if (gapMode === void 0) {
     gapMode = "margin"
   }
@@ -494,7 +521,7 @@ var getGapWidth = (gapMode) => {
 // node_modules/.pnpm/react-remove-scroll-bar@2.3.6_@types+react@18.3.5_react@18.3.1/node_modules/react-remove-scroll-bar/dist/es2015/component.js
 var Style = styleSingleton()
 var lockAttribute = "data-scroll-locked"
-var getStyles = (_a, allowRelative, gapMode, important) => {
+var getStyles = function (_a, allowRelative, gapMode, important) {
   var left = _a.left,
     top = _a.top,
     right = _a.right,
@@ -545,20 +572,17 @@ var getStyles = (_a, allowRelative, gapMode, important) => {
     .concat(removedBarSizeVariable, ": ")
     .concat(gap, "px;\n  }\n")
 }
-var getCurrentUseCounter = () => {
-  var counter = Number.parseInt(
-    document.body.getAttribute(lockAttribute) || "0",
-    10
-  )
+var getCurrentUseCounter = function () {
+  var counter = parseInt(document.body.getAttribute(lockAttribute) || "0", 10)
   return isFinite(counter) ? counter : 0
 }
-var useLockAttribute = () => {
-  React6.useEffect(() => {
+var useLockAttribute = function () {
+  React6.useEffect(function () {
     document.body.setAttribute(
       lockAttribute,
       (getCurrentUseCounter() + 1).toString()
     )
-    return () => {
+    return function () {
       var newCounter = getCurrentUseCounter() - 1
       if (newCounter <= 0) {
         document.body.removeAttribute(lockAttribute)
@@ -568,13 +592,18 @@ var useLockAttribute = () => {
     }
   }, [])
 }
-var RemoveScrollBar = (_a) => {
+var RemoveScrollBar = function (_a) {
   var noRelative = _a.noRelative,
     noImportant = _a.noImportant,
     _b = _a.gapMode,
     gapMode = _b === void 0 ? "margin" : _b
   useLockAttribute()
-  var gap = React6.useMemo(() => getGapWidth(gapMode), [gapMode])
+  var gap = React6.useMemo(
+    function () {
+      return getGapWidth(gapMode)
+    },
+    [gapMode]
+  )
   return React6.createElement(Style, {
     styles: getStyles(
       gap,

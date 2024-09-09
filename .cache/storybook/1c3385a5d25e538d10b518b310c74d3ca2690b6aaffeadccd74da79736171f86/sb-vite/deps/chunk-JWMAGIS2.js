@@ -7,7 +7,7 @@ var import_react = __toESM(require_react(), 1)
 var import_client = __toESM(require_client(), 1)
 var nodes = /* @__PURE__ */ new Map()
 var WithCallback = ({ callback, children }) => {
-  const once = (0, import_react.useRef)()
+  let once = (0, import_react.useRef)()
   return (
     (0, import_react.useLayoutEffect)(() => {
       once.current !== callback && ((once.current = callback), callback())
@@ -16,7 +16,7 @@ var WithCallback = ({ callback, children }) => {
   )
 }
 var renderElement = async (node, el, rootOptions) => {
-  const root = await getReactRoot(el, rootOptions)
+  let root = await getReactRoot(el, rootOptions)
   return new Promise((resolve) => {
     root.render(
       import_react.default.createElement(
@@ -28,7 +28,7 @@ var renderElement = async (node, el, rootOptions) => {
   })
 }
 var unmountElement = (el, shouldUseNewRootApi) => {
-  const root = nodes.get(el)
+  let root = nodes.get(el)
   root && (root.unmount(), nodes.delete(el))
 }
 var getReactRoot = async (el, rootOptions) => {

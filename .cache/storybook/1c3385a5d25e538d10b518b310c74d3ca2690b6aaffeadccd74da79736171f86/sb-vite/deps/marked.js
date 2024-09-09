@@ -1385,7 +1385,7 @@ var _Lexer = class __Lexer {
       }
       cutSrc = src
       if (this.options.extensions && this.options.extensions.startBlock) {
-        let startIndex = Number.POSITIVE_INFINITY
+        let startIndex = Infinity
         const tempSrc = src.slice(1)
         let tempStart
         this.options.extensions.startBlock.forEach((getStartIndex) => {
@@ -1394,7 +1394,7 @@ var _Lexer = class __Lexer {
             startIndex = Math.min(startIndex, tempStart)
           }
         })
-        if (startIndex < Number.POSITIVE_INFINITY && startIndex >= 0) {
+        if (startIndex < Infinity && startIndex >= 0) {
           cutSrc = src.substring(0, startIndex + 1)
         }
       }
@@ -1577,7 +1577,7 @@ var _Lexer = class __Lexer {
       }
       cutSrc = src
       if (this.options.extensions && this.options.extensions.startInline) {
-        let startIndex = Number.POSITIVE_INFINITY
+        let startIndex = Infinity
         const tempSrc = src.slice(1)
         let tempStart
         this.options.extensions.startInline.forEach((getStartIndex) => {
@@ -1586,7 +1586,7 @@ var _Lexer = class __Lexer {
             startIndex = Math.min(startIndex, tempStart)
           }
         })
-        if (startIndex < Number.POSITIVE_INFINITY && startIndex >= 0) {
+        if (startIndex < Infinity && startIndex >= 0) {
           cutSrc = src.substring(0, startIndex + 1)
         }
       }
@@ -2151,9 +2151,7 @@ var Marked = class {
           ) {
             this.defaults.extensions.childTokens[genericToken.type].forEach(
               (childTokens) => {
-                const tokens2 = genericToken[childTokens].flat(
-                  Number.POSITIVE_INFINITY
-                )
+                const tokens2 = genericToken[childTokens].flat(Infinity)
                 values = values.concat(this.walkTokens(tokens2, callback))
               }
             )
@@ -2439,7 +2437,7 @@ var markedInstance = new Marked()
 function marked(src, opt) {
   return markedInstance.parse(src, opt)
 }
-marked.options = marked.setOptions = (options2) => {
+marked.options = marked.setOptions = function (options2) {
   markedInstance.setOptions(options2)
   marked.defaults = markedInstance.defaults
   changeDefaults(marked.defaults)
@@ -2447,14 +2445,15 @@ marked.options = marked.setOptions = (options2) => {
 }
 marked.getDefaults = _getDefaults
 marked.defaults = _defaults
-marked.use = (...args) => {
+marked.use = function (...args) {
   markedInstance.use(...args)
   marked.defaults = markedInstance.defaults
   changeDefaults(marked.defaults)
   return marked
 }
-marked.walkTokens = (tokens, callback) =>
-  markedInstance.walkTokens(tokens, callback)
+marked.walkTokens = function (tokens, callback) {
+  return markedInstance.walkTokens(tokens, callback)
+}
 marked.parseInline = markedInstance.parseInline
 marked.Parser = _Parser
 marked.parser = _Parser.parse

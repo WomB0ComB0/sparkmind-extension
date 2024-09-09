@@ -1,5 +1,5 @@
 try {
-  (() => {
+  ;(() => {
     var t = __REACT__,
       {
         Children: f,
@@ -36,8 +36,8 @@ try {
         useState: no,
         useSyncExternalStore: eo,
         useTransition: co,
-        version: to,
-      } = __REACT__;
+        version: to
+      } = __REACT__
     var io = __STORYBOOK_API__,
       {
         ActiveTabs: so,
@@ -71,8 +71,8 @@ try {
         useSharedState: Ho,
         useStoryPrepared: Mo,
         useStorybookApi: C,
-        useStorybookState: Uo,
-      } = __STORYBOOK_API__;
+        useStorybookState: Uo
+      } = __STORYBOOK_API__
     var Ko = __STORYBOOK_COMPONENTS__,
       {
         A: Yo,
@@ -142,8 +142,8 @@ try {
         interleaveSeparators: oe,
         nameSpaceClassNames: ne,
         resetComponents: ee,
-        withReset: ce,
-      } = __STORYBOOK_COMPONENTS__;
+        withReset: ce
+      } = __STORYBOOK_COMPONENTS__
     var le = __STORYBOOK_ICONS__,
       {
         AccessibilityAltIcon: ie,
@@ -373,41 +373,50 @@ try {
         ZoomIcon: CI,
         ZoomOutIcon: hI,
         ZoomResetIcon: AI,
-        iconList: _I,
-      } = __STORYBOOK_ICONS__;
-    var i = 'storybook/outline',
-      _ = 'outline',
+        iconList: _I
+      } = __STORYBOOK_ICONS__
+    var i = "storybook/outline",
+      _ = "outline",
       b = u(function () {
         let [c, r] = S(),
           s = C(),
-          I = [!0, 'true'].includes(c[_]),
-          a = d(() => r({ [_]: !I }), [I]);
+          I = [!0, "true"].includes(c[_]),
+          a = d(() => r({ [_]: !I }), [I])
         return (
           p(() => {
             s.setAddonShortcut(i, {
-              label: 'Toggle Outline',
-              defaultShortcut: ['alt', 'O'],
-              actionName: 'outline',
+              label: "Toggle Outline",
+              defaultShortcut: ["alt", "O"],
+              actionName: "outline",
               showInMenu: !1,
-              action: a,
-            });
+              action: a
+            })
           }, [a, s]),
           t.createElement(
             h,
-            { key: 'outline', active: I, title: 'Apply outlines to the preview', onClick: a },
-            t.createElement(A, null),
+            {
+              key: "outline",
+              active: I,
+              title: "Apply outlines to the preview",
+              onClick: a
+            },
+            t.createElement(A, null)
           )
-        );
-      });
+        )
+      })
     l.register(i, () => {
       l.add(i, {
-        title: 'Outline',
+        title: "Outline",
         type: m.TOOL,
-        match: ({ viewMode: c, tabId: r }) => !!(c && c.match(/^(story|docs)$/)) && !r,
-        render: () => t.createElement(b, null),
-      });
-    });
-  })();
+        match: ({ viewMode: c, tabId: r }) =>
+          !!(c && c.match(/^(story|docs)$/)) && !r,
+        render: () => t.createElement(b, null)
+      })
+    })
+  })()
 } catch (e) {
-  console.error('[Storybook] One of your manager-entries failed: ' + import.meta.url, e);
+  console.error(
+    "[Storybook] One of your manager-entries failed: " + import.meta.url,
+    e
+  )
 }

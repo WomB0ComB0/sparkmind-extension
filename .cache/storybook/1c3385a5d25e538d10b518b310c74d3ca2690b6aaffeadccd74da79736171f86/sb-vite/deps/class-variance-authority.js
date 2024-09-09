@@ -50,7 +50,7 @@ var cva = (base, config) => {
     const propsWithoutUndefined =
       props &&
       Object.entries(props).reduce((acc, param) => {
-        const [key, value] = param
+        let [key, value] = param
         if (value === void 0) {
           return acc
         }
@@ -63,13 +63,13 @@ var cva = (base, config) => {
         : (ref = config.compoundVariants) === null || ref === void 0
           ? void 0
           : ref.reduce((acc, param1) => {
-              const {
+              let {
                 class: cvClass,
                 className: cvClassName,
                 ...compoundVariantOptions
               } = param1
               return Object.entries(compoundVariantOptions).every((param) => {
-                const [key, value] = param
+                let [key, value] = param
                 return Array.isArray(value)
                   ? value.includes(
                       {
