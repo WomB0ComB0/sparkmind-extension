@@ -95,7 +95,7 @@
     "prettier-plugin-sh": "^0.14.0",
     "release-it": "^17.6.0",
     "sentences-per-line": "^0.2.1",
-    "storybook": "^8.2.9",
+    "storybook": "^8.6.15",
     "stream-browserify": "^3.0.0",
     "typescript": "5.5.4"
   },
